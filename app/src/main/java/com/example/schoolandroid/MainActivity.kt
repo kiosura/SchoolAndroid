@@ -1,8 +1,7 @@
 package com.example.schoolandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.screens.about_school
@@ -30,8 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -41,6 +38,5 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(binding.mainPageBottomMenue, binding.mainActivityVp){
             tab, pos -> tab.text = fragNames[pos]
         }.attach()
-
     }
 }
