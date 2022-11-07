@@ -35,7 +35,7 @@ class courses : Fragment() {
             adapter = course_adapter
         }
         course_adapter.addCourse(Course("course2"))
-        course_adapter.addCourse(Course("course3"))
+        course_adapter.addCourse(listOf(Course("course3"), Course("course4")))
     }
 
     companion object {

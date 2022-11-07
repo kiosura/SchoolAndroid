@@ -34,4 +34,8 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
         courses.add(course)
         notifyDataSetChanged()
     }
+    fun addCourse(course : List<Course>){
+        courses.addAll(course)
+        notifyDataSetChanged()
+    }
 }
