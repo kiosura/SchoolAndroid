@@ -2,7 +2,11 @@ package com.example.schoolandroid
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolandroid.adapter.CourseAdapter
 import com.example.schoolandroid.adapter.PageAdapter
+import com.example.schoolandroid.data.Course
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.screens.about_school
 import com.example.schoolandroid.screens.courses

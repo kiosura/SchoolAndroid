@@ -6,9 +6,12 @@
     tools:context=".screens.courses">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleCourses"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="618dp"
+        android:layout_margin="8dp"
+        android:padding="8dp" />
 
 </FrameLayout>
