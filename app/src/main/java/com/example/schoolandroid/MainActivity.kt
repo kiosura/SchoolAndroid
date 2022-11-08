@@ -1,15 +1,10 @@
 package com.example.schoolandroid
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolandroid.adapter.CourseAdapter
 import com.example.schoolandroid.adapter.PageAdapter
-import com.example.schoolandroid.data.Course
 import com.example.schoolandroid.databinding.ActivityMainBinding
+import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.screens.about_school
 import com.example.schoolandroid.screens.courses
 import com.example.schoolandroid.screens.profile
@@ -32,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val PushDialogFragment = PushDialog()
+    private val manager = supportFragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,25 +43,10 @@ class MainActivity : AppCompatActivity() {
             tab, pos -> tab.text = fragNames[pos]
         }.attach()
 
-        var pushLayout = binding.viewStub2
-        var pushWindow = pushLayout.inflate()
-        pushLayout.isVisible = false
-
-        val pushOpen = binding.pushButton
-        pushOpen.setOnClickListener{
-            pushWindow.isVisible = true
-
-
+        val button = binding.pushButton
+        button.setOnClickListener {
+            PushDialogFragment.show(manager, "Push")
         }
-        val pushClose = findViewById<Button>(R.id.closepush)
-        println(pushClose.text)
-
-        pushClose.setOnClickListener{
-            pushWindow.isVisible = false
-
-        }
-
-
 
     }
 }
