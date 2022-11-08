@@ -1,6 +1,5 @@
 package com.example.schoolandroid.dialogs
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,14 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.example.schoolandroid.R
 
-class PushDialog : DialogFragment(), OnClickListener {
+class SettingsDialog : DialogFragment(), OnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view : View = inflater.inflate(R.layout.push_layout, null)
+        val view : View = inflater.inflate(R.layout.settings_layout, null)
 
         view.findViewById<Button>(R.id.closesettings).setOnClickListener(this);
 

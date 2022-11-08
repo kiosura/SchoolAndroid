@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
+import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.about_school
 import com.example.schoolandroid.screens.courses
 import com.example.schoolandroid.screens.profile
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val PushDialogFragment = PushDialog()
+    private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +45,14 @@ class MainActivity : AppCompatActivity() {
             tab, pos -> tab.text = fragNames[pos]
         }.attach()
 
-        val button = binding.pushButton
-        button.setOnClickListener {
+        val buttonP = binding.pushButton
+        buttonP.setOnClickListener {
             PushDialogFragment.show(manager, "Push")
+        }
+
+        val buttonS = binding.settingsButton
+        buttonS.setOnClickListener {
+            SettingsDialogFragment.show(manager, "Push")
         }
 
     }
