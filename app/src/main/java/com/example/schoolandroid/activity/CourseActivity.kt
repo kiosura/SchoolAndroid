@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityMainBinding
+import com.example.schoolandroid.dialogs.PushDialog
+import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.course.about_course
 import com.example.schoolandroid.screens.course.chats
 import com.example.schoolandroid.screens.course.course
@@ -26,6 +28,10 @@ class CourseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val PushDialogFragment = PushDialog()
+    private val SettingsDialogFragment = SettingsDialog()
+    private val manager = supportFragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,5 +47,15 @@ class CourseActivity : AppCompatActivity() {
 
         val intent : Intent = getIntent()
         println(intent.getIntExtra(MainActivity.extrahui, 100))
+
+        val buttonP = binding.pushButton
+        buttonP.setOnClickListener {
+            PushDialogFragment.show(manager, "Push")
+        }
+
+        val buttonS = binding.settingsButton
+        buttonS.setOnClickListener {
+            SettingsDialogFragment.show(manager, "Settings")
+        }
     }
 }

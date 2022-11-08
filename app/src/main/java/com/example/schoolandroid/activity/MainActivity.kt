@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         val buttonS = binding.settingsButton
         buttonS.setOnClickListener {
-            SettingsDialogFragment.show(manager, "Push")
+            SettingsDialogFragment.show(manager, "Settings")
         }
 
     }

@@ -11,7 +11,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="130dp"
         android:layout_marginTop="88dp"
-        android:text="push1" />
+        android:text="settings" />
 
     <Button
         android:id="@+id/closesettings"
