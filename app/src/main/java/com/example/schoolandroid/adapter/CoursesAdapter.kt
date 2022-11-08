@@ -21,7 +21,7 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
         fun bind(course: Course) = with(binding){
-            textView2.text = course.name
+            courseBody.text = course.name
         }
     }
 
@@ -33,7 +33,7 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     override fun onBindViewHolder(holder: CourseHolder, position: Int) {
         holder.bind(courses[position])
         val context : Context = holder.itemView.context
-        holder.itemView.findViewById<Button>(R.id.textView2)
+        holder.itemView.findViewById<Button>(R.id.courseBody)
             .setOnClickListener(View.OnClickListener {
             val intent: Intent = Intent(context, CourseActivity::class.java)
             intent.putExtra(extrahui, position)

@@ -4,27 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginBottom="432dp"
-        android:text="push1" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclePushes"
+        android:layout_width="match_parent"
+        android:layout_height="618dp"
+        android:layout_margin="8dp"
+        android:padding="8dp" />
 
     <Button
-        android:id="@+id/closesettings"
+        android:id="@+id/closepush"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="258dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="102dp"
-
-        android:text="Button" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="x" />
 </RelativeLayout>
