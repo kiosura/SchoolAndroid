@@ -1,12 +1,10 @@
-package com.example.schoolandroid.screens
+package com.example.schoolandroid.screens.course
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import android.widget.TextView
-import androidx.core.view.ScrollingView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
@@ -17,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class about_school : Fragment() {
+class about_course : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +37,6 @@ class about_school : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = about_school()
+        fun newInstance() = about_course()
     }
 }

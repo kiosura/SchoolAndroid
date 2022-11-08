@@ -6,9 +6,9 @@ import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
-import com.example.schoolandroid.screens.about_school
-import com.example.schoolandroid.screens.courses
-import com.example.schoolandroid.screens.profile
+import com.example.schoolandroid.screens.main.about_school
+import com.example.schoolandroid.screens.main.courses
+import com.example.schoolandroid.screens.main.profile
 import com.google.android.material.tabs.TabLayoutMediator
 
 

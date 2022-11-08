@@ -1,4 +1,4 @@
-package com.example.schoolandroid.screens
+package com.example.schoolandroid.screens.course
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.schoolandroid.R
 
 
-class profile : Fragment() {
+class chats : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
