@@ -22,16 +22,8 @@ class about_course : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view : View = inflater.inflate(R.layout.fragment_about_school, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_about_course, container, false)
 
-        lifecycleScope.launch {
-            whenStarted {
-                val mainText = activity?.findViewById<TextView>(R.id.mainText)
-                mainText?.text = withContext(Dispatchers.IO) {
-                    apiBase()
-                }
-            }
-        }
         return view
     }
 

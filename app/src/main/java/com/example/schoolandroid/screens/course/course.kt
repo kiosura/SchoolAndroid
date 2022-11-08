@@ -14,37 +14,18 @@ import com.example.schoolandroid.data.Course
 
 class course : Fragment() {
 
-    private lateinit var recycleView: RecyclerView
-    val course_adapter = CourseAdapter()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_courses, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_course, container, false)
 
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recycleView = view.findViewById(R.id.recycleCourses)
-        with(recycleView) {
-            //setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(view.context)
-            adapter = course_adapter
-        }
-        course_adapter.addCourse(Course("course1"))
-        course_adapter.addCourse(listOf(Course("course2"), Course("course3")))
-
-        for (i in 4..200){
-            course_adapter.addCourse(Course("course" + i.toString()))
-        }
-    }
-
     companion object {
         @JvmStatic
-        fun newInstance() = courses()
+        fun newInstance() = course()
     }
 }

@@ -15,11 +15,11 @@ class chats : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = profile()
+        fun newInstance() = chats()
     }
 }
