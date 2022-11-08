@@ -1,4 +1,4 @@
-package com.example.schoolandroid
+package com.example.schoolandroid.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        public const val extrahui : String = "hui"
+    }
 
     private val fragList = listOf(
         about_school.newInstance(),
