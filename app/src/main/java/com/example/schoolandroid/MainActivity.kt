@@ -1,7 +1,9 @@
 package com.example.schoolandroid
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.adapter.CourseAdapter
@@ -42,5 +44,26 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(binding.mainPageBottomMenue, binding.mainActivityVp){
             tab, pos -> tab.text = fragNames[pos]
         }.attach()
+
+        var pushLayout = binding.viewStub2
+        var pushWindow = pushLayout.inflate()
+        pushLayout.isVisible = false
+
+        val pushOpen = binding.pushButton
+        pushOpen.setOnClickListener{
+            pushWindow.isVisible = true
+
+
+        }
+        val pushClose = findViewById<Button>(R.id.closepush)
+        println(pushClose.text)
+
+        pushClose.setOnClickListener{
+            pushWindow.isVisible = false
+
+        }
+
+
+
     }
 }

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ViewStub
+        android:id="@+id/viewStub2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout="@layout/push_layout"
+
+        app:layout_constraintBottom_toTopOf="@+id/mainPageBottomMenue"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/mainActivityVp"
+        app:layout_constraintStart_toStartOf="@+id/mainActivityVp" />
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/mainPageBottomMenue"
         android:layout_width="match_parent"
@@ -36,22 +48,25 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/mainPageBottomMenue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.0" />
 
     <RelativeLayout
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
-        android:paddingHorizontal="12dp">
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="b"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:text="b" />
 
         <TextView
             android:id="@+id/textView"
@@ -67,7 +82,6 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:text="p" />
-
 
 
     </RelativeLayout>

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.whenCreated
 import androidx.lifecycle.whenStarted
 import com.example.schoolandroid.R
 import kotlinx.coroutines.*
