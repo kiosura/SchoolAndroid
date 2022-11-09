@@ -1,7 +1,9 @@
 package com.example.schoolandroid.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
@@ -9,12 +11,13 @@ import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
 import com.example.schoolandroid.screens.main.profile
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        public const val extrahui : String = "hui"
+        const val extrahui : String = "hui"
     }
 
     private val fragList = listOf(
@@ -57,6 +60,5 @@ class MainActivity : AppCompatActivity() {
         buttonS.setOnClickListener {
             SettingsDialogFragment.show(manager, "Settings")
         }
-
     }
 }
