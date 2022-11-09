@@ -20,7 +20,7 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
-        fun bind(course: Course) = with(binding){
+        fun bind(course: Course) = with(binding) {
             courseBody.text = course.name
         }
     }
