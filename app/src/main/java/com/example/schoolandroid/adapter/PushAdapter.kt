@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Push
-import com.example.schoolandroid.databinding.CourseCardViewBinding
 import com.example.schoolandroid.databinding.PushCardViewBinding
 
 class PushAdapter : RecyclerView.Adapter<PushAdapter.PushHolder>() {
