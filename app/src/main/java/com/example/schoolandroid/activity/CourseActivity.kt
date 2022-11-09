@@ -4,19 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.adapter.PageAdapter
-import com.example.schoolandroid.databinding.ActivityMainBinding
+import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.course.about_course
 import com.example.schoolandroid.screens.course.chats
-import com.example.schoolandroid.screens.course.course
+import com.example.schoolandroid.screens.course.lesson
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CourseActivity : AppCompatActivity() {
 
     private val fragList = listOf(
         about_course.newInstance(),
-        course.newInstance(),
+        lesson.newInstance(),
         chats.newInstance()
     )
 
@@ -26,7 +26,7 @@ class CourseActivity : AppCompatActivity() {
         "чаты"
     )
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCourseBinding
 
     private val PushDialogFragment = PushDialog()
     private val SettingsDialogFragment = SettingsDialog()
@@ -35,13 +35,13 @@ class CourseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val adapter = PageAdapter(this, fragList)
-        binding.mainActivityVp.adapter = adapter
+        binding.courseActivityVp.adapter = adapter
 
-        TabLayoutMediator(binding.mainPageBottomMenue, binding.mainActivityVp){
+        TabLayoutMediator(binding.coursePageBottomMenue, binding.courseActivityVp){
                 tab, pos -> tab.text = fragNames[pos]
         }.attach()
 

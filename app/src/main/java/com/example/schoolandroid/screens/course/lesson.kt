@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.CourseAdapter
 import com.example.schoolandroid.adapter.TaskAdapter
-import com.example.schoolandroid.data.Course
 import com.example.schoolandroid.data.Task
 
 
-class course : Fragment() {
+class lesson : Fragment() {
 
     private lateinit var recycleView: RecyclerView
     val task_adapter = TaskAdapter()
@@ -26,7 +22,7 @@ class course : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_course, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_lesson, container, false)
 
         return view
     }
@@ -47,6 +43,6 @@ class course : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = course()
+        fun newInstance() = lesson()
     }
 }
