@@ -52,7 +52,8 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="true"
                 android:layout_margin="8dp"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
 

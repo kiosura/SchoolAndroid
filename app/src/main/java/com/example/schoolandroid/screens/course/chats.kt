@@ -39,7 +39,7 @@ class chats : Fragment() {
         chats_adapter.addChat(Chat("chat1"))
         chats_adapter.addChat(listOf(Chat("chat2"), Chat("chat3")))
 
-        for (i in 4..10){
+        for (i in 4..17){
             chats_adapter.addChat(Chat("chat" + i.toString()))
         }
     }
