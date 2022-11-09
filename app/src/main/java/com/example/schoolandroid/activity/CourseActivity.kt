@@ -3,6 +3,8 @@ package com.example.schoolandroid.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.PageAdapter
 import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
@@ -10,7 +12,10 @@ import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.course.about_course
 import com.example.schoolandroid.screens.course.chats
 import com.example.schoolandroid.screens.course.lesson
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.Tab
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class CourseActivity : AppCompatActivity() {
 
@@ -45,8 +50,12 @@ class CourseActivity : AppCompatActivity() {
                 tab, pos -> tab.text = fragNames[pos]
         }.attach()
 
+        val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
+        val tab = tabLayout.getTabAt(1)
+        tab?.select()
+
         val intent : Intent = getIntent()
-        println(intent.getIntExtra(MainActivity.extrahui, 100))
+        //println(intent.getIntExtra(MainActivity.extrahui, 100))
 
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {

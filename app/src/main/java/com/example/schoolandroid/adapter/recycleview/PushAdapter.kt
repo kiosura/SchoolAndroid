@@ -1,4 +1,4 @@
-package com.example.schoolandroid.adapter
+package com.example.schoolandroid.adapter.recycleview
 
 import android.view.LayoutInflater
 import android.view.View

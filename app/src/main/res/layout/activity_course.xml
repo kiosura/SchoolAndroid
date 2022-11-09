@@ -15,12 +15,11 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="about school" />
+            android:text="about_course" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="courses"
             tools:layout_editor_absoluteX="144dp"
             tools:layout_editor_absoluteY="388dp" />
 

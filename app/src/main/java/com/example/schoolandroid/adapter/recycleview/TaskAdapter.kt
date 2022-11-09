@@ -1,13 +1,11 @@
-package com.example.schoolandroid.adapter
+package com.example.schoolandroid.adapter.recycleview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.data.Push
 import com.example.schoolandroid.data.Task
-import com.example.schoolandroid.databinding.PushCardViewBinding
 import com.example.schoolandroid.databinding.TaskCardViewBinding
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {

@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.ChatsAdapter
-import com.example.schoolandroid.adapter.CourseAdapter
+import com.example.schoolandroid.adapter.recycleview.ChatsAdapter
 import com.example.schoolandroid.data.Chat
-import com.example.schoolandroid.data.Course
 
 
 class chats : Fragment() {

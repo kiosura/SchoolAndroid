@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.CourseAdapter
+import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.data.Course
 
 

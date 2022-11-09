@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.TaskAdapter
+import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.data.Task
 
 
@@ -34,9 +34,10 @@ class lesson : Fragment() {
             //setHasFixedSize(true)
             layoutManager = GridLayoutManager(view.context, 4)
             adapter = task_adapter
+            isNestedScrollingEnabled = false
         }
 
-        for (i in 1..12){
+        for (i in 1..40){
             task_adapter.addTask(Task(i, " hui"))
         }
     }

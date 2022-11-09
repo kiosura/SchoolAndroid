@@ -1,4 +1,4 @@
-package com.example.schoolandroid.adapter
+package com.example.schoolandroid.adapter.recycleview
 
 import android.content.Context
 import android.content.Intent
