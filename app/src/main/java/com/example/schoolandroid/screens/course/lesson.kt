@@ -32,9 +32,10 @@ class lesson : Fragment() {
         recycleView = view.findViewById(R.id.recycleTasks)
         with(recycleView) {
             //setHasFixedSize(true)
-            layoutManager = GridLayoutManager(view.context, 4)
+            layoutManager = object : GridLayoutManager(view.context, 4) {
+                override fun canScrollVertically() = false
+            }
             adapter = task_adapter
-            isNestedScrollingEnabled = false
         }
 
         for (i in 1..40){
