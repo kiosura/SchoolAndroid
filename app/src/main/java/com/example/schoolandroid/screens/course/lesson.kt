@@ -34,6 +34,7 @@ class lesson : Fragment() {
             //setHasFixedSize(true)
             layoutManager = GridLayoutManager(view.context, 4)
             adapter = task_adapter
+            //suppressLayout(true)
         }
 
         for (i in 1..40){
