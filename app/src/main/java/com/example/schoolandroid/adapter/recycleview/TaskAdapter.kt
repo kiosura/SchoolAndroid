@@ -12,7 +12,8 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
     private val tasks = ArrayList<Task>()
 
     class TaskHolder(card : View) : RecyclerView.ViewHolder(card){
-        val binding = TaskCardViewBinding.bind(card)
+        private val binding = TaskCardViewBinding.bind(card)
+
         fun bind(task: Task) = with(binding){
             taskBody.text = task.id.toString()
         }
