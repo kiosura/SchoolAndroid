@@ -1,18 +1,21 @@
 package com.example.schoolandroid.adapter.recycleview
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Chat
 import com.example.schoolandroid.databinding.ChatCardViewBinding
 
-class ChatsAdapter  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>() {
+class ChatsAdapter/*(val listener: Listener)*/  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>(){
     private val chats = ArrayList<Chat>()
 
     class ChatHolder(card : View) : RecyclerView.ViewHolder(card){
-        val binding = ChatCardViewBinding.bind(card)
+        private val binding = ChatCardViewBinding.bind(card)
+
         fun bind(chat: Chat) = with(binding){
             chatBody.text = chat.name
         }
@@ -25,6 +28,13 @@ class ChatsAdapter  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>() {
 
     override fun onBindViewHolder(holder: ChatHolder, position: Int) {
         holder.bind(chats[position])
+        val context : Context = holder.itemView.context
+//        holder.itemView.findViewById<Button>(R.id.lessonBody)
+//            .setOnClickListener(View.OnClickListener{
+//
+//                listener.onClick(position)
+//
+//            })
     }
 
     override fun getItemCount(): Int {
@@ -38,5 +48,8 @@ class ChatsAdapter  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>() {
     fun addChat(chat : List<Chat>){
         chats.addAll(chat)
         notifyDataSetChanged()
+    }
+    interface Listener{
+        fun onClick(position: Int)
     }
 }

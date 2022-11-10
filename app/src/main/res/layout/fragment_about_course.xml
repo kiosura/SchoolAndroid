@@ -5,15 +5,47 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.about_school">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/mainText"
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/courseName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/aboutCourse" />
+
+            <TextView
+                android:id="@+id/courseDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/aboutCourse" />
+
+            <Button
+                android:id="@+id/courseInfo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/more"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleLessons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="true"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

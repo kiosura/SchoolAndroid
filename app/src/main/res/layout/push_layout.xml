@@ -4,13 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclePushes"
-        android:layout_width="match_parent"
-        android:layout_height="618dp"
-        android:layout_margin="8dp"
-        android:padding="8dp" />
-
     <Button
         android:id="@+id/closepush"
         android:layout_width="wrap_content"
@@ -20,4 +13,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="x" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclePushes"
+        android:layout_width="match_parent"
+        android:layout_height="618dp"
+        android:layout_margin="8dp"
+        android:padding="8dp" />
+
+
 </RelativeLayout>

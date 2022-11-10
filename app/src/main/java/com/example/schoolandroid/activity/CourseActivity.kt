@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.CoursePageAdapter
+import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
+import com.example.schoolandroid.data.Lesson
 import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
@@ -39,6 +41,7 @@ class CourseActivity : AppCompatActivity() {
     private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         course_id = getIntent().getIntExtra(MainActivity.extrahui, 100)
@@ -72,4 +75,5 @@ class CourseActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

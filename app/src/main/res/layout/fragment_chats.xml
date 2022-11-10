@@ -5,11 +5,33 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.profile">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleChats"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="618dp"
-        android:layout_margin="8dp"
-        android:padding="8dp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleChats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chats Description" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

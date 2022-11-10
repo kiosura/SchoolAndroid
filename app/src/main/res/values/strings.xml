@@ -2,4 +2,8 @@
     <string name="app_name">SchoolAndroid</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="about_course">About Course</string>
+    <string name="aboutCourse" />
+    <string name="more">more</string>
 </resources>

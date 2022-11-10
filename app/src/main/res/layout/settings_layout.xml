@@ -3,6 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/closesettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="x" />
+
     <TextView
         android:layout_width="151dp"
         android:layout_height="wrap_content"
@@ -13,14 +23,5 @@
         android:layout_marginTop="88dp"
         android:text="settings" />
 
-    <Button
-        android:id="@+id/closesettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
 
-        android:text="x" />
 </RelativeLayout>
