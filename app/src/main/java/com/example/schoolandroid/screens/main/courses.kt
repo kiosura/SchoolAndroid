@@ -38,7 +38,7 @@ class courses : Fragment() {
         course_adapter.addCourse(Course("course1"))
         course_adapter.addCourse(listOf(Course("course2"), Course("course3")))
 
-        for (i in 4..200){
+        for (i in 4..20){
             course_adapter.addCourse(Course("course" + i.toString()))
         }
     }

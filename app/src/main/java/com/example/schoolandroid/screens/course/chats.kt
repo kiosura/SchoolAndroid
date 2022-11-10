@@ -10,22 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.ChatsAdapter
 import com.example.schoolandroid.data.Chat
+import com.example.schoolandroid.screens.BaseFragment
 
 
-class chats : Fragment() {
+class chats : BaseFragment(R.layout.fragment_chats) {
 
     private lateinit var recycleView: RecyclerView
     val chats_adapter = ChatsAdapter()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_chats, container, false)
-
-        return view
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

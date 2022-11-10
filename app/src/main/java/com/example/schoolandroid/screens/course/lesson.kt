@@ -1,34 +1,33 @@
 package com.example.schoolandroid.screens.course
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.data.Task
+import com.example.schoolandroid.screens.BaseFragment
+import com.google.android.material.tabs.TabLayout
 
 
-class lesson : Fragment() {
+class lesson : BaseFragment(R.layout.fragment_lesson), TaskAdapter.Listener {
 
     private lateinit var recycleView: RecyclerView
-    val task_adapter = TaskAdapter()
+    var task_adapter : TaskAdapter = TaskAdapter(this)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_lesson, container, false)
-
-        return view
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         recycleView = view.findViewById(R.id.recycleTasks)
         with(recycleView) {
             //setHasFixedSize(true)
@@ -40,6 +39,10 @@ class lesson : Fragment() {
         for (i in 1..40){
             task_adapter.addTask(Task(i, " hui"))
         }
+    }
+
+    override fun onClick(position: Int) {
+        fragmentReplacer.replace(1, task.newInstance())
     }
 
     companion object {

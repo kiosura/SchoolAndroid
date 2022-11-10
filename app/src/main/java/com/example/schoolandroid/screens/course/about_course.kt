@@ -10,22 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import com.example.schoolandroid.R
 import com.example.schoolandroid.api.FirstApi.Companion.apiBase
+import com.example.schoolandroid.screens.BaseFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class about_course : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val view : View = inflater.inflate(R.layout.fragment_about_course, container, false)
-
-        return view
-    }
+class about_course : BaseFragment(R.layout.fragment_about_course) {
 
     companion object {
         @JvmStatic

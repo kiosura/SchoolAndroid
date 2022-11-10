@@ -1,10 +1,9 @@
 package com.example.schoolandroid.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.PageAdapter
+import com.example.schoolandroid.adapter.CoursePageAdapter
 import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
@@ -47,16 +46,16 @@ class CourseActivity : AppCompatActivity() {
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = PageAdapter(this, fragList)
+        val adapter = CoursePageAdapter(this)
         binding.courseActivityVp.adapter = adapter
 
         TabLayoutMediator(binding.coursePageBottomMenue, binding.courseActivityVp){
                 tab, pos -> tab.text = fragNames[pos]
         }.attach()
 
-        val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
-        val tab = tabLayout.getTabAt(1)
-        tab?.select()
+//        val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
+//        val tab = tabLayout.getTabAt(1)
+//        tab?.select()
 
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {
