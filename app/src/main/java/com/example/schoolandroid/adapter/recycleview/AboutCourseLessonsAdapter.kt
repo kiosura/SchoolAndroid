@@ -12,7 +12,7 @@ import com.example.schoolandroid.data.Lesson
 import com.example.schoolandroid.databinding.AboutCourseLessonCardViewBinding
 import com.google.android.material.tabs.TabLayout
 
-class AboutCourseLessonsAdapter : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
+class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
     private val lessons = ArrayList<Lesson>()
 
     class LessonHolder(card : View) : RecyclerView.ViewHolder(card){
@@ -20,6 +20,7 @@ class AboutCourseLessonsAdapter : RecyclerView.Adapter<AboutCourseLessonsAdapter
 
         fun bind(lesson: Lesson) = with(binding){
             lessonBody.text = lesson.name
+
         }
     }
 
@@ -32,13 +33,12 @@ class AboutCourseLessonsAdapter : RecyclerView.Adapter<AboutCourseLessonsAdapter
     override fun onBindViewHolder(holder: LessonHolder, position: Int) {
         holder.bind(lessons[position])
         val context : Context = holder.itemView.context
-//        holder.itemView.findViewById<Button>(R.id.lessonBody)
-//            .setOnClickListener(View.OnClickListener{
-//            val tabLayout : TabLayout = holder.itemView.findViewById<TabLayout>(R.id.coursePageBottomMenue)
-//                val tab = tabLayout.getTabAt(1)
-//                tab?.select()
-//
-//            })
+        holder.itemView.findViewById<Button>(R.id.lessonBody)
+            .setOnClickListener(View.OnClickListener{
+
+                listener.onClick(1)
+
+            })
     }
 
     override fun getItemCount(): Int {
@@ -52,6 +52,10 @@ class AboutCourseLessonsAdapter : RecyclerView.Adapter<AboutCourseLessonsAdapter
     fun addLesson(lesson: List<Lesson>){
         lessons.addAll(lesson)
         notifyDataSetChanged()
+    }
+
+    interface Listener {
+        fun onClick(int: Int)
     }
 
 }

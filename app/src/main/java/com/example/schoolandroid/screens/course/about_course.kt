@@ -9,14 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
+import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
 import com.example.schoolandroid.data.Lesson
+import com.google.android.material.tabs.TabLayout
 
 
-class about_course : Fragment() {
+class about_course : Fragment(), AboutCourseLessonsAdapter.Listener {
 
     private lateinit var recycleView: RecyclerView
-    val lessonsAdapter = AboutCourseLessonsAdapter()
+    val lessonsAdapter = AboutCourseLessonsAdapter(this)
 
 
     override fun onCreateView(
@@ -50,5 +52,11 @@ class about_course : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = about_course()
+    }
+
+    override fun onClick(int: Int) {
+        val tabLayout : TabLayout? = activity?.findViewById<TabLayout>(R.id.coursePageBottomMenue)
+        val tab = tabLayout?.getTabAt(1)
+        tab?.select()
     }
 }
