@@ -14,10 +14,10 @@ import com.example.schoolandroid.data.Chat
 import com.example.schoolandroid.screens.BaseFragment
 
 
-class chats : BaseFragment(R.layout.fragment_chats) {
+class chats : BaseFragment(R.layout.fragment_chats), ChatsAdapter.Listener {
 
     private lateinit var recycleView: RecyclerView
-    val chats_adapter = ChatsAdapter(/*this*/)
+    val chats_adapter = ChatsAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +42,7 @@ class chats : BaseFragment(R.layout.fragment_chats) {
     }
 
     override fun onClick(position : Int) {
-        //Toast.makeText(context,"Clicked on chat № ${position}" ,Toast.LENGTH_LONG).show()
+        Toast.makeText(context,"Clicked on chat № ${position}" ,Toast.LENGTH_LONG).show()
         println("34iuo5hrlkjewhtlkh34o2y7583476583746583746857345")
     }
 }

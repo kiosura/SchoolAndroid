@@ -10,7 +10,7 @@ import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Chat
 import com.example.schoolandroid.databinding.ChatCardViewBinding
 
-class ChatsAdapter/*(val listener: Listener)*/  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>(){
+class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>(){
     private val chats = ArrayList<Chat>()
 
     class ChatHolder(card : View) : RecyclerView.ViewHolder(card){
@@ -28,13 +28,12 @@ class ChatsAdapter/*(val listener: Listener)*/  : RecyclerView.Adapter<ChatsAdap
 
     override fun onBindViewHolder(holder: ChatHolder, position: Int) {
         holder.bind(chats[position])
-        val context : Context = holder.itemView.context
-//        holder.itemView.findViewById<Button>(R.id.lessonBody)
-//            .setOnClickListener(View.OnClickListener{
-//
-//                listener.onClick(position)
-//
-//            })
+        holder.itemView.findViewById<Button>(R.id.chatBody)
+            .setOnClickListener(View.OnClickListener{
+
+                listener.onClick(position)
+
+            })
     }
 
     override fun getItemCount(): Int {
