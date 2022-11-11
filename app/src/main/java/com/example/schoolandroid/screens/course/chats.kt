@@ -1,20 +1,24 @@
 package com.example.schoolandroid.screens.course
 
+import android.R.attr.label
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.ChatsAdapter
 import com.example.schoolandroid.data.Chat
+import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 
 
-class chats : BaseFragment(R.layout.fragment_chats), ChatsAdapter.Listener {
+class chats : BaseFragment(R.layout.fragment_chats), Listener {
 
     private lateinit var recycleView: RecyclerView
     val chats_adapter = ChatsAdapter(this)
@@ -33,6 +37,14 @@ class chats : BaseFragment(R.layout.fragment_chats), ChatsAdapter.Listener {
 
         for (i in 4..17){
             chats_adapter.addChat(Chat("chat" + i.toString()))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val backtolesson = activity?.findViewById<Button>(R.id.backtoMain)
+        backtolesson?.setOnClickListener {
+            activity?.finish()
         }
     }
 

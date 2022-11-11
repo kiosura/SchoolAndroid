@@ -41,6 +41,7 @@ class CourseActivity : AppCompatActivity() {
     private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
 
+    private val baseAdapter = CoursePageAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class CourseActivity : AppCompatActivity() {
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = CoursePageAdapter(this)
+        val adapter = baseAdapter
         binding.courseActivityVp.adapter = adapter
 
         TabLayoutMediator(binding.coursePageBottomMenue, binding.courseActivityVp){
@@ -74,6 +75,25 @@ class CourseActivity : AppCompatActivity() {
         buttonBack.setOnClickListener {
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        var isItTrue : Boolean = false
+        baseAdapter.mapOfFragment.values.forEach {
+            if (it.pageId.toInt() == R.layout.task_view) {
+                isItTrue = true
+            }
+            else return@forEach
+        }
+        if (isItTrue) {
+            val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
+            val tab = tabLayout.getTabAt(1)
+            if (tab!!.isSelected) {
+                baseAdapter.replaceDef(1)
+            }
+            else finish()
+        }
+        else finish()
     }
 
 }

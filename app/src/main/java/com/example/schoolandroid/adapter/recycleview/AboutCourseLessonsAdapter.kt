@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Lesson
 import com.example.schoolandroid.databinding.AboutCourseLessonCardViewBinding
+import com.example.schoolandroid.interfaces.Listener
 import com.google.android.material.tabs.TabLayout
 
 class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
@@ -20,7 +21,6 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
         fun bind(lesson: Lesson) = with(binding){
             lessonBody.text = lesson.name
-
         }
     }
 
@@ -32,12 +32,9 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
     override fun onBindViewHolder(holder: LessonHolder, position: Int) {
         holder.bind(lessons[position])
-        val context : Context = holder.itemView.context
         holder.itemView.findViewById<Button>(R.id.lessonBody)
             .setOnClickListener(View.OnClickListener{
-
                 listener.onClick(1)
-
             })
     }
 
@@ -53,9 +50,4 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         lessons.addAll(lesson)
         notifyDataSetChanged()
     }
-
-    interface Listener {
-        fun onClick(int: Int)
-    }
-
 }

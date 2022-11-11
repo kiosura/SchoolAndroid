@@ -19,8 +19,11 @@ class CoursePageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
         private const val PAGE_COUNT = 3
     }
 
-
     override fun replace(position: Int, newFragment: BaseFragment, isNotify: Boolean) {
+        newFragment.setPageInfo(
+            pagePos = position,
+            fragmentReplacer = this
+        )
         mapOfFragment[position] = newFragment
         if (isNotify)
             notifyItemChanged(position)

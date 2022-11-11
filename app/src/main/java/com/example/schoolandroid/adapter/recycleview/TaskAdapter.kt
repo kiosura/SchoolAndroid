@@ -12,16 +12,17 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Task
 import com.example.schoolandroid.databinding.TaskCardViewBinding
+import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.course.lesson
 import com.example.schoolandroid.screens.course.task
 import com.google.android.material.tabs.TabLayout
 
 class TaskAdapter(val listener : Listener) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
     private val tasks = ArrayList<Task>()
-    private var frame : FrameLayout? = null
 
     class TaskHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = TaskCardViewBinding.bind(card)
+
         fun bind(task: Task) {
             binding.taskBody.text = task.id.toString()
         }
@@ -41,10 +42,6 @@ class TaskAdapter(val listener : Listener) : RecyclerView.Adapter<TaskAdapter.Ta
 
     override fun getItemCount(): Int {
         return tasks.size
-    }
-
-    interface Listener {
-        fun onClick(position : Int)
     }
 
     fun addTask(task: Task){

@@ -9,7 +9,7 @@ import com.example.schoolandroid.interfaces.FragmentReplacer
 import kotlin.random.Random
 
 abstract class BaseFragment(val layoutId : Int) : Fragment() {
-    val pageId : Long = Random.nextLong(2000, 2000*3)
+    val pageId : Long = layoutId.toLong()
     var pagePos = -1
     protected lateinit var fragmentReplacer: FragmentReplacer
 
