@@ -23,12 +23,6 @@ class CourseActivity : AppCompatActivity() {
 
     private var course_id : Int = 0
 
-    private val fragList = listOf(
-        about_course.newInstance(),
-        lesson.newInstance(),
-        chats.newInstance()
-    )
-
     private val fragNames = listOf(
         "о курсе",
         "урок",
