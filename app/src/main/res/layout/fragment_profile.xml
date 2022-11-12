@@ -10,17 +10,53 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="50dp"
             android:paddingVertical="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/registrationLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Почта / Номер телефона"/>
+
+            <EditText
+                android:id="@+id/registrationPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Пароль"/>
+
+            <EditText
+                android:id="@+id/registrationPasswordComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Подтверждение пароля"/>
 
             <TextView
-                android:id="@+id/mainText"
+                android:id="@+id/errorOccured"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/profile" />
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/registrationButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Зарегистрироваться"/>
+
+            <TextView
+                android:id="@+id/loginPath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Войти"/>
 
         </LinearLayout>
 

@@ -77,23 +77,7 @@ class CourseActivity : AppCompatActivity() {
 
         val buttonBack = binding.backtoMain
         buttonBack.setOnClickListener {
-            var isItTrue : Boolean = false
-            baseAdapter.mapOfFragment.values.forEach {
-                if (it.pageId.toInt() == R.layout.task_view) {
-                    isItTrue = true
-                }
-                else return@forEach
-            }
-            if (isItTrue) {
-                val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
-                val tab = tabLayout.getTabAt(1)
-                if (tab!!.isSelected) {
-                    baseAdapter.replaceDef(1)
-                    binding.textView.text = "Урок"
-                }
-                else finish()
-            }
-            else finish()
+            onBackPressed()
         }
     }
 

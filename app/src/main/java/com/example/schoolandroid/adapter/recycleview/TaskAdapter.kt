@@ -36,13 +36,15 @@ class TaskAdapter(val listener : Listener) : RecyclerView.Adapter<TaskAdapter.Ta
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         holder.bind(tasks[position])
         holder.itemView.findViewById<Button>(R.id.taskBody).setOnClickListener {
-            listener.onClick(1)
+            listener.onClick(position)
         }
     }
 
     override fun getItemCount(): Int {
         return tasks.size
     }
+
+    fun getTask(pos : Int) = tasks[pos]
 
     fun addTask(task: Task){
         tasks.add(task)

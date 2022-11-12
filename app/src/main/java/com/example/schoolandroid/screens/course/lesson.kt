@@ -25,7 +25,7 @@ import com.google.android.material.tabs.TabLayout
 class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
 
     private lateinit var recycleView: RecyclerView
-    var task_adapter : TaskAdapter = TaskAdapter(this)
+    private var task_adapter : TaskAdapter = TaskAdapter(this)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
     }
 
     override fun onClick(position: Int) {
-        fragmentReplacer.replace(1, task.newInstance())
+        fragmentReplacer.replace(1, task.newInstance(adapter = task_adapter, tabSelected = position))
         val text = activity?.findViewById<TextView>(R.id.textView)!!
         text.text = "Домашнее задание"
     }
