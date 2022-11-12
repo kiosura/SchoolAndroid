@@ -5,27 +5,32 @@
     android:id="@+id/answer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="com.example.schoolandroid.activity.CourseActivity"
     android:tag="taskFrag">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tabRecycler"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="50dp"
         android:orientation="vertical">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/taskTopMenue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.tabs.TabLayout>
 
         <EditText
             android:id="@+id/editTextNumber"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="150dp"
             android:ems="10"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="105dp"
             android:inputType="text" />
     </LinearLayout>
 </FrameLayout>

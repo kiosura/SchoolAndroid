@@ -40,13 +40,6 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
-        android:id="@+id/courseFragZone"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/coursePageBottomMenue"
-        app:layout_constraintTop_toBottomOf="@+id/view"></LinearLayout>
-
     <RelativeLayout
         android:id="@+id/view"
         android:layout_width="0dp"

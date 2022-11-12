@@ -17,19 +17,19 @@ import com.example.schoolandroid.screens.course.lesson
 import com.example.schoolandroid.screens.course.task
 import com.google.android.material.tabs.TabLayout
 
-class TaskAdapter(val listener : Listener) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
+class TaskAdapter(private val listener : Listener, private val layout : Int) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
     private val tasks = ArrayList<Task>()
 
     class TaskHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = TaskCardViewBinding.bind(card)
-
         fun bind(task: Task) {
             binding.taskBody.text = task.id.toString()
+            binding.taskBody.setBackgroundColor(task.color)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.task_card_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layout, null)
         return TaskHolder(view)
     }
 
@@ -43,8 +43,6 @@ class TaskAdapter(val listener : Listener) : RecyclerView.Adapter<TaskAdapter.Ta
     override fun getItemCount(): Int {
         return tasks.size
     }
-
-    fun getTask(pos : Int) = tasks[pos]
 
     fun addTask(task: Task){
         tasks.add(task)

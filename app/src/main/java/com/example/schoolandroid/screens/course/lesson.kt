@@ -24,15 +24,15 @@ import com.google.android.material.tabs.TabLayout
 
 class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
 
-    private lateinit var recycleView: RecyclerView
-    private var task_adapter : TaskAdapter = TaskAdapter(this)
+    private lateinit var recyclerView: RecyclerView
+    private val task_adapter : TaskAdapter = TaskAdapter(this, R.layout.task_card_view)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycleView = view.findViewById(R.id.recycleTasks)
-        with(recycleView) {
+        recyclerView = view.findViewById(R.id.recycleTasks)
+        with(recyclerView) {
             //setHasFixedSize(true)
             layoutManager = GridLayoutManager(view.context, 4)
             adapter = task_adapter
@@ -40,12 +40,12 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
         }
 
         for (i in 1..40){
-            task_adapter.addTask(Task(i, " hui"))
+            task_adapter.addTask(Task(i, " hui", resources.getColor(R.color.purple_500)))
         }
     }
 
     override fun onClick(position: Int) {
-        fragmentReplacer.replace(1, task.newInstance(adapter = task_adapter, tabSelected = position))
+        fragmentReplacer.replace(1, task.newInstance(tabSelected = position))
         val text = activity?.findViewById<TextView>(R.id.textView)!!
         text.text = "Домашнее задание"
     }
