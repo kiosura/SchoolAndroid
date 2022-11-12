@@ -1,15 +1,7 @@
 package com.example.schoolandroid.screens.course
 
-import android.app.ActivityManager
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -30,12 +22,9 @@ class task(private val adapter: TaskAdapter, private val tabSelected : Int) : Ba
         super.onViewCreated(view, savedInstanceState)
         tabLayout = view.findViewById(R.id.taskTopMenue)
         tabConstructor()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onResume() {
-        super.onResume()
-        tabLayout.scrollTo(tabLayout.getTabAt(tabSelected)!!.position, 0)
+        tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        tabLayout.tabGravity = GRAVITY_CENTER
+        tabLayout.getTabAt(tabSelected)!!.select()
     }
 
     private fun tabConstructor() {
@@ -43,7 +32,6 @@ class task(private val adapter: TaskAdapter, private val tabSelected : Int) : Ba
             val tab = tabLayout.newTab()
             tab.text = adapter.getTask(i).id.toString()
             tabLayout.addTab(tab)
-            if (i == tabSelected) tabLayout.getTabAt(tabSelected)!!.select()
         }
     }
 
