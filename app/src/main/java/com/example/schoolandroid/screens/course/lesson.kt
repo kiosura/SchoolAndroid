@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -43,16 +44,10 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val backtolesson = activity?.findViewById<Button>(R.id.backtoMain)
-        backtolesson?.setOnClickListener {
-            activity?.finish()
-        }
-    }
-
     override fun onClick(position: Int) {
         fragmentReplacer.replace(1, task.newInstance())
+        val text = activity?.findViewById<TextView>(R.id.textView)!!
+        text.text = "Домашнее задание"
     }
 
     companion object {

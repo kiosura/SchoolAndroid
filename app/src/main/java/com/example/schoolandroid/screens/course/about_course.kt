@@ -43,14 +43,6 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val backtolesson = activity?.findViewById<Button>(R.id.backtoMain)
-        backtolesson?.setOnClickListener {
-            activity?.finish()
-        }
-    }
-
     override fun onClick(int: Int) {
         fragmentReplacer.replaceDef(1)
         val tabLayout : TabLayout? = activity?.findViewById<TabLayout>(R.id.coursePageBottomMenue)

@@ -34,11 +34,11 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
         holder.bind(courses[position])
         val context : Context = holder.itemView.context
         holder.itemView.findViewById<Button>(R.id.courseBody)
-            .setOnClickListener(View.OnClickListener {
+            .setOnClickListener {
             val intent: Intent = Intent(context, CourseActivity::class.java)
             intent.putExtra(extrahui, position)
             context.startActivity(intent)
-        })
+        }
     }
 
     override fun getItemCount(): Int {

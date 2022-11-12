@@ -40,14 +40,6 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val backtolesson = activity?.findViewById<Button>(R.id.backtoMain)
-        backtolesson?.setOnClickListener {
-            activity?.finish()
-        }
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = chats()

@@ -12,5 +12,4 @@ class PageAdapter(fa: FragmentActivity, private val list: List<Fragment>) : Frag
     override fun createFragment(position: Int): Fragment {
         return list[position]
     }
-
 }

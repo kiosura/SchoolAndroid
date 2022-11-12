@@ -1,10 +1,17 @@
 package com.example.schoolandroid.screens.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Switch
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
@@ -16,6 +23,15 @@ class courses : Fragment() {
 
     private lateinit var recycleView: RecyclerView
     val course_adapter = CourseAdapter()
+
+    private val courseNames : List<String> = listOf(
+        "Все курсы",
+        "Мои курсы"
+    )
+
+    private lateinit var courseBaseName : TextView
+    private lateinit var switchContainer : LinearLayout
+    private lateinit var switch : SwitchCompat
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,17 +45,25 @@ class courses : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         recycleView = view.findViewById(R.id.recycleCourses)
         with(recycleView) {
             //setHasFixedSize(true)
             layoutManager = LinearLayoutManager(view.context)
             adapter = course_adapter
         }
-        course_adapter.addCourse(Course("course1"))
-        course_adapter.addCourse(listOf(Course("course2"), Course("course3")))
-
-        for (i in 4..20){
+        for (i in 1..20){
             course_adapter.addCourse(Course("course" + i.toString()))
+        }
+
+        courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
+        switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)!!
+        switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)!!
+
+        switchContainer.setOnClickListener {
+            switch.isChecked = !switch.isChecked
+            if (switch.isChecked) courseBaseName.text = courseNames[1]
+            else courseBaseName.text = courseNames[0]
         }
     }
 
