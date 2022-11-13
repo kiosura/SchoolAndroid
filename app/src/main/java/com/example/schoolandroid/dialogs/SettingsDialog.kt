@@ -3,7 +3,6 @@ package com.example.schoolandroid.dialogs
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
@@ -15,7 +14,7 @@ class SettingsDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view : View = inflater.inflate(R.layout.settings_layout, null)
 
         view.findViewById<Button>(R.id.closesettings).setOnClickListener {
