@@ -9,6 +9,7 @@
     android:tag="taskFrag">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedTabLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
