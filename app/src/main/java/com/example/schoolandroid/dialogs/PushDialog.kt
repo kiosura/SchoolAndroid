@@ -14,7 +14,7 @@ import com.example.schoolandroid.adapter.recycleview.PushAdapter
 import com.example.schoolandroid.data.Push
 
 
-class PushDialog : DialogFragment(), OnClickListener {
+class PushDialog : DialogFragment() {
 
     private lateinit var recycleView: RecyclerView
     val push_adapter = PushAdapter()
@@ -26,7 +26,9 @@ class PushDialog : DialogFragment(), OnClickListener {
     ): View? {
         val view : View = inflater.inflate(R.layout.push_layout, container, false)
 
-        view.findViewById<Button>(R.id.closepush).setOnClickListener(this);
+        view.findViewById<Button>(R.id.closepush).setOnClickListener {
+            dialog?.cancel()
+        }
 
         return view
     }
@@ -47,9 +49,5 @@ class PushDialog : DialogFragment(), OnClickListener {
         }
 
 
-    }
-
-    override fun onClick(v: View?) {
-        dialog?.cancel()
     }
 }
