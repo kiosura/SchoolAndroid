@@ -32,16 +32,40 @@
                 android:layout_marginTop="10dp"/>
 
             <Button
-                android:id="@+id/lessonPlan"
+                android:id="@+id/lessonPlanButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp" />
 
+            <LinearLayout
+                android:id="@+id/lessonPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Каждый из нас хоть раз задумывался о том,что ждет его впереди. На самом же деле - нихуя его не ждет. Славненько."/>
+            </LinearLayout>
+
             <Button
-                android:id="@+id/files"
+                android:id="@+id/filesButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:id="@+id/files"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/filesRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/progress"

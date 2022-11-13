@@ -21,19 +21,22 @@
                 android:id="@+id/registrationLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Почта / Номер телефона"/>
+                android:hint="Почта / Номер телефона"
+                android:autofillHints="Почта / Номер телефона"/>
 
             <EditText
                 android:id="@+id/registrationPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Пароль"/>
+                android:hint="Пароль"
+                android:autofillHints="Пароль"/>
 
             <EditText
                 android:id="@+id/registrationPasswordComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Подтверждение пароля"/>
+                android:hint="Подтверждение пароля"
+                android:autofillHints="Подтверждение пароля"/>
 
             <TextView
                 android:id="@+id/errorOccured"
