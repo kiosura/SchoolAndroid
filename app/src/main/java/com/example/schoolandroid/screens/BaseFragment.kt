@@ -26,5 +26,4 @@ abstract class BaseFragment(val layoutId : Int) : Fragment() {
         this.fragmentReplacer = fragmentReplacer
     }
 
-
 }

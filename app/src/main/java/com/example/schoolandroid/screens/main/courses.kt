@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.data.Course
+import com.example.schoolandroid.dialogs.FilterCoursesDialog
 
 
 class courses : Fragment() {
@@ -29,6 +30,8 @@ class courses : Fragment() {
         "Мои курсы"
     )
 
+    private val FilterCoursesDialogFragment = FilterCoursesDialog()
+
     private lateinit var courseBaseName : TextView
     private lateinit var switchContainer : LinearLayout
     private lateinit var switch : SwitchCompat
@@ -39,6 +42,11 @@ class courses : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_courses, container, false)
+
+        val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
+        buttonFilter.setOnClickListener {
+            FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
+        }
 
         return view
     }
