@@ -21,6 +21,7 @@
                 android:id="@+id/registrationLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/profile_fragment_input_text"
                 android:hint="Почта / Номер телефона"
                 android:autofillHints="Почта / Номер телефона"/>
 
@@ -29,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Пароль"
+                style="@style/profile_fragment_input_text"
                 android:autofillHints="Пароль"/>
 
             <EditText
@@ -36,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Подтверждение пароля"
+                style="@style/profile_fragment_input_text"
                 android:autofillHints="Подтверждение пароля"/>
 
             <TextView

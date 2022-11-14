@@ -46,8 +46,10 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:paddingHorizontal="16dp"
+        android:paddingRight="34dp"
+        android:paddingLeft="24dp"
         android:paddingVertical="20dp"
+        android:gravity="center"
         tools:ignore="MissingConstraints">
 
         <Button
@@ -62,7 +64,10 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:gravity="center"
+            android:gravity="top"
+            android:textSize="25sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/bruta_semibold"
             android:text="text" />
 
         <Button
