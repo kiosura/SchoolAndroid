@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="course_card_tag" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/bruta_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+    <style name="course_card_teacher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/bruta_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+</resources>

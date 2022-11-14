@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.activity.CourseActivity
@@ -20,9 +21,9 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
-        fun bind(course: Course) = with(binding) {
-            courseBody.text = course.name
-        }
+//        fun bind(course: Course) = with(binding) {
+//            courseBody.text = course.name
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseHolder {
@@ -31,9 +32,9 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     }
 
     override fun onBindViewHolder(holder: CourseHolder, position: Int) {
-        holder.bind(courses[position])
+//        holder.bind(courses[position])
         val context : Context = holder.itemView.context
-        holder.itemView.findViewById<Button>(R.id.courseBody)
+        holder.itemView.findViewById<LinearLayout>(R.id.courseBody)
             .setOnClickListener {
             val intent: Intent = Intent(context, CourseActivity::class.java)
             intent.putExtra(extrahui, position)
