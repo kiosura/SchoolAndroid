@@ -43,8 +43,6 @@ class CourseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCourseBinding
 
-    private val PushDialogFragment = PushDialog()
-    private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
     private val baseAdapter = CoursePageAdapter(this)
 
@@ -67,11 +65,13 @@ class CourseActivity : AppCompatActivity() {
 
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {
+            val PushDialogFragment = PushDialog()
             PushDialogFragment.show(manager, "Push")
         }
 
         val buttonS = binding.settingsButton
         buttonS.setOnClickListener {
+            val SettingsDialogFragment = SettingsDialog()
             SettingsDialogFragment.show(manager, "Settings")
         }
 
