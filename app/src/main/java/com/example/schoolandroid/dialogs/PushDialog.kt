@@ -44,7 +44,7 @@ class PushDialog : DialogFragment() {
         push_adapter.addPush(Push("push1"))
         push_adapter.addPush(listOf(Push("push2"), Push("push3")))
 
-        for (i in 4..200){
+        for (i in 4..10){
             push_adapter.addPush(Push("push" + i.toString()))
         }
 

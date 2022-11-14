@@ -30,8 +30,6 @@ class courses : Fragment() {
         "Мои курсы"
     )
 
-    private val FilterCoursesDialogFragment = FilterCoursesDialog()
-
     private lateinit var courseBaseName : TextView
     private lateinit var switchContainer : LinearLayout
     private lateinit var switch : SwitchCompat
@@ -45,6 +43,7 @@ class courses : Fragment() {
 
         val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
         buttonFilter.setOnClickListener {
+            val FilterCoursesDialogFragment = FilterCoursesDialog()
             FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
         }
 
