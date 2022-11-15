@@ -26,12 +26,13 @@ class about_school : Fragment() {
 
         lifecycleScope.launch {
             whenStarted {
-                val mainText = activity?.findViewById<TextView>(R.id.mainText)
-                mainText?.text = withContext(Dispatchers.IO) {
+                val mainText = activity?.findViewById<TextView>(R.id.mainText)!!
+                mainText.text = withContext(Dispatchers.IO) {
                     apiBase()
                 }
             }
         }
+
         return view
     }
 

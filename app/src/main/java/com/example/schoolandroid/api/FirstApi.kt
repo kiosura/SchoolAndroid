@@ -1,7 +1,10 @@
 package com.example.schoolandroid.api
 
+import android.database.Observable
 import com.example.schoolandroid.data.Course
+import com.example.schoolandroid.data.CourseX
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import ru.gildor.coroutines.okhttp.await
@@ -20,17 +23,18 @@ interface FirstApi {
                 return@addInterceptor chain.proceed(request)
             }
             .build()
-        private const val url : String = "https://habr.com/ru/company/yandex_praktikum/blog/561696/"
+        private const val url : String = "https://kofefast.ru/api/course/"
         private const val api_url : String = "http://127.0.0.1:8000/api/course/"
 
-        suspend fun apiBase(): String {
+        suspend fun apiBase(): String{
             val request = Request.Builder()
                 .url(url)
                 .build()
 
             val response = client.newCall(request).await()
-            val gson = Gson().fromJson(response.body()!!.string(), Course::class.java)
-            return gson.name
+            val typeCourseX : ArrayList<CourseX> = object : ArrayList<CourseX>() {}
+            val gson : ArrayList<CourseX> = Gson().fromJson<ArrayList<CourseX>>(response.body()!!.string(), typeCourseX::class.java)
+            return gson[1].name
         }
     }
 }
