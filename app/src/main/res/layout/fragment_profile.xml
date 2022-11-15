@@ -10,59 +10,83 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingHorizontal="50dp"
-            android:paddingVertical="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/registrationLogin"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/profile_fragment_input_text"
-                android:hint="Почта / Номер телефона"
-                android:autofillHints="Почта / Номер телефона"/>
+                android:orientation="vertical"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="10dp"
+                android:layout_gravity="center">
 
-            <EditText
-                android:id="@+id/registrationPassword"
+                <EditText
+                    android:id="@+id/registrationLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/profile_fragment_input_text"
+                    android:hint="Почта / Номер телефона"
+                    android:autofillHints="Почта / Номер телефона"/>
+
+                <EditText
+                    android:id="@+id/registrationPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ПАРОЛЬ"
+                    style="@style/profile_fragment_input_text"
+                    android:autofillHints="Пароль"/>
+
+                <EditText
+                    android:id="@+id/registrationPasswordComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ПОДТВЕРЖДЕНИЕ ПАРОЛЯ"
+                    style="@style/profile_fragment_input_text"
+                    android:autofillHints="Подтверждение пароля"/>
+
+                <TextView
+                    android:id="@+id/errorOccured"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Пароль"
-                style="@style/profile_fragment_input_text"
-                android:autofillHints="Пароль"/>
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:gravity="bottom" >
 
-            <EditText
-                android:id="@+id/registrationPasswordComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Подтверждение пароля"
-                style="@style/profile_fragment_input_text"
-                android:autofillHints="Подтверждение пароля"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/registrationButton"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/bruta_regular"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_corner_black"
+                    android:text="Зарегистрироваться"/>
 
-            <TextView
-                android:id="@+id/errorOccured"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
+                <TextView
+                    android:id="@+id/loginPath"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/bruta_regular"
+                    android:textSize="13sp"
+                    android:text="У меня уже есть аккаунт"/>
 
-            <Button
-                android:id="@+id/registrationButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Зарегистрироваться"/>
-
-            <TextView
-                android:id="@+id/loginPath"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="17sp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Войти"/>
+            </LinearLayout>
 
         </LinearLayout>
 
