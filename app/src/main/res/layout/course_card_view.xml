@@ -73,7 +73,8 @@
             <ImageView
                 android:layout_width="94dp"
                 android:layout_height="94dp"
-                android:layout_marginRight="15.8dp" />
+                android:layout_marginRight="15.8dp"
+                android:background="@drawable/rounded_corner_coral" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -118,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bruta_regular"
-            android:layout_marginBottom="22dp"
+            android:layout_marginBottom="24dp"
             android:textColor="#000000"
             android:textSize="13.5sp"
             android:lineSpacingExtra="5sp"
@@ -138,10 +139,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="31.5dp"
-                    android:layout_height="31.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/clock"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -152,12 +154,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
+                        android:layout_marginTop="-3dp"
                         android:fontFamily="@font/bruta_semibold"
                         android:textSize="14sp"
                         android:text="8"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-8dp"
                         android:textColor="#000000"
                         android:fontFamily="@font/bruta_regular"
                         android:textSize="11sp"
@@ -175,10 +179,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="31.5dp"
-                    android:layout_height="31.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/clock"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -189,12 +194,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
+                        android:layout_marginTop="-3dp"
                         android:fontFamily="@font/bruta_semibold"
                         android:textSize="14sp"
                         android:text="150"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-8dp"
                         android:textColor="#000000"
                         android:fontFamily="@font/bruta_regular"
                         android:textSize="11sp"
@@ -210,11 +217,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:src="@drawable/arrow_down"
+                android:layout_gravity="center"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bruta_regular"
                 android:textColor="#000000"
+                android:textSize="12sp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginLeft="10dp"
                 android:text="развернуть"/>
 
         </LinearLayout>

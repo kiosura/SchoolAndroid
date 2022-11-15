@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -23,14 +23,12 @@
                 android:orientation="horizontal"
                 android:gravity="center" >
                 <LinearLayout
+                    style="@style/filter_and_switch_card"
                     android:layout_weight="1"
                     android:id="@+id/switchWithCourses"
                     android:background="@drawable/rounded_corner_white"
-                    android:elevation="10dp"
                     android:layout_marginVertical="10dp"
                     android:paddingHorizontal="10dp"
-                    android:layout_width="150dp"
-                    android:layout_height="70dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginLeft="24dp"
                     android:clickable="true"
@@ -48,9 +46,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="false"
-                            android:clickable="false"
-                            android:thumb="@drawable/courses_switch_thumb"
-                            app:track="@drawable/courses_switch_track" />
+                            android:clickable="false" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -61,38 +57,41 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:textAlignment="textStart"
                             android:fontFamily="@font/bruta_regular"
                             android:lineHeight="17dp"
+                            android:layout_marginTop="-3dp"
+                            android:layout_marginLeft="5dp"
                             android:textColor="#000000"
                             android:text="мои курсы"/>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/filter_and_switch_card"
                     android:id="@+id/filterWithCourses"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_corner_white"
-                    android:elevation="10dp"
-                    android:paddingHorizontal="10dp"
                     android:layout_marginVertical="10dp"
-                    android:layout_width="150dp"
-                    android:layout_height="70dp"
+                    android:paddingHorizontal="15dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="24dp"
                     android:clickable="true"
                     android:focusable="true">
 
                     <LinearLayout
-                        android:layout_width="65dp"
+                        android:layout_width="45dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingHorizontal="5dp">
+                        android:layout_marginRight="5dp">
                         <ImageView
+                            android:background="@drawable/rounded_corner_white"
+                            android:elevation="5dp"
                             android:id="@+id/iconFilter"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/filter_icon"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -106,8 +105,9 @@
                             android:textAlignment="textStart"
                             android:textColor="#000000"
                             android:fontFamily="@font/bruta_regular"
-                            android:text="фильтр"
-                            android:textSize="15sp" />
+                            android:text="фильтры"
+                            android:layout_marginTop="-6dp"
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

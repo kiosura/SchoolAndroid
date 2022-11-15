@@ -45,20 +45,23 @@
     <RelativeLayout
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="65dp"
         android:paddingRight="34dp"
         android:paddingLeft="24dp"
-        android:paddingVertical="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="5dp"
         android:gravity="center"
         tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/settingsButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30.86dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="0dp"
-            android:text="b" />
+            android:background="@drawable/settings_icon"
+            app:backgroundTint="@color/black"/>
 
         <TextView
             android:id="@+id/textView"
@@ -72,11 +75,13 @@
 
         <Button
             android:id="@+id/pushButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="29.7dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="56dp"
-            android:text="p" />
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="55dp"
+            android:background="@drawable/push_icon"
+            app:backgroundTint="@color/black"/>
 
 
     </RelativeLayout>

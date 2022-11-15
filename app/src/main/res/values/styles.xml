@@ -25,4 +25,9 @@
         <item name="android:height">55dp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="filter_and_switch_card">
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:elevation">10dp</item>
+    </style>
 </resources>
