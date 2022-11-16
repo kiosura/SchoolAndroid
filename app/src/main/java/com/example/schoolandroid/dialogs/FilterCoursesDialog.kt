@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.adapter.recycleview.DirectionSubjectAdapter
+import com.example.schoolandroid.adapter.recycleview.FilterCoursesAdapter
 import com.example.schoolandroid.data.Filter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -17,8 +16,8 @@ class FilterCoursesDialog : BottomSheetDialogFragment() {
 
     private lateinit var recycleViewDirection: RecyclerView
     private lateinit var recycleViewSubject: RecyclerView
-    private val filer_direction_adapter = DirectionSubjectAdapter()
-    private val filer_subject_adapter = DirectionSubjectAdapter()
+    private val filer_direction_adapter = FilterCoursesAdapter()
+    private val filer_subject_adapter = FilterCoursesAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

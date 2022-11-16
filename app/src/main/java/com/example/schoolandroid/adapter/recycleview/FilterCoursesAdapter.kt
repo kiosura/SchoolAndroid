@@ -9,7 +9,7 @@ import com.example.schoolandroid.data.Filter
 import com.example.schoolandroid.databinding.DirectionSubjectCardViewBinding
 
 
-class DirectionSubjectAdapter: RecyclerView.Adapter<DirectionSubjectAdapter.FilterHolder>()  {
+class FilterCoursesAdapter: RecyclerView.Adapter<FilterCoursesAdapter.FilterHolder>()  {
     private val filters = ArrayList<Filter>()
 
     class FilterHolder(card : View) : RecyclerView.ViewHolder(card){
@@ -25,6 +25,7 @@ class DirectionSubjectAdapter: RecyclerView.Adapter<DirectionSubjectAdapter.Filt
     }
 
     override fun onBindViewHolder(holder: FilterHolder, position: Int) {
+
         holder.bind(filters[position])
     }
 

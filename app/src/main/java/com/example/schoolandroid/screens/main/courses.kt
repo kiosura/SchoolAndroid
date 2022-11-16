@@ -1,24 +1,19 @@
 package com.example.schoolandroid.screens.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Switch
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.api.CourseViewModel
-import com.example.schoolandroid.data.Course
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
 
 
@@ -70,10 +65,6 @@ class courses : Fragment() {
         }
 
 
-//        for (i in 1..20){
-//            course_adapter.addCourse(Course("course" + i.toString()))
-//        }
-//
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
         switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)!!
         switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)!!

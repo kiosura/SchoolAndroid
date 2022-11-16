@@ -25,7 +25,7 @@ object RetrofitInstance {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://kofefast.ru/api/")
+            .baseUrl("https://kofefast.ru/api")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

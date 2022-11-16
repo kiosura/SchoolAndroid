@@ -6,24 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.activity.MainActivity.Companion.extrahui
-import com.example.schoolandroid.data.CourseX
-import com.example.schoolandroid.data.CourseXItem
+import com.example.schoolandroid.data.Course
+import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.databinding.CourseCardViewBinding
 
 
 
 class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
-    var courses = emptyList<CourseXItem>()
+    var courses = emptyList<CourseItem>()
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
-        fun bind(course: CourseXItem) = with(binding) {
+        fun bind(course: CourseItem) = with(binding) {
             binding.coursename.text = course.name
             binding.coursedescription.text = course.product_preview
             binding.coursetutor.text = course.teachers[0].name
@@ -36,14 +35,10 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     }
 
     override fun onBindViewHolder(holder: CourseHolder, position: Int) {
-        holder.bind(courses[position])
-        val context : Context = holder.itemView.context
 
-//        holder.itemView.coursename.text =
-//
-//        holder.itemView.findViewById<TextView>(R.id.courseName).text
-//        holder.itemView.findViewById<TextView>(R.id.coursedescription)
-//        holder.itemView.findViewById<TextView>(R.id.courseName)
+        holder.bind(courses[position])
+
+        val context : Context = holder.itemView.context
 
         holder.itemView.findViewById<LinearLayout>(R.id.courseBody)
             .setOnClickListener {
@@ -58,7 +53,7 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     }
 
 
-    fun addCourse(list: CourseX) {
+    fun addCourse(list: Course) {
         courses = list
         notifyDataSetChanged()
     }
