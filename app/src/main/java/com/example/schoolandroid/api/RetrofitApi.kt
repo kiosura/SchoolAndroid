@@ -8,4 +8,5 @@ interface RetrofitApi {
     @GET ("course")
     @Headers("Content-Type: application/json")
     suspend fun fetchCourses(): Response<CourseX>
+
 }
