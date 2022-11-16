@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" tools:ignore="ManifestOrder" />
 
     <application
-        android:name="com.example.schoolandroid.api.RetrofitInstanse"
+        android:name="com.example.schoolandroid.api.RetrofitInstanseTest"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

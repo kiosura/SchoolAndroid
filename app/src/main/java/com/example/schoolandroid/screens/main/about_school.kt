@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import com.example.schoolandroid.R
 import com.example.schoolandroid.api.CourseViewModel
-import com.example.schoolandroid.api.FirstApi.Companion.apiBase
+import com.example.schoolandroid.api.RetrofitApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,23 +31,7 @@ class about_school : Fragment() {
 
         val view : View = inflater.inflate(R.layout.fragment_about_school, container, false)
 
-//        lifecycleScope.launch {
-//            whenStarted {
-//                val mainText = activity?.findViewById<TextView>(R.id.mainText)!!
-//                mainText.text = withContext(Dispatchers.IO) {
-//                    apiBase()
-//                }
-//            }
-//        }
-
-        lifecycleScope.launch {
-            whenStarted {
-                val mainText = activity?.findViewById<TextView>(R.id.mainText)!!
-                mainText.text = withContext(Dispatchers.IO) {
-                    apiBase()
-                }
-            }
-        }
+        //viewModel.fetchCourses(this.activity?.application as RetrofitApi)
 
 
         return view

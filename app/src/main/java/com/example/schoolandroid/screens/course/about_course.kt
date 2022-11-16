@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
 import com.example.schoolandroid.adapter.recycleview.TaskAdapter
-import com.example.schoolandroid.api.FirstApi.Companion.apiBase
+//import com.example.schoolandroid.api.FirstApi.Companion.apiBase
 import com.example.schoolandroid.data.Lesson
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
