@@ -64,10 +64,10 @@ class courses : Fragment() {
         }
 
         var viewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
-        viewModel.getCourses()
-        viewModel.coursesList.observe(viewLifecycleOwner, {list ->
+
+        viewModel.getCourses().observe(viewLifecycleOwner) { list ->
             list.body()?.let { course_adapter.addCourse(it) }
-        })
+        }
 
 
 //        for (i in 1..20){

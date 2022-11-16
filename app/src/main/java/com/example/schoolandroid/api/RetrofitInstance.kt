@@ -11,8 +11,8 @@ object RetrofitInstance {
         val header_name : String = "Authorization"
         val api_key : String = "BF7nDuG4.ZTGSsdUsnqSIk9ab2psqtEKrx19Pfkyb"
 
-        val httploggingInterceptor = HttpLoggingInterceptor()
-        httploggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//        val httploggingInterceptor = HttpLoggingInterceptor()
+//        httploggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor{chain ->

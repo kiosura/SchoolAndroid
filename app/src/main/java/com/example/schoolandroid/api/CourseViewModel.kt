@@ -28,13 +28,14 @@ import com.example.schoolandroid.api.RetrofitApi
 //}
 
 class CourseViewModel: ViewModel(){
-    var retrofitApi = RetrofitApiImplementation()
+    var retrofitApi = RetrofitInstance.api
     val coursesList: MutableLiveData<Response<CourseX>> = MutableLiveData()
 
-    fun getCourses(){
+    fun getCourses(): MutableLiveData<Response<CourseX>> {
         viewModelScope.launch {
-            coursesList.value = retrofitApi.getCourses()
+            coursesList.value = retrofitApi.fetchCourses()
         }
+        return coursesList
     }
 }
 
