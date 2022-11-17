@@ -23,9 +23,12 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
         fun bind(course: CourseItem) = with(binding) {
-            binding.coursename.text = course.name
-            binding.coursedescription.text = course.product_preview
-            binding.coursetutor.text = course.teachers[0].name
+            coursename.text = course.name
+            coursedescription.text = course.product_preview
+            coursetutor.text = makeTeacherName(course)
+        }
+        fun makeTeacherName(course : CourseItem) : String {
+            return course.teachers[0].name + " " + course.teachers[0].surname
         }
     }
 

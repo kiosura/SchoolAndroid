@@ -1,6 +1,7 @@
 package com.example.schoolandroid.activity
 
 import android.os.Bundle
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.schoolandroid.adapter.PageAdapter
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val PushDialogFragment = PushDialog()
-    private val SettingsDialogFragment = SettingsDialog()
+//    private val PushDialogFragment = PushDialog()
+//    private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,13 +70,13 @@ class MainActivity : AppCompatActivity() {
         // push button, calls push dialog
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {
-            PushDialogFragment.show(manager, "Push")
+            PushDialog().show(manager, "Push")
         }
 
         // settings button, calls settings dialog
         val buttonS = binding.settingsButton
         buttonS.setOnClickListener {
-            SettingsDialogFragment.show(manager, "Settings")
+            SettingsDialog().show(manager, "Settings")
         }
 
         tabClickListener()
