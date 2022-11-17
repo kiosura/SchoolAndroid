@@ -9,7 +9,7 @@ object RetrofitInstance {
     private val retrofit by lazy {
 
         val header_name : String = "Authorization"
-        val api_key : String = "BF7nDuG4.ZTGSsdUsnqSIk9ab2psqtEKrx19Pfkyb"
+        val api_key : String = "TFikEFVf.qpSKwjiMQs1ts1qeUNa4aUWPFXmGVWUo"
 
 //        val httploggingInterceptor = HttpLoggingInterceptor()
 //        httploggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
