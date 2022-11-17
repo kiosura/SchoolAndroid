@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.activity.MainActivity.Companion.extrahui
-import com.example.schoolandroid.data.Course
+import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.databinding.CourseCardViewBinding
 
@@ -18,7 +18,7 @@ import com.example.schoolandroid.databinding.CourseCardViewBinding
 
 class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
-    var courses = emptyList<CourseItem>()
+    var courses = ArrayList<CourseItem>()
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = CourseCardViewBinding.bind(card)
@@ -53,8 +53,8 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
     }
 
 
-    fun addCourse(list: Course) {
-        courses = list
+    fun addCourses(list: Courses?) {
+        if (list != null) courses.addAll(list)
         notifyDataSetChanged()
     }
 }

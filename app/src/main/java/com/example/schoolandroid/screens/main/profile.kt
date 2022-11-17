@@ -49,7 +49,6 @@ class profile : Fragment() {
     }
 
     fun registration() {
-        println(1)
         registrationButton.setOnClickListener {
             val (textRes, colorRes) = validateRegistration(registrationLogin.text.toString(),
                 registrationPassword.text.toString(),

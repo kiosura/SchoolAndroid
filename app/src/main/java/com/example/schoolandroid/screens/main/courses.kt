@@ -8,13 +8,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
-import com.example.schoolandroid.api.CourseViewModel
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
+import com.example.schoolandroid.storage.Storage
 
 
 class courses : Fragment() {
@@ -44,7 +43,6 @@ class courses : Fragment() {
             FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
         }
 
-
         return view
     }
 
@@ -58,12 +56,10 @@ class courses : Fragment() {
             adapter = course_adapter
         }
 
-        var viewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
-
-        viewModel.getCourses().observe(viewLifecycleOwner) { list ->
-            list.body()?.let { course_adapter.addCourse(it) }
+        // subscription for MutableLiveData<Courses> changes - coming from Storage
+        Storage.getCourses().observe(viewLifecycleOwner) { list ->
+            course_adapter.addCourses(list)
         }
-
 
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
         switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)!!

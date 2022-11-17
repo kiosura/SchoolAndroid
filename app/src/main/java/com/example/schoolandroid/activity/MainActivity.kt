@@ -2,13 +2,16 @@ package com.example.schoolandroid.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.schoolandroid.adapter.PageAdapter
+import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
 import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
 import com.example.schoolandroid.screens.main.profile
+import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -20,18 +23,21 @@ class MainActivity : AppCompatActivity() {
         const val extrahui : String = "hui"
     }
 
+    // MainActivity fragments' list
     private val fragList = listOf(
         about_school.newInstance(),
         courses.newInstance(),
         profile.newInstance()
     )
 
+    // tablayout items' names
     private val fragNames = listOf(
         "о школе",
         "курсы",
         "профиль"
     )
 
+    // headers' names
     private val baseNames : ArrayList<String> = arrayListOf<String>(
         "О Школе",
         "Все курсы",
@@ -47,27 +53,41 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // connecting views
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // MainActivity adapter connect
         val adapter = PageAdapter(this, fragList)
         binding.mainActivityVp.adapter = adapter
 
+        // tablayout's viewpager manager
         TabLayoutMediator(binding.mainPageBottomMenue, binding.mainActivityVp){
             tab, pos -> tab.text = fragNames[pos]
         }.attach()
 
+        // push button, calls push dialog
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {
             PushDialogFragment.show(manager, "Push")
         }
 
+        // settings button, calls settings dialog
         val buttonS = binding.settingsButton
         buttonS.setOnClickListener {
             SettingsDialogFragment.show(manager, "Settings")
         }
 
         tabClickListener()
+
+        // custom view model for main activity
+        val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+
+        // subscription for MutableLiveData<Response<Courses>> changes - coming from API
+        val coursesRaw =  storageViewModel.getCourses()
+        coursesRaw.observe(this) {
+            Storage.addCourses(coursesRaw)
+        }
     }
 
     fun tabClickListener(){
