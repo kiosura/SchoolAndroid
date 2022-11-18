@@ -20,9 +20,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val extrahui : String = "hui"
-    }
 
     // MainActivity fragments' list
     private val fragList = listOf(

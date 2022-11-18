@@ -25,6 +25,7 @@ class task(private val tabSelected : Int) : BaseFragment(R.layout.task_view),
     private lateinit var recyclerView: RecyclerView
     private val task_adapter : TaskAdapter = TaskAdapter(this, R.layout.task_tab_view)
     private var lastIndex : Int = tabSelected
+    private var nextIndex : Int = 0
     private lateinit var nesty : NestedScrollView
 
     @SuppressLint("RestrictedApi")
@@ -50,24 +51,35 @@ class task(private val tabSelected : Int) : BaseFragment(R.layout.task_view),
         }
         view.findViewById<Button>(R.id.nextTask).setOnClickListener {
             recyclerView.isVisible = false
-            onClick(lastIndex+1)
+            if (lastIndex + nextIndex < 38) nextIndex += 1
+            else if (lastIndex + nextIndex == 38){
+                nextIndex += 1
+                view.findViewById<Button>(R.id.nextTask).isVisible = false
+            }
         }
     }
 
     // .post (Runnable {} ) waiting for full initialization recyclerView (visible)
     @SuppressLint("RestrictedApi")
-    fun getScroll(tab : Int = lastIndex)
-        = nesty.post(Runnable { nesty.smoothScrollTo(0, (dpToPx(nesty.context, 50)*(if(tab > 2) tab-2 else 0)).toInt(), 200) })
+    fun getScroll() {
+        nesty.post(Runnable {
+            onClick(lastIndex + nextIndex)
+            nesty.smoothScrollTo(0,
+                (dpToPx(nesty.context, 50)*(if(lastIndex + nextIndex > 2) lastIndex + nextIndex-2 else 0))
+                    .toInt(), 200)
+        })
+    }
 
     override fun onClick(position: Int) {
         if (position != lastIndex) {
             if (position == task_adapter.itemCount-1) view?.findViewById<Button>(R.id.nextTask)?.isVisible = false
             if (lastIndex == task_adapter.itemCount-1) view?.findViewById<Button>(R.id.nextTask)?.isVisible = true
-            recyclerView.get(position).findViewById<Button>(R.id.taskBody)
-                .setBackgroundColor(resources.getColor(R.color.teal_200))
             recyclerView.get(lastIndex).findViewById<Button>(R.id.taskBody)
                 .setBackgroundColor(resources.getColor(R.color.purple_500))
+            recyclerView.get(position).findViewById<Button>(R.id.taskBody)
+                .setBackgroundColor(resources.getColor(R.color.teal_200))
             lastIndex = position
+            nextIndex = 0
         }
     }
 

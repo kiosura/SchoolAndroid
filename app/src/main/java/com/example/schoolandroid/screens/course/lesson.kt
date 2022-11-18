@@ -58,6 +58,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
             adapter = task_adapter
         }
 
+
         for (i in 1..40){
             task_adapter.addTask(Task(i, " hui", resources.getColor(R.color.purple_500)))
         }

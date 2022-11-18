@@ -1,25 +1,23 @@
 package com.example.schoolandroid.adapter.recycleview
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.data.Lesson
+import com.example.schoolandroid.data.LessonItem
+import com.example.schoolandroid.data.Lessons
 import com.example.schoolandroid.databinding.AboutCourseLessonCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
-import com.google.android.material.tabs.TabLayout
 
 class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
-    private val lessons = ArrayList<Lesson>()
+    private var lessons = ArrayList<LessonItem>()
 
     class LessonHolder(card : View) : RecyclerView.ViewHolder(card){
         private val binding = AboutCourseLessonCardViewBinding.bind(card)
 
-        fun bind(lesson: Lesson) = with(binding){
+        fun bind(lesson: LessonItem) = with(binding){
             lessonBody.text = lesson.name
         }
     }
@@ -42,12 +40,8 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         return lessons.size
     }
 
-    fun addLesson(lesson: Lesson){
-        lessons.add(lesson)
-        notifyDataSetChanged()
-    }
-    fun addLesson(lesson: List<Lesson>){
-        lessons.addAll(lesson)
+    fun addLesson(lesson: Lessons){
+        lessons = lesson
         notifyDataSetChanged()
     }
 }

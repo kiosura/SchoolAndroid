@@ -1,21 +1,13 @@
 package com.example.schoolandroid.activity
 
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.CoursePageAdapter
-import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
-import com.example.schoolandroid.data.Lesson
 import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
-import com.example.schoolandroid.screens.course.about_course
-import com.example.schoolandroid.screens.course.chats
-import com.example.schoolandroid.screens.course.lesson
-import com.google.android.material.tabs.TabItem
+import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -48,7 +40,6 @@ class CourseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        course_id = getIntent().getIntExtra(MainActivity.extrahui, 100)
 
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,7 +52,6 @@ class CourseActivity : AppCompatActivity() {
         }.attach()
 
         tabClickListener()
-
 
         val buttonP = binding.pushButton
         buttonP.setOnClickListener {

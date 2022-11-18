@@ -1,5 +1,6 @@
 package com.example.schoolandroid.screens.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,24 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
+import com.example.schoolandroid.activity.CourseActivity
+import com.example.schoolandroid.activity.MainActivity
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
+import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
+import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.storage.Storage
 
 
-class courses : Fragment() {
+class courses : Fragment(), Listener {
 
     private lateinit var recycleView: RecyclerView
-    val course_adapter = CourseAdapter()
+    val course_adapter = CourseAdapter(this)
 
     private val courseNames : List<String> = listOf(
         "Все курсы",
@@ -61,6 +68,15 @@ class courses : Fragment() {
             course_adapter.addCourses(list)
         }
 
+        // custom view model for main activity
+        val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+
+        // subscription for MutableLiveData<Response<Course.lessons>> changes - coming from API
+        val lessonsRaw = storageViewModel.getLessons()
+        lessonsRaw.observe(this.viewLifecycleOwner) {
+            Storage.mergeCourses(lessonsRaw)
+        }
+
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
         switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)!!
         switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)!!
@@ -70,6 +86,12 @@ class courses : Fragment() {
             if (switch.isChecked) courseBaseName.text = courseNames[1]
             else courseBaseName.text = courseNames[0]
         }
+    }
+
+    override fun onClick(position: Int) {
+        Storage.setCurrent(position)
+        val intent: Intent = Intent(context, CourseActivity::class.java)
+        context?.startActivity(intent)
     }
 
     companion object {

@@ -1,22 +1,19 @@
 package com.example.schoolandroid.adapter.recycleview
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.activity.CourseActivity
-import com.example.schoolandroid.activity.MainActivity.Companion.extrahui
 import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.databinding.CourseCardViewBinding
+import com.example.schoolandroid.interfaces.Listener
 
 
-
-class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
+class CourseAdapter(val listener : Listener) : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
     var courses = ArrayList<CourseItem>()
 
@@ -45,16 +42,13 @@ class CourseAdapter : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
         holder.itemView.findViewById<LinearLayout>(R.id.courseBody)
             .setOnClickListener {
-            val intent: Intent = Intent(context, CourseActivity::class.java)
-            intent.putExtra(extrahui, position)
-            context.startActivity(intent)
+            listener.onClick(position)
         }
     }
 
     override fun getItemCount(): Int {
         return courses.size
     }
-
 
     fun addCourses(list: Courses?) {
         if (list != null) courses.addAll(list)
