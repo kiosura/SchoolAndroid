@@ -112,6 +112,35 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- появляется только при включенном "мои курсы", это я прикручу позже -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/archiveButton"
+                    style="@style/archive_card"
+                    android:layout_width="170dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/rounded_corner_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/BrutaGlbExtended_Regular"
+                        android:text="архив курсов"
+                        android:textColor="#000000" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleCourses"
                 android:layout_width="match_parent"
