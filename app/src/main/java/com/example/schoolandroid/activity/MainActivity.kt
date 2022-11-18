@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
 
         // subscription for MutableLiveData<Response<Courses>> changes - coming from API
-        val coursesRaw =  storageViewModel.getCourses()
+        var coursesRaw = storageViewModel.getCourses()
         coursesRaw.observe(this) {
             Storage.addCourses(coursesRaw)
         }

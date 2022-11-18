@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
@@ -21,6 +22,7 @@ import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.storage.Storage
+import kotlinx.coroutines.launch
 
 
 class courses : Fragment(), Listener {

@@ -22,7 +22,6 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.about_course_lesson_card_view, parent,false)
             return LessonHolder(view)

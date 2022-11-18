@@ -1,30 +1,42 @@
 package com.example.schoolandroid.storage
 
 import androidx.lifecycle.MutableLiveData
-import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.data.Courses
-import com.example.schoolandroid.data.Lessons
-import com.example.schoolandroid.screens.course.lesson
-import com.example.schoolandroid.screens.main.courses
+import com.example.schoolandroid.data.CourseItem
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
 
+//private lateinit var currentCourse : StateFlow<Lessons>
+//
+//suspend fun setCurrent(index : Int, scope : CoroutineScope) {
+//    currentCourse = flow<Lessons> {
+//        emit(coursesList.value!![index].lessons)
+//    }.stateIn(scope = scope)
+//}
+//
+//fun getLessons() : Result<Lessons> =
+//    runCatching { currentCourse.value }
+//
+//
+//private var coursesList : MutableLiveData<Courses> = MutableLiveData()
+
+
 object Storage {
-    private var currentCourse : Int = 0
+    private lateinit var currentCourse : MutableLiveData<CourseItem>
 
     fun setCurrent(index : Int) {
-        currentCourse = index
+        currentCourse = MutableLiveData(coursesList.value!![index])
     }
 
-    fun getCurrent() = coursesList.value!![currentCourse]
-    fun getLessons() = MutableLiveData(coursesList.value!![currentCourse].lessons)
-
+    fun getCurrentCourse() = currentCourse
 
     private var coursesList : MutableLiveData<Courses> = MutableLiveData()
 
     fun addCourses(list : MutableLiveData<Response<Courses>>?) {
-        coursesList = MutableLiveData(list?.value?.body())
+        if (coursesList.value == null)
+            coursesList = MutableLiveData(list?.value?.body())
+        else mergeCourses(list)
     }
 
     fun getCourses() = coursesList

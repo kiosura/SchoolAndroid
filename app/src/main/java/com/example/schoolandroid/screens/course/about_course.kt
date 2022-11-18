@@ -2,16 +2,17 @@ package com.example.schoolandroid.screens.course
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
 //import com.example.schoolandroid.api.FirstApi.Companion.apiBase
-import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.launch
 
 
 class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
@@ -26,8 +27,9 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
             adapter = lessonsAdapter
         }
 
-        Storage.getLessons().observe(viewLifecycleOwner) { list ->
-            lessonsAdapter.addLesson(list)
+        val lessonRaw = Storage.getCurrentCourse()
+        lessonRaw.observe(this.viewLifecycleOwner) {list ->
+            lessonsAdapter.addLesson(list.lessons)
         }
     }
 
