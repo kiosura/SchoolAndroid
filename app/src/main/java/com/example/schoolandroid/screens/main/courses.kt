@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -28,7 +29,9 @@ import kotlinx.coroutines.launch
 class courses : Fragment(), Listener {
 
     private lateinit var recycleView: RecyclerView
-    val course_adapter = CourseAdapter(this)
+    // раздать разные cardview
+    val course_adapter = CourseAdapter(this, R.layout.course_card_view)
+    val my_course_adapter = CourseAdapter(this, R.layout.course_card_view)
 
     private val courseNames : List<String> = listOf(
         "Все курсы",
@@ -38,6 +41,7 @@ class courses : Fragment(), Listener {
     private lateinit var courseBaseName : TextView
     private lateinit var switchContainer : LinearLayout
     private lateinit var switch : SwitchCompat
+    private lateinit var archive : LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,9 +62,9 @@ class courses : Fragment(), Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // дописать заход на my_courses_adapter после подготовки UserData
         recycleView = view.findViewById(R.id.recycleCourses)
         with(recycleView) {
-            //setHasFixedSize(true)
             layoutManager = LinearLayoutManager(view.context)
             adapter = course_adapter
         }
@@ -68,6 +72,7 @@ class courses : Fragment(), Listener {
         // subscription for MutableLiveData<Courses> changes - coming from Storage
         Storage.getCourses().observe(viewLifecycleOwner) { list ->
             course_adapter.addCourses(list)
+            my_course_adapter.addCourses(list)
         }
 
         // custom view model for main activity
@@ -80,14 +85,29 @@ class courses : Fragment(), Listener {
         }
 
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
-        switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)!!
-        switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)!!
+        switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)
+        switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)
+        archive = view.findViewById<LinearLayout>(R.id.archiveButton)
+
+        archive.isVisible = false
 
         switchContainer.setOnClickListener {
             switch.isChecked = !switch.isChecked
-            if (switch.isChecked) courseBaseName.text = courseNames[1]
-            else courseBaseName.text = courseNames[0]
+            if (switch.isChecked) onChangeToSelf()
+            else onChangeToAll()
         }
+    }
+
+    fun onChangeToSelf() {
+        courseBaseName.text = courseNames[1]
+        recycleView.adapter = my_course_adapter
+        archive.isVisible = true
+    }
+
+    fun onChangeToAll() {
+        courseBaseName.text = courseNames[0]
+        recycleView.adapter = course_adapter
+        archive.isVisible = false
     }
 
     override fun onClick(position: Int) {

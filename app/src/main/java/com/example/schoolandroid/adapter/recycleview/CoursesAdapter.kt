@@ -13,7 +13,7 @@ import com.example.schoolandroid.databinding.CourseCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
 
 
-class CourseAdapter(val listener : Listener) : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
+class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
     var courses = ArrayList<CourseItem>()
 
@@ -30,15 +30,13 @@ class CourseAdapter(val listener : Listener) : RecyclerView.Adapter<CourseAdapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.course_card_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(card_layout, parent, false)
         return CourseHolder(view)
     }
 
     override fun onBindViewHolder(holder: CourseHolder, position: Int) {
 
         holder.bind(courses[position])
-
-        val context : Context = holder.itemView.context
 
         holder.itemView.findViewById<LinearLayout>(R.id.courseBody)
             .setOnClickListener {
