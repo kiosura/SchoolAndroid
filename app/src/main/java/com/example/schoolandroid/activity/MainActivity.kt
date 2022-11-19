@@ -1,7 +1,6 @@
 package com.example.schoolandroid.activity
 
 import android.os.Bundle
-import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.schoolandroid.adapter.MainPageAdapter
@@ -9,12 +8,7 @@ import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
-import com.example.schoolandroid.screens.BaseFragment
-import com.example.schoolandroid.screens.main.about_school
-import com.example.schoolandroid.screens.main.courses
-import com.example.schoolandroid.screens.main.profile
 import com.example.schoolandroid.storage.Storage
-import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator

@@ -1,10 +1,6 @@
 package com.example.schoolandroid.interfaces
 
 import com.example.schoolandroid.screens.BaseFragment
-import com.example.schoolandroid.screens.course.about_course
-import com.example.schoolandroid.screens.course.chats
-import com.example.schoolandroid.screens.course.lesson
-import com.example.schoolandroid.screens.main.profile
 
 interface FragmentReplacer {
 

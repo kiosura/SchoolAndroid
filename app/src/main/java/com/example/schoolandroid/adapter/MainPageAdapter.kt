@@ -8,7 +8,7 @@ import com.example.schoolandroid.interfaces.FragmentReplacer
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
-import com.example.schoolandroid.screens.main.profile
+import com.example.schoolandroid.screens.main.regAuth
 
 class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
     FragmentReplacer {
@@ -31,7 +31,7 @@ class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
         isNotify: Boolean,
         newFrag: List<BaseFragment>
     ): BaseFragment {
-        return super.replaceDefault(position, isNotify, listOf (about_school(), courses(), profile()))
+        return super.replaceDefault(position, isNotify, listOf (about_school(), courses(), regAuth()))
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +40,7 @@ class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
 
     override fun createFragment(position: Int): Fragment {
         return mapOfFragment[position] ?: replaceDefault(position, false, listOf
-            (about_school(), courses(), profile()))
+            (about_school(), courses(), regAuth()))
     }
 
     override fun getItemId(position: Int): Long {

@@ -1,104 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.main.profile">
+    android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"/>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="50dp"
-                android:paddingVertical="10dp"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:id="@+id/loginError"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"/>
-
-                <EditText
-                    android:id="@+id/registrationLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/profile_fragment_input_text"
-                    android:hint="ПОЧТА / НОМЕР ТЕЛЕФОНА"
-                    android:inputType="text"
-                    android:autofillHints="Почта / Номер телефона"/>
-
-                <EditText
-                    android:id="@+id/registrationPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="ПАРОЛЬ"
-                    android:inputType="textPassword"
-                    style="@style/profile_fragment_input_text"
-                    android:autofillHints="Пароль"/>
-
-                <EditText
-                    android:id="@+id/registrationPasswordComplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="ПОДТВЕРЖДЕНИЕ ПАРОЛЯ"
-                    android:inputType="textPassword"
-                    style="@style/profile_fragment_input_text"
-                    android:autofillHints="Подтверждение пароля"/>
-
-                <TextView
-                    android:id="@+id/passwordError"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="bottom"
-                android:gravity="bottom" >
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/registrationButton"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:paddingHorizontal="20dp"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/bruta_regular"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/rounded_corner_black"
-                    android:text="Зарегистрироваться"/>
-
-                <TextView
-                    android:id="@+id/loginPath"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/bruta_regular"
-                    android:textSize="13sp"
-                    android:text="У меня уже есть аккаунт"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
