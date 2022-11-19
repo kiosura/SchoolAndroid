@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.data.Courses
-import com.example.schoolandroid.data.Lessons
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -28,4 +27,10 @@ class StorageViewModel : ViewModel() {
         }
         return list
     }
+
+//    fun authentication() {
+//        viewModelScope.launch {
+//            retrofitApi.authentication())
+//        }
+//    }
 }
