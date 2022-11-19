@@ -7,17 +7,11 @@ import com.example.schoolandroid.adapter.CoursePageAdapter
 import com.example.schoolandroid.databinding.ActivityCourseBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
-import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class CourseActivity : AppCompatActivity() {
-//    companion object {
-//        const val extrahui : String = "EXTRAHUI"
-//    }
-
-    private var course_id : Int = 0
 
     private val fragNames = listOf(
         "о курсе",
@@ -44,8 +38,7 @@ class CourseActivity : AppCompatActivity() {
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = baseAdapter
-        binding.courseActivityVp.adapter = adapter
+        binding.courseActivityVp.adapter = baseAdapter
 
         TabLayoutMediator(binding.coursePageBottomMenue, binding.courseActivityVp){
                 tab, pos -> tab.text = fragNames[pos]
@@ -83,7 +76,7 @@ class CourseActivity : AppCompatActivity() {
             val tabLayout : TabLayout = findViewById<TabLayout>(R.id.coursePageBottomMenue)
             val tab = tabLayout.getTabAt(1)
             if (tab!!.isSelected) {
-                baseAdapter.replaceDef(1)
+                baseAdapter.replaceDefault(1)
                 binding.textView.text = "Урок"
             }
             else finish()

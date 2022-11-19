@@ -1,8 +1,35 @@
 package com.example.schoolandroid.interfaces
 
 import com.example.schoolandroid.screens.BaseFragment
+import com.example.schoolandroid.screens.course.about_course
+import com.example.schoolandroid.screens.course.chats
+import com.example.schoolandroid.screens.course.lesson
+import com.example.schoolandroid.screens.main.profile
 
 interface FragmentReplacer {
-    fun replace(position: Int, newFragment: BaseFragment, isNotify: Boolean = true)
-    fun replaceDef(position: Int, isNotify: Boolean = true) : BaseFragment
+
+    fun replace(position: Int, newFragment: BaseFragment, isNotify: Boolean = true) {
+        newFragment.setPageInfo(
+            pagePos = position,
+            fragmentReplacer = this
+        )
+    }
+
+
+    fun replaceDefault(position: Int, isNotify: Boolean = true, newFrag : List<BaseFragment> = listOf()) : BaseFragment {
+        val fragment : BaseFragment = when (position) {
+            0 -> newFrag[0]
+            1 -> newFrag[1]
+            2 -> newFrag[2]
+            else -> throw IllegalStateException()
+        }
+        fragment.setPageInfo(
+            pagePos = position,
+            fragmentReplacer = this
+        )
+
+        replace(position, fragment, isNotify)
+
+        return fragment
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.schoolandroid.screens.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,11 +23,12 @@ import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
 import com.example.schoolandroid.interfaces.Listener
+import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import kotlinx.coroutines.launch
 
 
-class courses : Fragment(), Listener {
+class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
     private lateinit var recycleView: RecyclerView
     // раздать разные cardview
@@ -43,24 +45,14 @@ class courses : Fragment(), Listener {
     private lateinit var switch : SwitchCompat
     private lateinit var archive : LinearLayout
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_courses, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
         buttonFilter.setOnClickListener {
             val FilterCoursesDialogFragment = FilterCoursesDialog()
             FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
         }
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // дописать заход на my_courses_adapter после подготовки UserData
         recycleView = view.findViewById(R.id.recycleCourses)

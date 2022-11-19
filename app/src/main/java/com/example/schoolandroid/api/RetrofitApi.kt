@@ -25,7 +25,7 @@ interface RetrofitApi {
 
     @POST("user/auth")
     @Headers("Content-Type: application/json")
-    suspend fun authentication():Response<User>
+    suspend fun authentication(): Response<User>
 
 //    @POST("user/update")
 //    @Headers("Content-Type: application/json")

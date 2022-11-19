@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.schoolandroid.adapter.PageAdapter
+import com.example.schoolandroid.adapter.MainPageAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
+import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
 import com.example.schoolandroid.screens.main.profile
@@ -20,13 +21,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
-
-    // MainActivity fragments' list
-    private val fragList = listOf(
-        about_school.newInstance(),
-        courses.newInstance(),
-        profile.newInstance()
-    )
 
     // tablayout items' names
     private val fragNames = listOf(
@@ -43,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var binding: ActivityMainBinding
+    private val baseAdapter = MainPageAdapter(this)
 
 //    private val PushDialogFragment = PushDialog()
 //    private val SettingsDialogFragment = SettingsDialog()
@@ -56,8 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // MainActivity adapter connect
-        val adapter = PageAdapter(this, fragList)
-        binding.mainActivityVp.adapter = adapter
+        binding.mainActivityVp.adapter = baseAdapter
 
         // tablayout's viewpager manager
         TabLayoutMediator(binding.mainPageBottomMenue, binding.mainActivityVp){

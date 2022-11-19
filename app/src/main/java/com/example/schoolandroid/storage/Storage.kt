@@ -3,6 +3,7 @@ package com.example.schoolandroid.storage
 import androidx.lifecycle.MutableLiveData
 import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
+import com.example.schoolandroid.data.User
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
@@ -23,15 +24,21 @@ import kotlin.reflect.full.primaryConstructor
 
 
 object Storage {
+    private var user : MutableLiveData<User>?  = null
+    private var coursesList : MutableLiveData<Courses> = MutableLiveData()
     private lateinit var currentCourse : MutableLiveData<CourseItem>
+
+    fun setUser(userItem : MutableLiveData<Response<User>>) {
+        user = MutableLiveData(userItem.value!!.body())
+    }
+
+    fun getUser() = user
 
     fun setCurrent(index : Int) {
         currentCourse = MutableLiveData(coursesList.value!![index])
     }
 
     fun getCurrentCourse() = currentCourse
-
-    private var coursesList : MutableLiveData<Courses> = MutableLiveData()
 
     fun addCourses(list : MutableLiveData<Response<Courses>>?) {
         if (coursesList.value == null)

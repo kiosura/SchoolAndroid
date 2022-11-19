@@ -6,11 +6,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.schoolandroid.interfaces.FragmentReplacer
 import com.example.schoolandroid.screens.BaseFragment
-import com.example.schoolandroid.screens.course.about_course
-import com.example.schoolandroid.screens.course.chats
-import com.example.schoolandroid.screens.course.lesson
+import com.example.schoolandroid.screens.main.about_school
+import com.example.schoolandroid.screens.main.courses
+import com.example.schoolandroid.screens.main.profile
 
-class CoursePageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
+class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
     FragmentReplacer {
 
     val mapOfFragment : ArrayMap<Int, BaseFragment> = ArrayMap<Int, BaseFragment>()
@@ -31,7 +31,7 @@ class CoursePageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
         isNotify: Boolean,
         newFrag: List<BaseFragment>
     ): BaseFragment {
-        return super.replaceDefault(position, isNotify, listOf (about_course(), lesson(), chats()))
+        return super.replaceDefault(position, isNotify, listOf (about_school(), courses(), profile()))
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +40,7 @@ class CoursePageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
 
     override fun createFragment(position: Int): Fragment {
         return mapOfFragment[position] ?: replaceDefault(position, false, listOf
-            (about_course(), lesson(), chats()))
+            (about_school(), courses(), profile()))
     }
 
     override fun getItemId(position: Int): Long {

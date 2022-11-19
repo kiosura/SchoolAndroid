@@ -1,18 +1,18 @@
 package com.example.schoolandroid.screens.main
 
+import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.interfaces.Validator.Companion.validateRegistration
+import com.example.schoolandroid.screens.BaseFragment
+import com.example.schoolandroid.storage.Storage
 
 
-class profile : Fragment() {
+class profile : BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var loginPath : TextView
     private lateinit var registrationButton : TextView
@@ -21,16 +21,16 @@ class profile : Fragment() {
     private lateinit var registrationPasswordComplete : EditText
     private lateinit var errorMessage : TextView
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if ( Storage.getUser() != null) activity?.findViewById<ViewPager2>(R.id.mainActivityVp)!!.post(
+                Runnable{ fragmentReplacer.replace(2, profile_face())
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         loginPath = view.findViewById(R.id.loginPath)
         registrationButton = view.findViewById(R.id.registrationButton)
         registrationLogin = view.findViewById(R.id.registrationLogin)
