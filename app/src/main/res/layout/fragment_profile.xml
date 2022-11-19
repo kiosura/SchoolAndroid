@@ -22,12 +22,19 @@
                 android:paddingVertical="10dp"
                 android:layout_gravity="center">
 
+                <TextView
+                    android:id="@+id/loginError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"/>
+
                 <EditText
                     android:id="@+id/registrationLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/profile_fragment_input_text"
-                    android:hint="Почта / Номер телефона"
+                    android:hint="ПОЧТА / НОМЕР ТЕЛЕФОНА"
+                    android:inputType="text"
                     android:autofillHints="Почта / Номер телефона"/>
 
                 <EditText
@@ -35,6 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ПАРОЛЬ"
+                    android:inputType="textPassword"
                     style="@style/profile_fragment_input_text"
                     android:autofillHints="Пароль"/>
 
@@ -43,11 +51,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ПОДТВЕРЖДЕНИЕ ПАРОЛЯ"
+                    android:inputType="textPassword"
                     style="@style/profile_fragment_input_text"
                     android:autofillHints="Подтверждение пароля"/>
 
                 <TextView
-                    android:id="@+id/errorOccured"
+                    android:id="@+id/passwordError"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>

@@ -5,7 +5,7 @@ data class User(
     val grade: String,
     val id: Int,
     val name: String,
-    val notifications: List<Any>,
+    val notifications: List<Notification>,
     val phone_number: String,
     val progresses: List<Progress>,
     val registered: String,

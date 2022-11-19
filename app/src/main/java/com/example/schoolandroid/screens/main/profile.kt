@@ -7,9 +7,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
-import com.example.schoolandroid.interfaces.Validator.Companion.validateRegistration
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
+import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
 
 
 class profile : BaseFragment(R.layout.fragment_profile) {
@@ -19,7 +19,8 @@ class profile : BaseFragment(R.layout.fragment_profile) {
     private lateinit var registrationLogin : EditText
     private lateinit var registrationPassword : EditText
     private lateinit var registrationPasswordComplete : EditText
-    private lateinit var errorMessage : TextView
+    private lateinit var loginError : TextView
+    private lateinit var passwordError : TextView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,7 +37,8 @@ class profile : BaseFragment(R.layout.fragment_profile) {
         registrationLogin = view.findViewById(R.id.registrationLogin)
         registrationPassword = view.findViewById(R.id.registrationPassword)
         registrationPasswordComplete = view.findViewById(R.id.registrationPasswordComplete)
-        errorMessage = view.findViewById(R.id.errorOccured)
+        loginError = view.findViewById(R.id.loginError)
+        passwordError = view.findViewById(R.id.passwordError)
 
         loginReplace()
         registration()
@@ -50,12 +52,16 @@ class profile : BaseFragment(R.layout.fragment_profile) {
 
     fun registration() {
         registrationButton.setOnClickListener {
-            val (textRes, colorRes) = validateRegistration(registrationLogin.text.toString(),
+            val (loginErrorReturned, passeordErrorReturned, result) = registrationValidation(registrationLogin.text.toString(),
                 registrationPassword.text.toString(),
                 registrationPasswordComplete.text.toString())
-            with(errorMessage){
-                text = textRes
-                setTextColor(resources.getColor(colorRes))
+            with(loginError) {
+                text = loginErrorReturned
+                setTextColor(0x000000)
+            }
+            with(passwordError) {
+                text = passeordErrorReturned
+                setTextColor(0x000000)
             }
         }
     }
