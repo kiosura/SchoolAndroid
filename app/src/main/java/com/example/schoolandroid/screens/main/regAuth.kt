@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.screens.BaseFragment
@@ -47,6 +48,26 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     fun loginReplace() {
         loginPath.setOnClickListener {
+            loginPath.text = "Зарегистрироваться"
+            registrationButton.text = "Войти"
+            registrationPasswordComplete.isVisible = false
+            login()
+            registrationReplace()
+        }
+    }
+
+    fun registrationReplace() {
+        loginPath.setOnClickListener {
+            loginPath.text = "У меня уже есть аккаунт"
+            registrationButton.text = "Зарегистрироваться"
+            registrationPasswordComplete.isVisible = true
+            registration()
+            loginReplace()
+        }
+    }
+
+    fun login() {
+        registrationButton.setOnClickListener {
 
         }
     }
@@ -54,6 +75,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
     @Suppress("DEPRECATION")
     fun registration() {
         registrationButton.setOnClickListener {
+
             val (loginErrorReturned, passwordErrorReturned, result) = registrationValidation(registrationLogin.text.toString(),
                 registrationPassword.text.toString(),
                 registrationPasswordComplete.text.toString())
