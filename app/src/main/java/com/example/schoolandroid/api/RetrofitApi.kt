@@ -9,7 +9,7 @@ interface RetrofitApi {
 
     @GET ("course")
     @Headers("Content-Type: application/json")
-    suspend fun fetchCourses(): Response<Courses>
+    suspend fun fetchCourses() : Response<Courses>
 
 //    @POST("point/course/lesson")
 //    @Headers("Content-Type: application/json")
@@ -17,15 +17,19 @@ interface RetrofitApi {
 
     @GET ("course/lessons")
     @Headers("Content-Type: application/json")
-    suspend fun fetchLessons(): Response<Courses>
+    suspend fun fetchLessons() : Response<Courses>
 
 //    @POST("point/course/lesson/task")
 //    @Headers("Content-Type: application/json")
 //    suspend fun getTask():Response<>
 
+    @POST("user/reg")
+    @Headers("Content-type: application/json")
+    suspend fun registration() : Response<User>
+
     @POST("user/auth")
     @Headers("Content-Type: application/json")
-    suspend fun authentication():Response<User>
+    suspend fun authentication() : Response<User>
 
 //    @POST("user/update")
 //    @Headers("Content-Type: application/json")

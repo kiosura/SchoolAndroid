@@ -23,6 +23,7 @@
         <item name="android:fontFamily">@font/bruta_regular</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:height">55dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:textAllCaps">true</item>
     </style>
     <style name="filter_and_switch_card">

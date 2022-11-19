@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.interfaces.Validator.Companion.validateRegistration
+import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
 
 
 class profile : Fragment() {
@@ -19,7 +19,8 @@ class profile : Fragment() {
     private lateinit var registrationLogin : EditText
     private lateinit var registrationPassword : EditText
     private lateinit var registrationPasswordComplete : EditText
-    private lateinit var errorMessage : TextView
+    private lateinit var loginError : TextView
+    private lateinit var passwordError : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,8 @@ class profile : Fragment() {
         registrationLogin = view.findViewById(R.id.registrationLogin)
         registrationPassword = view.findViewById(R.id.registrationPassword)
         registrationPasswordComplete = view.findViewById(R.id.registrationPasswordComplete)
-        errorMessage = view.findViewById(R.id.errorOccured)
+        loginError = view.findViewById(R.id.loginError)
+        passwordError = view.findViewById(R.id.passwordError)
 
         loginReplace()
         registration()
@@ -50,12 +52,16 @@ class profile : Fragment() {
 
     fun registration() {
         registrationButton.setOnClickListener {
-            val (textRes, colorRes) = validateRegistration(registrationLogin.text.toString(),
+            val (loginErrorReturned, passeordErrorReturned, result) = registrationValidation(registrationLogin.text.toString(),
                 registrationPassword.text.toString(),
                 registrationPasswordComplete.text.toString())
-            with(errorMessage){
-                text = textRes
-                setTextColor(resources.getColor(colorRes))
+            with(loginError) {
+                text = loginErrorReturned
+                setTextColor(0x000000)
+            }
+            with(passwordError) {
+                text = passeordErrorReturned
+                setTextColor(0x000000)
             }
         }
     }
