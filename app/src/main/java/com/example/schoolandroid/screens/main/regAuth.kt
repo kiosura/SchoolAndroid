@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
+import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
@@ -44,6 +46,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
         loginReplace()
         registration()
+
     }
 
     fun loginReplace() {
@@ -72,13 +75,16 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
         }
     }
 
+    //
     @Suppress("DEPRECATION")
     fun registration() {
+        val regAuthViewModel = ViewModelProvider(this).get(RegAuthViewModel::class.java)
         registrationButton.setOnClickListener {
-
-            val (loginErrorReturned, passwordErrorReturned, result) = registrationValidation(registrationLogin.text.toString(),
-                registrationPassword.text.toString(),
-                registrationPasswordComplete.text.toString())
+            val (loginErrorReturned, passwordErrorReturned, result) = registrationValidation(
+                    registrationLogin.text.toString(),
+                    registrationPassword.text.toString(),
+                    registrationPasswordComplete.text.toString()
+            )
             with(loginError) {
                 text = loginErrorReturned
                 setTextColor(resources.getColor(R.color.teal_200))
@@ -86,6 +92,12 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
             with(passwordError) {
                 text = passwordErrorReturned
                 setTextColor(resources.getColor(R.color.purple_700))
+            }
+            if (result) {
+                regAuthViewModel.postRegistration(
+                        registrationLogin.text.toString(),
+                        registrationPassword.text.toString()
+                )
             }
         }
     }

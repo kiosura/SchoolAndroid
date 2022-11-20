@@ -2,8 +2,11 @@ package com.example.schoolandroid.api
 
 import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.User
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import com.example.schoolandroid.api.RegAuthViewModel.PostRegUser
+
 
 interface RetrofitApi {
 
@@ -24,8 +27,8 @@ interface RetrofitApi {
 //    suspend fun getTask():Response<>
 
     @POST("user/reg")
-    @Headers("Content-type: application/json")
-    suspend fun registration() : Response<User>
+    fun sendRegistration(@Body data: PostRegUser): Call<PostRegUser>
+
 
     @POST("user/auth")
     @Headers("Content-Type: application/json")
