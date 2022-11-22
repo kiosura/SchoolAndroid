@@ -3,6 +3,7 @@ package com.example.schoolandroid.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.schoolandroid.adapter.MainPageAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.databinding.ActivityMainBinding
@@ -12,6 +13,9 @@ import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,10 +74,18 @@ class MainActivity : AppCompatActivity() {
         val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
 
         // subscription for MutableLiveData<Response<Courses>> changes - coming from API
-        var coursesRaw = storageViewModel.getCourses()
-        coursesRaw.observe(this) {
+        val coursesRaw = storageViewModel.getCourses()
+        coursesRaw.observe(this@MainActivity) {
             Storage.addCourses(coursesRaw)
+            val lessonsRaw = storageViewModel.getLessons()
+            lessonsRaw.observe(this@MainActivity) {
+                Storage.mergeCourses(lessonsRaw)
+            }
         }
+    }
+
+    suspend fun hard(){
+
     }
 
     fun tabClickListener(){
