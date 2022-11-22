@@ -1,7 +1,5 @@
 package com.example.schoolandroid.api
 
-import com.example.schoolandroid.data.User
-import com.example.schoolandroid.storage.Storage
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

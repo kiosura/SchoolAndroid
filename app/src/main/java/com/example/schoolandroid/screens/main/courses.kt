@@ -32,8 +32,8 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
     private lateinit var recycleView: RecyclerView
     // раздать разные cardview
-    val course_adapter = CourseAdapter(this, R.layout.course_card_view)
-    val my_course_adapter = CourseAdapter(this, R.layout.course_card_view)
+    private val course_adapter = CourseAdapter(this, R.layout.course_card_view)
+    private val my_course_adapter = CourseAdapter(this, R.layout.course_card_view)
 
     private val courseNames : List<String> = listOf(
         "Все курсы",
@@ -64,16 +64,11 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         // subscription for MutableLiveData<Courses> changes - coming from Storage
         Storage.getCourses().observe(viewLifecycleOwner) { list ->
             course_adapter.addCourses(list)
-            my_course_adapter.addCourses(list)
+            println(list)
         }
 
-        // custom view model for main activity
-        val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
-
-        // subscription for MutableLiveData<Response<Course.lessons>> changes - coming from API
-        val lessonsRaw = storageViewModel.getLessons()
-        lessonsRaw.observe(this.viewLifecycleOwner) {
-            Storage.mergeCourses(lessonsRaw)
+        Storage.getCourses().observe(viewLifecycleOwner) { list ->
+            my_course_adapter.addCourses(list)
         }
 
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
@@ -90,13 +85,15 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         }
     }
 
-    fun onChangeToSelf() {
+    private fun onChangeToSelf() {
         courseBaseName.text = courseNames[1]
         recycleView.adapter = my_course_adapter
-        archive.isVisible = true
+        switchContainer.post( Runnable {
+            archive.isVisible = true
+        })
     }
 
-    fun onChangeToAll() {
+    private fun onChangeToAll() {
         courseBaseName.text = courseNames[0]
         recycleView.adapter = course_adapter
         archive.isVisible = false
