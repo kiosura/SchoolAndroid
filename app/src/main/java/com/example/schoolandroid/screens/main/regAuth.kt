@@ -13,6 +13,7 @@ import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
+import retrofit2.awaitResponse
 
 
 class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
@@ -94,7 +95,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                 setTextColor(resources.getColor(R.color.purple_700))
             }
             if (result) {
-                regAuthViewModel.postRegistration(
+                val userData = regAuthViewModel.postRegistration(
                         registrationLogin.text.toString(),
                         registrationPassword.text.toString()
                 )

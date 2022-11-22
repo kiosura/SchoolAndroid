@@ -1,5 +1,7 @@
 package com.example.schoolandroid.api
 
+import com.example.schoolandroid.data.User
+import com.example.schoolandroid.storage.Storage
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,10 +10,7 @@ object RetrofitInstance {
     private val retrofit by lazy {
 
         val header_name : String = "Authorization"
-        val api_key : String = "TFikEFVf.qpSKwjiMQs1ts1qeUNa4aUWPFXmGVWUo"
-
-//        val httploggingInterceptor = HttpLoggingInterceptor()
-//        httploggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        val api_key : String = "PY2PDnfy.TNytIDkTIgZNyfew5dI2ucDfi6ZW1udy"
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor{chain ->
@@ -24,10 +23,12 @@ object RetrofitInstance {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://kofefast.ru/api/")
+            .baseUrl("https://samotokhin.ru/api/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+
     }
 
     val api: RetrofitApi by lazy {
