@@ -10,3 +10,19 @@ data class RetrofitPostRequest(
     @SerializedName("password_complete")
     val password_complete: String
 )
+
+data class RetrofitLessonRequest(
+    @SerializedName("course_id")
+    val course_id : Int,
+    @SerializedName("lesson_index")
+    val lesson_index : Int
+)
+
+data class RetrofitTaskRequest(
+    @SerializedName("course_id")
+    val course_id : Int,
+    @SerializedName("lesson_index")
+    val lesson_index : Int,
+    @SerializedName("task_index")
+    val task_index : Int
+)

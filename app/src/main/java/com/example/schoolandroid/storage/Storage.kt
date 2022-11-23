@@ -3,7 +3,10 @@ package com.example.schoolandroid.storage
 import androidx.lifecycle.MutableLiveData
 import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
+import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.data.User
+import okhttp3.internal.notify
+import okhttp3.internal.notifyAll
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
@@ -26,7 +29,7 @@ import kotlin.reflect.full.primaryConstructor
 object Storage {
     private var user : MutableLiveData<User>?  = null
     private var coursesList : MutableLiveData<Courses> = MutableLiveData()
-    private lateinit var currentCourse : MutableLiveData<CourseItem>
+    private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
     fun setUser(userItem : MutableLiveData<Response<User>>) {
         user = MutableLiveData(userItem.value!!.body())
@@ -40,6 +43,23 @@ object Storage {
 
     fun getCurrentCourse() = currentCourse
 
+    fun updateLesson(lesson : LessonItem?) {
+        if (lesson != null) {
+            val index = lesson.index
+            for (i in 0 until currentCourse.value!!.lessons.size) {
+                if (currentCourse.value!!.lessons[i].index == index) {
+                    currentCourse.value!!.lessons[i] =
+                        currentCourse.value!!.lessons[i] merge lesson
+                    currentCourse.postValue(currentCourse.value)
+                }
+            }
+        }
+        else println("lesson is null")
+    }
+
+    fun getLesson(index: Int) : MutableLiveData<LessonItem>
+        = MutableLiveData(currentCourse.value!!.lessons[index])
+
     fun addCourses(list : MutableLiveData<Response<Courses>>?) {
         if (coursesList.value == null)
             coursesList = MutableLiveData(list?.value?.body())
@@ -51,8 +71,8 @@ object Storage {
     fun mergeCourses(list : MutableLiveData<Response<Courses>>?) {
         val courseWithLessons = MutableLiveData(list?.value?.body())
         if (courseWithLessons.value != null) {
-            for (i in 0..coursesList.value!!.size - 1) {
-                for (k in 0..courseWithLessons.value!!.size - 1) {
+            for (i in 0 until coursesList.value!!.size) {
+                for (k in 0 until courseWithLessons.value!!.size) {
                     if (coursesList.value!![i].id == courseWithLessons.value!![k].id) {
                         coursesList.value!![i] =
                             coursesList.value!![i] merge courseWithLessons.value!![k]
@@ -62,7 +82,7 @@ object Storage {
         }
     }
 
-    inline infix fun <reified T : Any> T.merge(other: T): T {
+    private inline infix fun <reified T : Any> T.merge(other: T): T {
         val propertiesByName = T::class.declaredMemberProperties.associateBy { it.name }
         val primaryConstructor = T::class.primaryConstructor
             ?: throw IllegalArgumentException("merge type must have a primary constructor")

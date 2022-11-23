@@ -43,10 +43,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="16dp">
+
                 <TextView
+                    android:id="@+id/textPlan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Каждый из нас хоть раз задумывался о том,что ждет его впереди. На самом же деле - нихуя его не ждет. Славненько."/>
+                    android:text="Каждый из нас хоть раз задумывался о том,что ждет его впереди. На самом же деле - нихуя его не ждет. Славненько." />
             </LinearLayout>
 
             <Button

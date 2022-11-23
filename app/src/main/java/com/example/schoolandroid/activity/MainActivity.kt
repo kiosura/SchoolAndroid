@@ -75,11 +75,13 @@ class MainActivity : AppCompatActivity() {
 
         // subscription for MutableLiveData<Response<Courses>> changes - coming from API
         val coursesRaw = storageViewModel.getCourses()
-        coursesRaw.observe(this@MainActivity) {
-            Storage.addCourses(coursesRaw)
-            val lessonsRaw = storageViewModel.getLessons()
-            lessonsRaw.observe(this@MainActivity) {
-                if (it.body()!!.size > 0) Storage.mergeCourses(lessonsRaw)
+        coursesRaw.observe(this) {
+            if (coursesRaw.value!!.body() != null) {
+                Storage.addCourses(coursesRaw)
+                val lessonsRaw = storageViewModel.getLessons()
+                lessonsRaw.observe(this) {
+                    Storage.mergeCourses(lessonsRaw)
+                }
             }
         }
     }
