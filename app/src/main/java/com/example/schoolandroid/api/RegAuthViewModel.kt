@@ -42,14 +42,18 @@ class RegAuthViewModel : ViewModel() {
     fun postAuthentification(fragmentReplacer : FragmentReplacer, loginInputValue : String, passwordInputValue : String) {
         viewModelScope.launch {
             try {
-                val responseUser = retrofitApi.sendRegistration(
+                val responseUser = retrofitApi.authentication(
                     RetrofitPostRequest(
                         login = loginInputValue,
                         password = passwordInputValue
                     )
                 ).body()
+
                 Storage.setUser(responseUser)
-                fragmentReplacer.replace(2, profile())
+
+                if (responseUser?.error_message == null) {
+                    fragmentReplacer.replace(2, profile())
+                }
 
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
