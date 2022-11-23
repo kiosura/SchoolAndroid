@@ -103,6 +103,12 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                         registrationLogin.text.toString(),
                         registrationPassword.text.toString()
                 )
+                userData.observe(viewLifecycleOwner) {
+                    Storage.setUser(userData)
+                }
+
+                println(userData.value?.body())
+                fragmentReplacer.replace(2, profile())
 
 //                lifecycleScope.launch {
 //                    withContext(Dispatchers.IO) {
