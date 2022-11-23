@@ -84,6 +84,10 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                 registrationLogin.text.toString(),
                 registrationPassword.text.toString()
             )
+
+            Storage.getUser()?.observe(viewLifecycleOwner){user ->
+                Toast.makeText(context,"${user.error_message}" , Toast.LENGTH_LONG).show()
+            }
         }
     }
 
