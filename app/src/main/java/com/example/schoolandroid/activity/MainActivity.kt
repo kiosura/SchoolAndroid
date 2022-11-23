@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             Storage.addCourses(coursesRaw)
             val lessonsRaw = storageViewModel.getLessons()
             lessonsRaw.observe(this@MainActivity) {
-                println()
                 if (it.body()!!.size > 0) Storage.mergeCourses(lessonsRaw)
             }
         }
