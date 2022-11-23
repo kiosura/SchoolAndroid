@@ -29,6 +29,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
     private lateinit var registrationPasswordComplete : EditText
     private lateinit var loginError : TextView
     private lateinit var passwordError : TextView
+    private lateinit var regAuthViewModel : RegAuthViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,6 +37,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
             activity?.findViewById<ViewPager2>(R.id.mainActivityVp)!!.post(
                 Runnable{ fragmentReplacer.replace(2, profile()) }
             )
+        regAuthViewModel = ViewModelProvider(this).get(RegAuthViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,14 +78,17 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     fun login() {
         registrationButton.setOnClickListener {
-
+            regAuthViewModel.postAuthentification(
+                fragmentReplacer,
+                registrationLogin.text.toString(),
+                registrationPassword.text.toString()
+            )
         }
     }
 
     //
     @Suppress("DEPRECATION")
     fun registration() {
-        val regAuthViewModel = ViewModelProvider(this).get(RegAuthViewModel::class.java)
         registrationButton.setOnClickListener {
             val (loginErrorReturned, passwordErrorReturned, result) = registrationValidation(
                     registrationLogin.text.toString(),
