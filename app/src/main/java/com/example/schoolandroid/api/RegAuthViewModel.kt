@@ -27,14 +27,13 @@ class RegAuthViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 retrofitApi.sendRegistration(
-                    mapOf(
-                        "login" to loginInputValue,
-                        "password" to passwordInputValue,
-                        "password_complete" to passwordInputValue
+                    RetrofitPostRequest(
+                        login = loginInputValue,
+                        password = passwordInputValue,
+                        password_complete = passwordInputValue
                     )
                 )
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
             }
         }
