@@ -26,7 +26,7 @@ interface RetrofitApi {
 
     @POST("user/reg")
     @Headers("Content-Type: application/json")
-    suspend fun sendRegistration(@Body data : RetrofitPostRequest)
+    suspend fun sendRegistration(@Body data : RetrofitPostRequest) : Response<User>
 
     @POST("user/auth")
     @Headers("Content-Type: application/json")

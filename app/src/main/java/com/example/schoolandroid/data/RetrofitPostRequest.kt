@@ -6,9 +6,7 @@ data class RetrofitPostRequest(
     @SerializedName("login")
     val login : String,
     @SerializedName("password")
-    val password : String,
-    @SerializedName("password_complete")
-    val password_complete: String
+    val password : String
 )
 
 data class RetrofitLessonRequest(

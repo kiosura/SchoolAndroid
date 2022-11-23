@@ -23,19 +23,21 @@ import java.io.IOException
 class RegAuthViewModel : ViewModel() {
     val retrofitApi = RetrofitInstance.api
 
-    fun postRegistration(loginInputValue : String, passwordInputValue : String) {
+    var user : MutableLiveData<Response<User>> = MutableLiveData()
+
+    fun postRegistration(loginInputValue : String, passwordInputValue : String) : MutableLiveData<Response<User>> {
         viewModelScope.launch {
             try {
-                retrofitApi.sendRegistration(
+                user.value = retrofitApi.sendRegistration(
                     RetrofitPostRequest(
                         login = loginInputValue,
-                        password = passwordInputValue,
-                        password_complete = passwordInputValue
+                        password = passwordInputValue
                     )
                 )
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
             }
         }
+        return user
     }
 }
