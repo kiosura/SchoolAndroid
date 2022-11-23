@@ -9,5 +9,6 @@ data class User(
     val phone_number: String?,
     val progresses: List<Progress>?,
     val registered: String?,
-    val surname: String?
+    val surname: String?,
+    val error_message: String?
 )
