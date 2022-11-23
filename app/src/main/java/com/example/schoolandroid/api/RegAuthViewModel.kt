@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.RetrofitPostRequest
 import com.example.schoolandroid.data.User
+import com.example.schoolandroid.interfaces.FragmentReplacer
+import com.example.schoolandroid.screens.main.profile
+import com.example.schoolandroid.storage.Storage
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.launch
@@ -23,21 +26,21 @@ import java.io.IOException
 class RegAuthViewModel : ViewModel() {
     val retrofitApi = RetrofitInstance.api
 
-    var user : MutableLiveData<Response<User>> = MutableLiveData()
-
-    fun postRegistration(loginInputValue : String, passwordInputValue : String) : MutableLiveData<Response<User>> {
+    fun postRegistration(fragmentReplacer : FragmentReplacer, loginInputValue : String, passwordInputValue : String) {
         viewModelScope.launch {
             try {
-                user.value = retrofitApi.sendRegistration(
+                val responseUser = retrofitApi.sendRegistration(
                     RetrofitPostRequest(
                         login = loginInputValue,
                         password = passwordInputValue
                     )
-                )
+                ).body()
+                Storage.setUser(responseUser)
+                fragmentReplacer.replace(2, profile())
+
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
             }
         }
-        return user
     }
 }

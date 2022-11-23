@@ -31,8 +31,8 @@ object Storage {
     private var coursesList : MutableLiveData<Courses> = MutableLiveData()
     private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
-    fun setUser(userItem : MutableLiveData<Response<User>>) {
-        user = MutableLiveData(userItem.value!!.body())
+    fun setUser(userItem : User?) {
+        user = MutableLiveData(userItem)
     }
 
     fun getUser() = user

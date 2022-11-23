@@ -99,22 +99,11 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                 setTextColor(resources.getColor(R.color.purple_700))
             }
             if (result) {
-                val userData = regAuthViewModel.postRegistration(
-                        registrationLogin.text.toString(),
-                        registrationPassword.text.toString()
+                regAuthViewModel.postRegistration(
+                    fragmentReplacer,
+                    registrationLogin.text.toString(),
+                    registrationPassword.text.toString()
                 )
-                userData.observe(viewLifecycleOwner) {
-                    Storage.setUser(userData)
-                }
-
-                println(userData.value?.body())
-                fragmentReplacer.replace(2, profile())
-
-//                lifecycleScope.launch {
-//                    withContext(Dispatchers.IO) {
-//                        regAuthViewModel.sendIt(registrationLogin.text.toString(), registrationPassword.text.toString())
-//                    }
-//                }
             }
         }
     }
