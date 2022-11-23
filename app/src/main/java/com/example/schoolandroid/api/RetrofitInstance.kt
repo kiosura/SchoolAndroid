@@ -14,6 +14,7 @@ object RetrofitInstance {
             .addInterceptor{chain ->
                 val request = chain.request().newBuilder()
                     .addHeader(header_name, api_key)
+                    .addHeader("Content-Type", "application/json")
                     .build()
 
                 return@addInterceptor chain.proceed(request)

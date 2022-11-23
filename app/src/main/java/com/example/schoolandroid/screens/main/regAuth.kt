@@ -7,12 +7,16 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.awaitResponse
 
 
@@ -99,6 +103,12 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                         registrationLogin.text.toString(),
                         registrationPassword.text.toString()
                 )
+
+//                lifecycleScope.launch {
+//                    withContext(Dispatchers.IO) {
+//                        regAuthViewModel.sendIt(registrationLogin.text.toString(), registrationPassword.text.toString())
+//                    }
+//                }
             }
         }
     }
