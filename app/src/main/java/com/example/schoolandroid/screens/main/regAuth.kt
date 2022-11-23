@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -105,6 +106,11 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                     registrationPassword.text.toString()
                 )
             }
+
+            Storage.getUser()?.observe(viewLifecycleOwner){user ->
+                Toast.makeText(context,"${user.error_message}" , Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 

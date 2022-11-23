@@ -33,6 +33,7 @@ object Storage {
 
     fun setUser(userItem : User?) {
         user = MutableLiveData(userItem)
+        user!!.postValue(userItem)
     }
 
     fun getUser() = user
