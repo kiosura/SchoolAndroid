@@ -13,15 +13,15 @@ object RetrofitInstance {
         val api_key : String = "PY2PDnfy.TNytIDkTIgZNyfew5dI2ucDfi6ZW1udy"
 
         val okHttpClient = OkHttpClient.Builder()
-            .callTimeout(10, TimeUnit.SECONDS)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectionPool(ConnectionPool(
-                maxIdleConnections = 5,
-                keepAliveDuration = 5L,
-                timeUnit = TimeUnit.MINUTES
-            ))
+//            .callTimeout(10, TimeUnit.SECONDS)
+//            .connectTimeout(10, TimeUnit.SECONDS)
+//            .writeTimeout(10, TimeUnit.SECONDS)
+//            .readTimeout(10, TimeUnit.SECONDS)
+//            .connectionPool(ConnectionPool(
+//                maxIdleConnections = 5,
+//                keepAliveDuration = 5L,
+//                timeUnit = TimeUnit.MINUTES
+//            ))
             .addInterceptor{chain ->
                 val request = chain.request().newBuilder()
                     .addHeader(header_name, api_key)
