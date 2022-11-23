@@ -44,15 +44,19 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:paddingHorizontal="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="34dp"
         android:paddingVertical="20dp"
         tools:ignore="MissingConstraints">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/backtoMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:background="#ffffff"
+            android:textAllCaps="false"
+            android:fontFamily="@font/bruta_regular"
+            android:text="вернуться" />
 
         <Button
             android:id="@+id/settingsButton"
