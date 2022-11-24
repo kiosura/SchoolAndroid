@@ -10,7 +10,7 @@ object RetrofitInstance {
     private val retrofit by lazy {
 
         val header_name : String = "Authorization"
-        val api_key : String = "PY2PDnfy.TNytIDkTIgZNyfew5dI2ucDfi6ZW1udy"
+        val api_key : String = "CKo8iSAe.1ew8GQxP5657uzM2c0NbMnCFcOAI14h2"
 
         val okHttpClient = OkHttpClient.Builder()
 //            .callTimeout(10, TimeUnit.SECONDS)
