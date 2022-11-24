@@ -1,6 +1,5 @@
 package com.example.schoolandroid.api
 
-import androidx.lifecycle.MutableLiveData
 import com.example.schoolandroid.data.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -26,11 +25,11 @@ interface RetrofitApi {
 
     @POST("user/reg")
     @Headers("Content-Type: application/json")
-    suspend fun sendRegistration(@Body data : RetrofitPostRequest) : Response<User>
+    suspend fun sendRegistration(@Body data : RetrofitUserPostRequest) : Response<User>
 
     @POST("user/auth")
     @Headers("Content-Type: application/json")
-    suspend fun authentication(@Body data : RetrofitPostRequest) : Response<User>
+    suspend fun authentication(@Body data : RetrofitUserPostRequest) : Response<User>
 
 
 //    @POST("user/update")
