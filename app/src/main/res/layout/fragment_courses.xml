@@ -112,7 +112,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- появляется только при включенном "мои курсы", это я прикручу позже -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/brutaglbextended_regular"
+                        android:fontFamily="@font/bruta_regular"
                         android:text="архив курсов"
                         android:textColor="#000000" />
 

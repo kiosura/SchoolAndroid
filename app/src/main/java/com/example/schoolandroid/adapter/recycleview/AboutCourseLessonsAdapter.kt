@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.LessonItem
@@ -14,11 +15,11 @@ import com.example.schoolandroid.interfaces.Listener
 class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
     private var lessons = ArrayList<LessonItem>()
 
-    class LessonHolder(card : View) : RecyclerView.ViewHolder(card){
+    class LessonHolder(card : View) : RecyclerView.ViewHolder(card) {
         private val binding = AboutCourseLessonCardViewBinding.bind(card)
 
-        fun bind(lesson: LessonItem) = with(binding){
-            lessonBody.text = lesson.name
+        fun bind(lesson: LessonItem) = with(binding) {
+            lessonName.text = lesson.name
         }
     }
 
@@ -29,7 +30,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
     override fun onBindViewHolder(holder: LessonHolder, position: Int) {
         holder.bind(lessons[position])
-        holder.itemView.findViewById<Button>(R.id.lessonBody)
+        holder.itemView.findViewById<LinearLayout>(R.id.lessonBody)
             .setOnClickListener(View.OnClickListener{
                 listener.onClick(1)
             })
