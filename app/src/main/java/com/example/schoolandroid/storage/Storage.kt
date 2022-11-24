@@ -41,8 +41,7 @@ object Storage {
         if (is_added) {
             //needs some actions with PersistentStorage: add new fields for SharedPref
 
-            val newUser = User() merge userItem
-            user = MutableLiveData(newUser merge user?.value!!)
+            user = MutableLiveData(userItem merge user?.value!!)
             user!!.postValue(user?.value)
         }
         else {
