@@ -10,7 +10,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingHorizontal="34dp"
             android:paddingVertical="34dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,6 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="21dp"
+                android:layout_marginHorizontal="34dp"
                 android:fontFamily="@font/bruta_semibold"
                 android:includeFontPadding="false"
                 android:text=""
@@ -29,14 +29,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="94dp"
+                android:layout_height="110dp"
                 android:layout_marginBottom="22dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_corner_white"
+                android:layout_marginHorizontal="34dp">
 
                 <ImageView
-                    android:layout_width="94dp"
-                    android:layout_height="94dp"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
                     android:layout_marginRight="15.8dp"
                     android:background="@drawable/rounded_corner_coral" />
 
@@ -79,24 +81,35 @@
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/bruta_semibold"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:layout_marginBottom="7dp"
-                android:text="Описание" />
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="@drawable/rounded_corner_white"
+                android:elevation="7dp"
+                android:layout_marginHorizontal="34dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/courseDescription"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="14sp"
-                android:fontFamily="@font/bruta_regular"
-                android:lineSpacingExtra="5sp"
-                android:textColor="#000000"
-                android:text="@string/aboutCourse" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bruta_semibold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Описание" />
+
+                <TextView
+                    android:id="@+id/courseDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/bruta_regular"
+                    android:lineSpacingExtra="5sp"
+                    android:textColor="#000000"
+                    android:text="@string/aboutCourse" />
+
+            </LinearLayout>
 
 <!--            <Button-->
 <!--                android:id="@+id/courseInfo"-->
@@ -105,13 +118,22 @@
 <!--                android:layout_marginTop="10dp"-->
 <!--                android:text="@string/more"/>-->
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:fontFamily="@font/bruta_semibold"
+                android:textColor="#000000"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="34dp"
+                android:text="Уроки"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleLessons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="true"
-                android:layout_margin="8dp"
-                android:padding="8dp"
                 android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>

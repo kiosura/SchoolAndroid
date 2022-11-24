@@ -47,16 +47,29 @@
         android:paddingLeft="24dp"
         android:paddingRight="34dp"
         android:paddingVertical="20dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:layout_gravity="center">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/backtoMain"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:textAllCaps="false"
-            android:fontFamily="@font/bruta_regular"
-            android:text="вернуться" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/backtoMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bruta_regular"
+                android:textColor="#000000"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:text="&lt;  вернуться" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/settingsButton"
@@ -73,8 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:gravity="center"
             android:fontFamily="@font/bruta_regular"
+            android:gravity="center"
+            android:textColor="#ffffff"
             android:text="text" />
 
         <Button

@@ -5,15 +5,44 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/lessonBody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="90dp"
+        android:layout_marginHorizontal="34dp"
+        android:layout_marginVertical="15dp"
+        android:orientation="horizontal"
+        android:elevation="7dp"
+        android:background="@drawable/rounded_corner_white">
 
-        <Button
-            android:id="@+id/lessonBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+        <LinearLayout
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:fontFamily="@font/bruta_semibold"
+                android:background="@drawable/rounded_corner_grey"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lessonName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="@font/bruta_regular"
+            android:textColor="#000000"
+            android:text="Пивопитие"/>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
