@@ -5,8 +5,6 @@ import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.data.User
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
@@ -32,8 +30,25 @@ object Storage {
     private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
     fun setUser(userItem : User?) {
+        if (userItem != null && userItem.error_message == null) {
+            PersistentStorage.addProperty("name", userItem.name.toString())
+        }
         user = MutableLiveData(userItem)
         user!!.postValue(userItem)
+    }
+
+    fun setUser(userItem : User, is_added : Boolean){
+        if (is_added) {
+            //needs some actions with PersistentStorage: add new fields for SharedPref
+
+            val newUser = User() merge userItem
+            user = MutableLiveData(newUser merge user?.value!!)
+            user!!.postValue(user?.value)
+        }
+        else {
+            user = MutableLiveData(userItem)
+            user!!.postValue(userItem)
+        }
     }
 
     fun getUser() = user

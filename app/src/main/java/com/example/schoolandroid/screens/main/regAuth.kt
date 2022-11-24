@@ -8,18 +8,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
 import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.awaitResponse
-
+import com.example.schoolandroid.storage.PersistentStorage
 
 class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
@@ -34,7 +29,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if ( Storage.getUser() != null)
+        if (PersistentStorage.getProperty("name") != null)
             activity?.findViewById<ViewPager2>(R.id.mainActivityVp)!!.post(
                 Runnable{ fragmentReplacer.replace(2, profile()) }
             )

@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.schoolandroid.adapter.MainPageAdapter
 import com.example.schoolandroid.api.StorageViewModel
+import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
+import com.example.schoolandroid.storage.PersistentStorage
 import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -43,6 +45,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // SharedPref initial
+        PersistentStorage.init(this)
+        Storage.setUser(User(name = PersistentStorage.getProperty("name").toString()), false)
 
         // connecting views
         binding = ActivityMainBinding.inflate(layoutInflater)

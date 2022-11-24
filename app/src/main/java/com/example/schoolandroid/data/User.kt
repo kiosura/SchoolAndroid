@@ -1,14 +1,14 @@
 package com.example.schoolandroid.data
 
 data class User(
-    val email: String?,
-    val grade: String?,
-    val id: Int?,
-    val name: String?,
-    val notifications: List<Notification>?,
-    val phone_number: String?,
-    val progresses: List<Progress>?,
-    val registered: String?,
-    val surname: String?,
-    val error_message: String?
+    var email: String? = null,
+    var grade: String? = null,
+    var id: Int? = null,
+    var name: String? = null,
+    var notifications: List<Notification>? = null,
+    var phone_number: String? = null,
+    var progresses: List<Progress>? = null,
+    var registered_datetime: String? = null,
+    var surname: String? = null,
+    var error_message: String? = null
 )
