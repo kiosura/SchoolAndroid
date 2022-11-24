@@ -1,8 +1,8 @@
 package com.example.schoolandroid.storage
 
 import androidx.lifecycle.MutableLiveData
-import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
+import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.data.User
 import retrofit2.Response
@@ -31,7 +31,7 @@ object Storage {
 
     fun setUser(userItem : User?) {
         if (userItem != null && userItem.error_message == null) {
-            PersistentStorage.addProperty("name", userItem.name.toString())
+            PersistentStorage.addObject(userItem)
         }
         user = MutableLiveData(userItem)
         user!!.postValue(userItem)
@@ -39,10 +39,10 @@ object Storage {
 
     fun setUser(userItem : User, is_added : Boolean){
         if (is_added) {
-            //needs some actions with PersistentStorage: add new fields for SharedPref
-
             user = MutableLiveData(userItem merge user?.value!!)
             user!!.postValue(user?.value)
+
+            PersistentStorage.addObject(user?.value!!)
         }
         else {
             user = MutableLiveData(userItem)

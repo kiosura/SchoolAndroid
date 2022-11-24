@@ -29,7 +29,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (PersistentStorage.getProperty("name") != null)
+        if (PersistentStorage.getProperty("registered_datetime") != null)
             activity?.findViewById<ViewPager2>(R.id.mainActivityVp)!!.post(
                 Runnable{ fragmentReplacer.replace(2, profile()) }
             )

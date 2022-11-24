@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.reflect.full.declaredMemberProperties
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
 
         // SharedPref initial
         PersistentStorage.init(this)
-        Storage.setUser(User(name = PersistentStorage.getProperty("name").toString()), false)
+        val user = PersistentStorage.getObject<User>()
+        println(user)
+        Storage.setUser(user, false)
 
         // connecting views
         binding = ActivityMainBinding.inflate(layoutInflater)
