@@ -8,6 +8,7 @@ data class CourseItem(
     var lessons: Lessons,
     val name: String,
     val product_preview: String,
+    val description: String,
     val teachers: List<Teacher>,
     val value: Int
 )
