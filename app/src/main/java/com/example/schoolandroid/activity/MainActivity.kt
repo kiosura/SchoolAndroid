@@ -10,6 +10,12 @@ import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
+import com.example.schoolandroid.screens.BaseFragment
+import com.example.schoolandroid.screens.course.about_course
+import com.example.schoolandroid.screens.main.about_school
+import com.example.schoolandroid.screens.main.courses
+import com.example.schoolandroid.screens.main.profile
+import com.example.schoolandroid.screens.main.regAuth
 import com.example.schoolandroid.storage.PersistentStorage
 import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
@@ -38,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var binding: ActivityMainBinding
-    private val baseAdapter = MainPageAdapter(this)
+    private lateinit var baseAdapter : MainPageAdapter
 
 //    private val PushDialogFragment = PushDialog()
 //    private val SettingsDialogFragment = SettingsDialog()
@@ -50,8 +56,13 @@ class MainActivity : AppCompatActivity() {
         // SharedPref initial
         PersistentStorage.init(this)
         val user = PersistentStorage.getObject<User>()
-        println(user)
-        Storage.setUser(user, false)
+
+        // checking if user already exists, saving it in Storage if it does
+        // and changing fragment (profile -> regAuth) if it doesn't
+        var listOfFragments = arrayListOf(about_school(), courses(), profile())
+        if (user.registered_datetime == null) listOfFragments[2] = regAuth()
+        else Storage.setUser(user, false)
+        baseAdapter = MainPageAdapter(this, listOfFragments.toList())
 
         // connecting views
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -93,10 +104,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    suspend fun hard(){
-
     }
 
     fun tabClickListener(){

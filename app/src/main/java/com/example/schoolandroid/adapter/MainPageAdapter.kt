@@ -10,7 +10,7 @@ import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
 import com.example.schoolandroid.screens.main.regAuth
 
-class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
+class MainPageAdapter(fa: FragmentActivity, val list : List<BaseFragment>) : FragmentStateAdapter(fa),
     FragmentReplacer {
 
     val mapOfFragment : ArrayMap<Int, BaseFragment> = ArrayMap<Int, BaseFragment>()
@@ -31,7 +31,7 @@ class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
         isNotify: Boolean,
         newFrag: List<BaseFragment>
     ): BaseFragment {
-        return super.replaceDefault(position, isNotify, listOf (about_school(), courses(), regAuth()))
+        return super.replaceDefault(position, isNotify, list)
     }
 
     override fun getItemCount(): Int {
@@ -39,8 +39,7 @@ class MainPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa),
     }
 
     override fun createFragment(position: Int): Fragment {
-        return mapOfFragment[position] ?: replaceDefault(position, false, listOf
-            (about_school(), courses(), regAuth()))
+        return mapOfFragment[position] ?: replaceDefault(position, false, list)
     }
 
     override fun getItemId(position: Int): Long {
