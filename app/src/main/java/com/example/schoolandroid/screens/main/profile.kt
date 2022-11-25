@@ -19,11 +19,6 @@ class profile: BaseFragment(R.layout.fragment_profile) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Toast.makeText(context, "${PersistentStorage.getProperty("name")}", Toast.LENGTH_LONG).show()
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = profile()

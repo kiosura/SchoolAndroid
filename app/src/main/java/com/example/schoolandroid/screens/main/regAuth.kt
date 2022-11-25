@@ -14,7 +14,6 @@ import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
-import com.example.schoolandroid.storage.PersistentStorage
 
 class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
@@ -29,10 +28,6 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (PersistentStorage.getProperty("registered_datetime") != null)
-            activity?.findViewById<ViewPager2>(R.id.mainActivityVp)!!.post(
-                Runnable{ fragmentReplacer.replace(2, profile()) }
-            )
         regAuthViewModel = ViewModelProvider(this).get(RegAuthViewModel::class.java)
     }
 

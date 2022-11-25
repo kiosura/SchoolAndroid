@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         // checking if user already exists, saving it in Storage if it does
         // and changing fragment (profile -> regAuth) if it doesn't
-        var listOfFragments = arrayListOf(about_school(), courses(), profile())
+        val listOfFragments = arrayListOf(about_school(), courses(), profile())
         if (user.registered_datetime == null) listOfFragments[2] = regAuth()
         else Storage.setUser(user, false)
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())
