@@ -10,7 +10,12 @@
         android:id="@+id/coursePageBottomMenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="#9b9b9b"
+        app:tabTextAppearance="@style/tab_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tabIndicatorColor="#E86B6B"
+        app:tabIndicatorHeight="4dp">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
