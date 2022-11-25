@@ -20,9 +20,10 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/lessonNumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="1"
+                android:text=""
                 android:gravity="center"
                 android:textSize="16sp"
                 android:fontFamily="@font/bruta_semibold"

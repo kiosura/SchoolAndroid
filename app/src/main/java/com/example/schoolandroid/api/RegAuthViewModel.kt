@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
-import com.example.schoolandroid.data.RetrofitPostRequest
+import com.example.schoolandroid.data.RetrofitUserPostRequest
 
 import com.example.schoolandroid.interfaces.FragmentReplacer
 import com.example.schoolandroid.screens.main.profile
@@ -21,7 +21,7 @@ class RegAuthViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val responseUser = retrofitApi.sendRegistration(
-                    RetrofitPostRequest(
+                    RetrofitUserPostRequest(
                         login = loginInputValue,
                         password = passwordInputValue
                     )
@@ -43,7 +43,7 @@ class RegAuthViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val responseUser = retrofitApi.authentication(
-                    RetrofitPostRequest(
+                    RetrofitUserPostRequest(
                         login = loginInputValue,
                         password = passwordInputValue
                     )

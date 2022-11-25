@@ -3,11 +3,8 @@ package com.example.schoolandroid.screens.course
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
 import com.example.schoolandroid.api.CourseViewModel
@@ -18,7 +15,6 @@ import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.launch
 
 
 class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
@@ -36,13 +32,13 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         val binding = FragmentAboutCourseBinding.bind(view)
         fun bind() = with(binding) {
             val currentCourse = Storage.getCurrentCourse()
-            currentCourse.observe(viewLifecycleOwner) { list ->
-                fun makeTeacherName(list : CourseItem) : String {
-                    return list.teachers[0].name + " " + list.teachers[0].surname
+            currentCourse.observe(viewLifecycleOwner) { courseItem ->
+                fun makeTeacherName(courseItem : CourseItem) : String {
+                    return courseItem.teachers[0].name + " " + courseItem.teachers[0].surname
                 }
-                courseName.text = list.name
-                courseDescription.text = list.product_preview
-                courseTutor.text = makeTeacherName(list)
+                courseName.text = courseItem.name
+                courseDescription.text = courseItem.description
+                courseTutor.text = makeTeacherName(courseItem)
                 with(recycleLessons) {
                     layoutManager = LinearLayoutManager(view.context)
                     adapter = lessonsAdapter

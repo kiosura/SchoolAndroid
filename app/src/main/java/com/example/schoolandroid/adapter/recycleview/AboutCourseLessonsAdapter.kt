@@ -20,6 +20,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
         fun bind(lesson: LessonItem) = with(binding) {
             lessonName.text = lesson.name
+            lessonNumber.text = (lesson.index + 1).toString()
         }
     }
 

@@ -2,7 +2,7 @@ package com.example.schoolandroid.data
 
 import com.google.gson.annotations.SerializedName
 
-data class RetrofitPostRequest(
+data class RetrofitUserPostRequest(
     @SerializedName("login")
     val login : String,
     @SerializedName("password")

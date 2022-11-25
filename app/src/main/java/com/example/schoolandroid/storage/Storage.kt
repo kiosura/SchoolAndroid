@@ -69,7 +69,6 @@ object Storage {
                 }
             }
         }
-        else println("lesson is null")
     }
 
     fun getLesson(index: Int) : MutableLiveData<LessonItem>
