@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ScrollView
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.TaskAdapter
-import com.example.schoolandroid.data.Task
+import com.example.schoolandroid.data.TaskItem
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.google.android.material.internal.ViewUtils.dpToPx
@@ -38,8 +37,8 @@ class task(private val tabSelected : Int) : BaseFragment(R.layout.task_view),
             adapter = task_adapter
         }
         for (i in 1..40){
-            if (i-1 == tabSelected) task_adapter.addTask(Task(i, " hui", resources.getColor(R.color.teal_200)))
-            else task_adapter.addTask(Task(i, " hui", resources.getColor(R.color.purple_500)))
+            if (i-1 == tabSelected) task_adapter.addTask(TaskItem(i, " hui", resources.getColor(R.color.teal_200)))
+            else task_adapter.addTask(TaskItem(i, " hui", resources.getColor(R.color.purple_500)))
         }
         recyclerView.isVisible = false
 

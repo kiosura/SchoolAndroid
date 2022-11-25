@@ -17,7 +17,7 @@ import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.api.CourseViewModel
 import com.example.schoolandroid.data.File
 import com.example.schoolandroid.data.LessonItem
-import com.example.schoolandroid.data.Task
+import com.example.schoolandroid.data.TaskItem
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
@@ -78,13 +78,15 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
             onClick(0)
         }
 
-        Storage.getCurrentCourse().observe(requireActivity()){ course ->
+        Storage.getCurrentCourse().observe(viewLifecycleOwner){ course ->
             val lesson = course.lessons[CourseVM.lessonIndex]
+            println(lesson)
             textPlan.post(Runnable{
                 textPlan.text = lesson.description
             })
-            for (i in 0 until lesson.tasksCount){
-                task_adapter.addTask(Task(i, " hui", resources.getColor(R.color.purple_500)))
+            task_adapter.putTasks(null)
+            for (i in 0 until lesson.getTasks){
+                task_adapter.addTask(TaskItem(i+1, " hui", resources.getColor(R.color.purple_500)))
             }
         }
     }

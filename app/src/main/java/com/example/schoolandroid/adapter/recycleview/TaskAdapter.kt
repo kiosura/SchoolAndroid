@@ -4,25 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
-import com.example.schoolandroid.data.Task
+import com.example.schoolandroid.data.TaskItem
+import com.example.schoolandroid.data.Tasks
 import com.example.schoolandroid.databinding.TaskCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
-import com.example.schoolandroid.screens.course.lesson
-import com.example.schoolandroid.screens.course.task
-import com.google.android.material.tabs.TabLayout
 
 class TaskAdapter(private val listener : Listener, private val layout : Int) : RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
-    private val tasks = ArrayList<Task>()
+    private var tasks = ArrayList<TaskItem>()
 
     class TaskHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = TaskCardViewBinding.bind(card)
-        fun bind(task: Task) {
+        fun bind(task: TaskItem) {
             binding.taskBody.text = task.id.toString()
             binding.taskBody.setBackgroundColor(task.color)
         }
@@ -44,12 +38,13 @@ class TaskAdapter(private val listener : Listener, private val layout : Int) : R
         return tasks.size
     }
 
-    fun addTask(task: Task){
+    fun addTask(task: TaskItem){
         tasks.add(task)
         notifyDataSetChanged()
     }
-    fun addTask(task: List<Task>){
-        tasks.addAll(task)
-        notifyDataSetChanged()
+
+    fun putTasks(list : Tasks?){
+        if (list != null) tasks = list
+        else tasks.clear()
     }
 }

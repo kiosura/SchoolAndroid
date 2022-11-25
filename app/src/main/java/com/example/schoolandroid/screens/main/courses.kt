@@ -64,7 +64,6 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         // subscription for MutableLiveData<Courses> changes - coming from Storage
         Storage.getCourses().observe(viewLifecycleOwner) { list ->
             course_adapter.addCourses(list)
-            println(list)
         }
 
         Storage.getCourses().observe(viewLifecycleOwner) { list ->
