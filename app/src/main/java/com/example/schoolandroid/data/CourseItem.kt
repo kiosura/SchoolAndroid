@@ -12,3 +12,5 @@ data class CourseItem(
     val teachers: List<Teacher>,
     val value: Int
 )
+
+class Courses : ArrayList<CourseItem>()

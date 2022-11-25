@@ -5,3 +5,5 @@ data class TaskItem(
     val text : String,
     val color : Int
 )
+
+class Tasks : ArrayList<TaskItem>()

@@ -1,14 +1,13 @@
 package com.example.schoolandroid.adapter.recycleview
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.data.CourseItem
+import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.databinding.CourseCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
 

@@ -1,14 +1,10 @@
 package com.example.schoolandroid.api
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.schoolandroid.data.Courses
-import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.data.RetrofitLessonRequest
 import com.example.schoolandroid.storage.Storage
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class CourseViewModel : ViewModel() {
     private val retrofitApi = RetrofitInstance.api
