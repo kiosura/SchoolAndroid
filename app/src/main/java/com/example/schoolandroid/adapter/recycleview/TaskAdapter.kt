@@ -17,7 +17,7 @@ class TaskAdapter(private val listener : Listener, private val layout : Int) : R
     class TaskHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = TaskCardViewBinding.bind(card)
         fun bind(task: TaskItem) {
-            binding.taskBody.text = task.id.toString()
+            binding.taskBody.text = task.index.toString()
             binding.taskBody.setBackgroundColor(task.color)
         }
     }

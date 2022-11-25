@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
-import com.example.schoolandroid.data.File
+import com.example.schoolandroid.data.FileItem
 import com.example.schoolandroid.databinding.FileCardViewBinding
 
 class FilesAdapter : RecyclerView.Adapter<FilesAdapter.FileHolder>() {
-    val files : ArrayList<File> = ArrayList()
+    val files : ArrayList<FileItem> = ArrayList()
 
     class FileHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = FileCardViewBinding.bind(card)
-        fun bind(file : File) = with(binding) {
+        fun bind(file : FileItem) = with(binding) {
             fileName.text = file.name
         }
     }
@@ -31,7 +31,7 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.FileHolder>() {
         return files.size
     }
 
-    fun addFile(file : File){
+    fun addFile(file : FileItem){
         files.add(file)
         notifyDataSetChanged()
     }

@@ -1,9 +1,12 @@
 package com.example.schoolandroid.data
 
 data class TaskItem(
-    val id : Int,
-    val text : String,
-    val color : Int
+    val id : Int? = null,
+    var name : String? = null,
+    var text : String? = null,
+    var index : Int? = null,
+    var color : Int,
+    var files : Files? = null
 )
 
 class Tasks : ArrayList<TaskItem>()

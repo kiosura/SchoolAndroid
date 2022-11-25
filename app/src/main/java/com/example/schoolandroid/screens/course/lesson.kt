@@ -15,8 +15,7 @@ import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.FilesAdapter
 import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.api.CourseViewModel
-import com.example.schoolandroid.data.File
-import com.example.schoolandroid.data.LessonItem
+import com.example.schoolandroid.data.FileItem
 import com.example.schoolandroid.data.TaskItem
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
@@ -32,12 +31,9 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
 
     private lateinit var CourseVM : CourseViewModel
 
-    private lateinit var lessonItem: LessonItem
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
-        lessonItem = Storage.getLesson(CourseVM.lessonIndex).value!!
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +50,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
         }
 
         for (i in 1..3){
-            file_adapter.addFile(File("file$i"))
+            file_adapter.addFile(FileItem("file$i"))
         }
         recyclerViewFiles.isVisible = false
 
@@ -86,7 +82,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
             })
             task_adapter.putTasks(null)
             for (i in 0 until lesson.getTasks){
-                task_adapter.addTask(TaskItem(i+1, " hui", resources.getColor(R.color.purple_500)))
+                task_adapter.addTask(TaskItem(index = i+1, name="hui", color=resources.getColor(R.color.purple_500)))
             }
         }
     }

@@ -6,8 +6,9 @@ data class LessonItem(
     var access: String,
     var getTasks : Int,
     var index : Int,
-    var description : String,
-    
+    var description : String?,
+    var homework: Homework?,
+    var link : String?
 )
 
 class Lessons : ArrayList<LessonItem>()
