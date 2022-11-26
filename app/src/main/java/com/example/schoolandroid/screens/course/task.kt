@@ -157,7 +157,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                                         background = resources.getDrawable(R.drawable.border_task_truth)
                                     }
                                     with(editTextAnswer) {
-                                        hint = progressTask.toString()
+                                        hint = progressTask.first.toString()
                                         setTextIsSelectable(false)
                                     }
                                     with(sendAnswer) {
@@ -168,9 +168,6 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                                     with(editAnswerContainer) {
                                         background = resources.getDrawable(R.drawable.border_task_false)
                                     }
-                                    with(editTextAnswer) {
-                                        hint = progressTask.toString()
-                                    }
                                 }
                             }
             } } } } }
@@ -178,7 +175,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
 
     private fun answerPost() {
         if (Storage.getUser().value!!.id != null) {
-            val answer = binding.editTextAnswer.text.toString()
+            val answer = binding.editTextAnswer.editableText.toString()
             CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
         }
     }

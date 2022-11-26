@@ -7,12 +7,12 @@ data class ProgressItem (
     var whole_course: Int?,
     var lessons: String?,
     var status_tasks: String?,
-    var passed_tasks: String?
+    var answer_tasks: String?
 ) {
 
     fun getTaskProgress(lessonIndex : Int, taskIndex : Int) : Pair<String?, Int> {
         var answer : String? = null
-        val findedAnswer = parseToList(this.passed_tasks!!).get(lessonIndex).get(taskIndex)
+        val findedAnswer = parseToList(this.answer_tasks!!).get(lessonIndex).get(taskIndex)
         if (findedAnswer != "null") answer = findedAnswer
 
         val statusCode : Int = parseToList(this.status_tasks!!).get(lessonIndex).get(taskIndex).toInt()
