@@ -36,21 +36,23 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     private lateinit var nesty : NestedScrollView
 
     private lateinit var CourseVM : CourseViewModel
-
+    private val course = Storage.getCurrentCourse().value!!
     private var taskCount : Int = 0
+    private lateinit var binding : TaskViewBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
-        taskCount = Storage.getCurrentCourse().value!!.lessons[CourseVM.lessonIndex].getTasks
+        taskCount = course.lessons[CourseVM.lessonIndex].getTasks
     }
 
     @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = TaskViewBinding.bind(view)
         getTask()
 
-        nesty = view.findViewById<NestedScrollView>(R.id.nestedTabLayout)
+        nesty = binding.nestedTabLayout
 
 
         recyclerView = view.findViewById(R.id.tabRecycler)
@@ -68,20 +70,28 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                 task_adapter.addTask(TaskItem(index = i+1, name="hui", color=color))
             }
         }
+        // Storage.currentCourse for course.id, CourseViewModel.lesson_index, taskIndex
+        if (Storage.getUser().value!!.registered_datetime != null) {
+            Storage.getUser().observe(viewLifecycleOwner) { user ->
+                with(binding){
+                    with(editTextAnswer) {
+                        hint = user.progresses!!.findProgress(course.id)!!.getTaskProgress(CourseVM.lessonIndex, taskIndex()).toString()
+        } } } }
 
 
-        if (taskCount < 2)  view.findViewById<Button>(R.id.nextTask).isVisible = false
+        if (taskCount < 2)  binding.nextTask.isVisible = false
         recyclerView.isVisible = false
 
 
-        view.findViewById<Button>(R.id.showAllTasks).setOnClickListener {
+        binding.sendAnswer.setOnClickListener { answerPost() }
+        binding.showAllTasks.setOnClickListener {
             recyclerView.isVisible = !recyclerView.isVisible
             if (recyclerView.isVisible) getScroll()
         }
-        view.findViewById<Button>(R.id.nextTask).setOnClickListener {
+        binding.nextTask.setOnClickListener {
             recyclerView.isVisible = false
-            if (lastIndex + nextIndex < taskCount-2) nextIndex += 1
-            else if (lastIndex + nextIndex == taskCount-2){
+            if (taskIndex() < taskCount-2) nextIndex += 1
+            else if (taskIndex() == taskCount-2){
                 nextIndex += 1
                 it.isVisible = false
             }
@@ -93,9 +103,9 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     @SuppressLint("RestrictedApi")
     fun getScroll() {
         nesty.post(Runnable {
-            onClick(lastIndex + nextIndex)
+            onClick(taskIndex())
             nesty.smoothScrollTo(0,
-                (dpToPx(nesty.context, 50)*(if(lastIndex + nextIndex > 2) lastIndex + nextIndex-2 else 0))
+                (dpToPx(nesty.context, 50)*(if(taskIndex() > 2) taskIndex()-2 else 0))
                     .toInt(), 200)
         })
     }
@@ -121,14 +131,20 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                 Thread.sleep(500L)
                 getTask()
             }
-            val current_task = homework!!.tasks[lastIndex+nextIndex]
-            val binding = TaskViewBinding.bind(requireView())
+            val current_task = homework!!.tasks[taskIndex()]
             with(binding) {
                 taskName.text = current_task.name
                 taskText.text = current_task.text
             }
         }
     }
+
+    fun answerPost() {
+        val answer = binding.sendText.text.toString()
+        CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
+    }
+
+    fun taskIndex() : Int = lastIndex + nextIndex
 
     companion object {
         @JvmStatic

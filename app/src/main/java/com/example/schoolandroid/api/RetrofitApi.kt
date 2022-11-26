@@ -19,6 +19,10 @@ interface RetrofitApi {
     @Headers("Content-Type: application/json")
     suspend fun fetchLesson(@Body data : RetrofitLessonRequest): Response<LessonItem>
 
+    @POST("task/answer")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchTaskAnswer(@Body data : RetrofitTaskAnswerRequest): Response<User>
+
 //    @POST("point/course/lesson/task")
 //    @Headers("Content-Type: application/json")
 //    suspend fun getTask():Response<>

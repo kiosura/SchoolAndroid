@@ -1,10 +1,7 @@
 package com.example.schoolandroid.storage
 
 import androidx.lifecycle.MutableLiveData
-import com.example.schoolandroid.data.CourseItem
-import com.example.schoolandroid.data.Courses
-import com.example.schoolandroid.data.LessonItem
-import com.example.schoolandroid.data.User
+import com.example.schoolandroid.data.*
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
@@ -25,29 +22,34 @@ import kotlin.reflect.full.primaryConstructor
 
 
 object Storage {
-    private var user : MutableLiveData<User>?  = null
+    private var user : MutableLiveData<User>  = MutableLiveData()
     private var coursesList : MutableLiveData<Courses> = MutableLiveData()
     private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
-    fun setUser(userItem : User?) {
-        if (userItem != null && userItem.error_message == null) {
+    fun setUser(userItem : User) {
+        if (userItem.error_message == null) {
             PersistentStorage.addObject(userItem)
         }
         user = MutableLiveData(userItem)
-        user!!.postValue(userItem)
+        user.postValue(userItem)
     }
 
     fun setUser(userItem : User, is_added : Boolean){
-        if (is_added) {
-            user = MutableLiveData(userItem merge user?.value!!)
-            user!!.postValue(user?.value)
+        if (is_added && user.value != null) {
+            user = MutableLiveData(userItem merge user.value!!)
+            user.postValue(user.value)
 
-            PersistentStorage.addObject(user?.value!!)
+            PersistentStorage.addObject(user.value!!)
         }
         else {
             user = MutableLiveData(userItem)
-            user!!.postValue(userItem)
+            user.postValue(userItem)
         }
+    }
+
+    fun setProgresses(progresses: Progresses) {
+        user.value!!.progresses = progresses
+        user.postValue(user.value)
     }
 
     fun getUser() = user

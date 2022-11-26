@@ -7,7 +7,7 @@ data class User(
     var name: String? = null,
     var notifications: List<Notification>? = null,
     var phone_number: String? = null,
-    var progresses: List<Progress>? = null,
+    var progresses: Progresses? = null,
     var registered_datetime: String? = null,
     var surname: String? = null,
     var error_message: String? = null

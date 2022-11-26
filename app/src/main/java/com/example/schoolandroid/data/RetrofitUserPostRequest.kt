@@ -24,3 +24,16 @@ data class RetrofitTaskRequest(
     @SerializedName("task_index")
     val task_index : Int
 )
+
+data class RetrofitTaskAnswerRequest(
+    @SerializedName("course_id")
+    val course_id : Int,
+    @SerializedName("lesson_index")
+    val lesson_index : Int,
+    @SerializedName("task_index")
+    val task_index : Int,
+    @SerializedName("user_id")
+    val user_id : Int,
+    @SerializedName("answer")
+    val answer : String,
+)
