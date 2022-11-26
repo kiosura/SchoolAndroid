@@ -76,6 +76,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                 with(binding){
                     with(editTextAnswer) {
                         hint = user.progresses!!.findProgress(course.id)!!.getTaskProgress(CourseVM.lessonIndex, taskIndex()).toString()
+                        setTextIsSelectable(false)
         } } } }
 
 
