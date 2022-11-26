@@ -3,6 +3,8 @@ package com.example.schoolandroid.screens.course
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import androidx.core.view.get
@@ -43,7 +45,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
-        taskCount = course.lessons[CourseVM.lessonIndex].getTasks
+        taskCount = course.lessons[CourseVM.lessonIndex].getTasks!!
     }
 
     @SuppressLint("RestrictedApi")
@@ -62,23 +64,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
             adapter = task_adapter
         }
 
-        Storage.getCurrentCourse().observe(viewLifecycleOwner){ course ->
-            taskCount = course.lessons[CourseVM.lessonIndex].getTasks
-            task_adapter.putTasks(null)
-            for (i in 0 until taskCount){
-                val color = if (lastIndex == i) resources.getColor(R.color.teal_200) else resources.getColor(R.color.purple_500)
-                task_adapter.addTask(TaskItem(index = i+1, name="hui", color=color))
-            }
-        }
-        // Storage.currentCourse for course.id, CourseViewModel.lesson_index, taskIndex
-        if (Storage.getUser().value!!.registered_datetime != null) {
-            Storage.getUser().observe(viewLifecycleOwner) { user ->
-                with(binding){
-                    with(editTextAnswer) {
-                        hint = user.progresses!!.findProgress(course.id)!!.getTaskProgress(CourseVM.lessonIndex, taskIndex()).toString()
-                        setTextIsSelectable(false)
-        } } } }
-
+        observeCourse()
 
         if (taskCount < 2)  binding.nextTask.isVisible = false
         recyclerView.isVisible = false
@@ -102,7 +88,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
 
     // .post (Runnable {} ) waiting for full initialization recyclerView (visible)
     @SuppressLint("RestrictedApi")
-    fun getScroll() {
+    private fun getScroll() {
         nesty.post(Runnable {
             onClick(taskIndex())
             nesty.smoothScrollTo(0,
@@ -125,27 +111,79 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
         }
     }
 
-    fun getTask() {
+    // receive info with current task
+    private fun getTask() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val homework = Storage.getCurrentCourse().value!!.lessons[CourseVM.lessonIndex].homework
+            val homework = course.lessons[CourseVM.lessonIndex].homework
             if (homework == null) {
                 Thread.sleep(500L)
                 getTask()
+                return@launch
             }
-            val current_task = homework!!.tasks[taskIndex()]
+            val current_task = homework.tasks[taskIndex()]
             with(binding) {
                 taskName.text = current_task.name
                 taskText.text = current_task.text
             }
         }
+        checkProgressForNow()
     }
 
-    fun answerPost() {
-        val answer = binding.sendText.text.toString()
-        CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
+    private fun observeCourse(){
+        lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getCurrentCourse().observe(viewLifecycleOwner){
+                task_adapter.putTasks(null)
+                for (i in 0 until taskCount){
+                    val color = if (lastIndex == i) resources.getColor(R.color.teal_200) else resources.getColor(R.color.purple_500)
+                    task_adapter.addTask(TaskItem(index = i+1, name="hui", color=color))
+                }
+            }
+        }
     }
 
-    fun taskIndex() : Int = lastIndex + nextIndex
+    // Storage.currentCourse for course.id, CourseViewModel.lesson_index, taskIndex - for checking statusCode of current Task
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun checkProgressForNow() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            if (Storage.getUser().value?.registered_datetime != null) {
+                Storage.getUser().observe(viewLifecycleOwner) { user ->
+                    val progressTask = user.progresses?.findProgress(course.id)?.getTaskProgress(CourseVM.lessonIndex, taskIndex())
+                    if (progressTask != null) {
+                        with(binding) {
+                            when (progressTask.second ) {
+                                0 -> with(editTextAnswer) {  }
+                                1 -> {
+                                    with(editAnswerContainer) {
+                                        background = resources.getDrawable(R.drawable.border_task_truth)
+                                    }
+                                    with(editTextAnswer) {
+                                        hint = progressTask.toString()
+                                        setTextIsSelectable(false)
+                                    }
+                                    with(sendAnswer) {
+                                        isVisible = false
+                                    }
+                                }
+                                2 -> {
+                                    with(editAnswerContainer) {
+                                        background = resources.getDrawable(R.drawable.border_task_false)
+                                    }
+                                    with(editTextAnswer) {
+                                        hint = progressTask.toString()
+                                    }
+                                }
+                            }
+            } } } } }
+    }
+
+    private fun answerPost() {
+        if (Storage.getUser().value!!.id != null) {
+            val answer = binding.editTextAnswer.text.toString()
+            CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
+        }
+    }
+
+    private fun taskIndex() : Int = lastIndex + nextIndex
 
     companion object {
         @JvmStatic

@@ -34,6 +34,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
+        CourseVM.getLesson()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,12 +77,11 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
 
         Storage.getCurrentCourse().observe(viewLifecycleOwner){ course ->
             val lesson = course.lessons[CourseVM.lessonIndex]
-            println(lesson)
             textPlan.post(Runnable{
                 textPlan.text = lesson.description
             })
             task_adapter.putTasks(null)
-            for (i in 0 until lesson.getTasks){
+            for (i in 0 until lesson.getTasks!!){
                 task_adapter.addTask(TaskItem(index = i+1, name="hui", color=resources.getColor(R.color.purple_500)))
             }
         }

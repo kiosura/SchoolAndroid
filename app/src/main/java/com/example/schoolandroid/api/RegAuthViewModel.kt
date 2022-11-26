@@ -27,7 +27,7 @@ class RegAuthViewModel : ViewModel() {
                     )
                 ).body()
 
-                Storage.setUser(responseUser)
+                responseUser?.let { Storage.setUser(it) }
 
                 if (responseUser?.error_message == null) {
                     fragmentReplacer.replace(2, profile())
@@ -49,7 +49,7 @@ class RegAuthViewModel : ViewModel() {
                     )
                 ).body()
 
-                Storage.setUser(responseUser)
+                responseUser?.let { Storage.setUser(it) }
 
                 if (responseUser?.error_message == null) {
                     fragmentReplacer.replace(2, profile())

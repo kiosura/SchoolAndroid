@@ -3,15 +3,33 @@ package com.example.schoolandroid.data
 data class ProgressItem (
     val id : Int?,
     val id_course: Int?,
-    val is_bought: Boolean?,
-    val whole_course: Int?,
-    val lessons: String?,
-    val status_tasks: String?
+    var is_bought: Boolean?,
+    var whole_course: Int?,
+    var lessons: String?,
+    var status_tasks: String?,
+    var passed_tasks: String?
 ) {
-    // надо дописать
-    fun getTaskProgress(lessonIndex : Int, taskIndex : Int) : Boolean{
-        return false
+
+    fun getTaskProgress(lessonIndex : Int, taskIndex : Int) : Pair<String?, Int> {
+        var answer : String? = null
+        val findedAnswer = parseToList(this.passed_tasks!!).get(lessonIndex).get(taskIndex)
+        if (findedAnswer != "null") answer = findedAnswer
+
+        val statusCode : Int = parseToList(this.status_tasks!!).get(lessonIndex).get(taskIndex).toInt()
+
+        return Pair<String?, Int>(answer, statusCode)
     }
+
+    // from models
+    private fun parseToList(variable : String) : List<List<String>> {
+        val array = variable.split(".")
+        val finishArray = ArrayList<List<String>>()
+        for (i in array.indices) {
+            finishArray.add(array[i].split(" "))
+        }
+        return finishArray
+    }
+
 }
 
 class Progresses : ArrayList<ProgressItem>() {

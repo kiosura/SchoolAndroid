@@ -21,7 +21,7 @@ class CourseViewModel : ViewModel() {
                     lesson_index = lessonIndex
                 )
             ).body()
-            Storage.updateLesson(lesson)
+            Storage.updateLesson(lesson, lessonIndex)
         }
     }
 

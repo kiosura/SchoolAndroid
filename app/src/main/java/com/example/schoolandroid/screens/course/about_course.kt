@@ -56,8 +56,7 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
 
     override fun onClick(position: Int) {
         fragmentReplacer.replaceDefault(1)
-        CourseVM.lessonIndex = position-1
-        CourseVM.getLesson()
+        CourseVM.lessonIndex = position
         val tabLayout : TabLayout? = activity?.findViewById<TabLayout>(R.id.coursePageBottomMenue)
         val tab = tabLayout?.getTabAt(1)
         tab?.select()

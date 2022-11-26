@@ -19,7 +19,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
         fun bind(lesson: LessonItem) = with(binding) {
             lessonName.text = lesson.name
-            lessonNumber.text = (lesson.index + 1).toString()
+            lessonNumber.text = (lesson.index!!.plus(1)).toString()
         }
     }
 
@@ -32,7 +32,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         holder.bind(lessons[position])
         holder.itemView.findViewById<LinearLayout>(R.id.lessonBody)
             .setOnClickListener(View.OnClickListener{
-                listener.onClick(1)
+                listener.onClick(position)
             })
     }
 

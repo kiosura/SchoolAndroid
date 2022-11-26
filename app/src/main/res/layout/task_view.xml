@@ -47,15 +47,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <EditText
-                android:id="@+id/editTextAnswer"
-                android:layout_width="200dp"
+            <LinearLayout
+                android:id="@+id/editAnswerContainer"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="105dp"
+                android:layout_marginStart="55dp"
                 android:layout_marginTop="150dp"
-                android:inputType="text"
-                android:hint="Введите ответ"
-                android:autofillHints="Введите ответ"/>
+                android:paddingHorizontal="10dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/editTextAnswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:hint="Введите ответ"
+                    android:autofillHints="Введите ответ"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/sendAnswer"

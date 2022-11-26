@@ -60,9 +60,8 @@ object Storage {
 
     fun getCurrentCourse() = currentCourse
 
-    fun updateLesson(lesson : LessonItem?) {
+    fun updateLesson(lesson : LessonItem?, index : Int) {
         if (lesson != null) {
-            val index = lesson.index
             for (i in 0 until currentCourse.value!!.lessons.size) {
                 if (currentCourse.value!!.lessons[i].index == index) {
                     currentCourse.value!!.lessons[i] =
