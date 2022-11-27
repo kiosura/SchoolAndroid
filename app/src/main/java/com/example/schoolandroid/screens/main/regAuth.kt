@@ -8,9 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.example.schoolandroid.R
-import com.example.schoolandroid.api.RegAuthViewModel
+import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.example.schoolandroid.interfaces.Validator.Companion.registrationValidation
@@ -24,11 +23,11 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
     private lateinit var registrationPasswordComplete : EditText
     private lateinit var loginError : TextView
     private lateinit var passwordError : TextView
-    private lateinit var regAuthViewModel : RegAuthViewModel
+    private lateinit var storageViewModel : StorageViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        regAuthViewModel = ViewModelProvider(this).get(RegAuthViewModel::class.java)
+        storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,7 +68,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
 
     fun login() {
         registrationButton.setOnClickListener {
-            regAuthViewModel.postAuthentification(
+            storageViewModel.postAuthentification(
                 fragmentReplacer,
                 registrationLogin.text.toString(),
                 registrationPassword.text.toString()
@@ -99,14 +98,14 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
                 setTextColor(resources.getColor(R.color.purple_700))
             }
             if (result) {
-                regAuthViewModel.postRegistration(
+                storageViewModel.postRegistration(
                     fragmentReplacer,
                     registrationLogin.text.toString(),
                     registrationPassword.text.toString()
                 )
             }
 
-            Storage.getUser()?.observe(viewLifecycleOwner){user ->
+            Storage.getUser().observe(viewLifecycleOwner){user ->
                 Toast.makeText(context,"${user.error_message}" , Toast.LENGTH_LONG).show()
             }
 

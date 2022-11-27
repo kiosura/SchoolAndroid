@@ -3,16 +3,12 @@ package com.example.schoolandroid.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.schoolandroid.adapter.MainPageAdapter
-import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.ActivityMainBinding
 import com.example.schoolandroid.dialogs.PushDialog
 import com.example.schoolandroid.dialogs.SettingsDialog
-import com.example.schoolandroid.screens.BaseFragment
-import com.example.schoolandroid.screens.course.about_course
 import com.example.schoolandroid.screens.main.about_school
 import com.example.schoolandroid.screens.main.courses
 import com.example.schoolandroid.screens.main.profile
@@ -22,10 +18,6 @@ import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.reflect.full.declaredMemberProperties
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     // headers' names
-    private val baseNames : ArrayList<String> = arrayListOf<String>(
+    private val baseNames : ArrayList<String> = arrayListOf(
         "О Школе",
         "Все курсы",
         "Профиль"
@@ -49,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     // custom view models for main activity
     private lateinit var storageViewModel : StorageViewModel
-    private lateinit var regAuthVM : RegAuthViewModel
 
 //    private val PushDialogFragment = PushDialog()
 //    private val SettingsDialogFragment = SettingsDialog()
@@ -59,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
-        regAuthVM = ViewModelProvider(this).get(RegAuthViewModel::class.java)
 
         // SharedPref initial
         PersistentStorage.init(this)
@@ -71,8 +61,11 @@ class MainActivity : AppCompatActivity() {
         if (user.registered_datetime == null) listOfFragments[2] = regAuth()
         else {
             Storage.setUser(user, false)
-            regAuthVM.getProgresses()
+            storageViewModel.getProgresses()
         }
+
+        storageViewModel.getCoursesWithLessons()
+
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())
 
         // connecting views
@@ -102,16 +95,16 @@ class MainActivity : AppCompatActivity() {
         tabClickListener()
 
         // subscription for MutableLiveData<Response<Courses>> changes - coming from API
-        val coursesRaw = storageViewModel.getCourses()
-        coursesRaw.observe(this) {
-            if (coursesRaw.value!!.body() != null) {
-                Storage.addCourses(coursesRaw)
-                val lessonsRaw = storageViewModel.getLessons()
-                lessonsRaw.observe(this) {
-                    Storage.mergeCourses(lessonsRaw)
-                }
-            }
-        }
+//        val coursesRaw = storageViewModel.getCourses()
+//        coursesRaw.observe(this) {
+//            if (coursesRaw.value!!.body() != null) {
+//                Storage.addCourses(coursesRaw)
+//                val lessonsRaw = storageViewModel.getLessons()
+//                lessonsRaw.observe(this) {
+//                    Storage.mergeCourses(lessonsRaw)
+//                }
+//            }
+//        }
     }
 
     fun tabClickListener(){

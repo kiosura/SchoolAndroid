@@ -65,8 +65,6 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
             adapter = task_adapter
         }
 
-        observeCourse()
-
         if (taskCount < 2)  binding.nextTask.isVisible = false
         recyclerView.isVisible = false
 
@@ -145,6 +143,8 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     // Storage.currentCourse for course.id, CourseViewModel.lesson_index, taskIndex - for checking statusCode of current Task
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun checkProgressForNow() {
+        Storage.getUser().removeObservers(viewLifecycleOwner)
+        observeCourse()
         lifecycleScope.launch(Dispatchers.Main) {
             if (Storage.getUser().value?.registered_datetime != null) {
                 Storage.getUser().observe(viewLifecycleOwner) { user ->

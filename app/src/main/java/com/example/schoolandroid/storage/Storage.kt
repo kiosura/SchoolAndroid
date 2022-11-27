@@ -75,22 +75,26 @@ object Storage {
     fun getLesson(index: Int) : MutableLiveData<LessonItem>
         = MutableLiveData(currentCourse.value!!.lessons[index])
 
-    fun addCourses(list : MutableLiveData<Response<Courses>>?) {
+    fun addCourses(list : Courses?) {
         if (coursesList.value == null)
-            coursesList = MutableLiveData(list?.value?.body())
+            coursesList = MutableLiveData(list)
         else mergeCourses(list)
+    }
+
+    fun clearCourses() {
+        coursesList = MutableLiveData()
     }
 
     fun getCourses() = coursesList
 
-    fun mergeCourses(list : MutableLiveData<Response<Courses>>?) {
-        val courseWithLessons = MutableLiveData(list?.value?.body())
-        if (courseWithLessons.value != null) {
+    fun mergeCourses(list : Courses?) {
+        val courseWithLessons = list
+        if (courseWithLessons != null) {
             for (i in 0 until coursesList.value!!.size) {
-                for (k in 0 until courseWithLessons.value!!.size) {
-                    if (coursesList.value!![i].id == courseWithLessons.value!![k].id) {
+                for (k in 0 until courseWithLessons.size) {
+                    if (coursesList.value!![i].id == courseWithLessons[k].id) {
                         coursesList.value!![i] =
-                            coursesList.value!![i] merge courseWithLessons.value!![k]
+                            coursesList.value!![i] merge courseWithLessons[k]
                     }
                 }
             }

@@ -11,9 +11,17 @@ interface RetrofitApi {
     @Headers("Content-Type: application/json")
     suspend fun fetchCourses() : Response<Courses>
 
+    @POST ("course")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchCoursesPost(@Body data : RetrofitUserIdPostRequest) : Response<Courses>
+
     @GET ("course/lessons")
     @Headers("Content-Type: application/json")
     suspend fun fetchLessons() : Response<Courses>
+
+    @POST ("course/lessons")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchLessonsPost(@Body data : RetrofitUserIdPostRequest) : Response<Courses>
 
     @POST("point/course/lesson")
     @Headers("Content-Type: application/json")
@@ -37,7 +45,7 @@ interface RetrofitApi {
 
     @POST("user/progresses")
     @Headers("Content-Type: application/json")
-    suspend fun userProgresses(@Body data : RetrofitUserProgressesPostRequest) : Response<User>
+    suspend fun userProgresses(@Body data : RetrofitUserIdPostRequest) : Response<User>
 
 
 //    @POST("user/update")
