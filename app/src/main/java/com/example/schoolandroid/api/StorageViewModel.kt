@@ -35,7 +35,6 @@ class StorageViewModel : ViewModel() {
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
-
                 Storage.addCourses(lessonsFromCourses)
             }
             else {
@@ -55,7 +54,7 @@ class StorageViewModel : ViewModel() {
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
-
+                
                 Storage.addCourses(coursesList, isMy = true)
             }
         }
@@ -116,7 +115,7 @@ class StorageViewModel : ViewModel() {
                             user_id = Storage.getUser().value!!.id!!,
                         )
                     ).body()
-                    println(responseUserProgresses)
+
                     if (responseUserProgresses?.error_message == null) {
                         Storage.setProgresses(responseUserProgresses!!.progresses!!)
                     }

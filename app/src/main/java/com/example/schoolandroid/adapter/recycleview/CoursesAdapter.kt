@@ -48,7 +48,9 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
     }
 
     fun addCourses(list: Courses?) {
-        if (list != null) courses = list
-        notifyDataSetChanged()
+        if (list != null) {
+            courses = list
+            notifyDataSetChanged()
+        }
     }
 }

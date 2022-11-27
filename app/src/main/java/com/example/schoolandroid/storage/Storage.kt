@@ -23,8 +23,8 @@ import kotlin.reflect.full.primaryConstructor
 
 object Storage {
     private var user : MutableLiveData<User>  = MutableLiveData()
-    private var coursesList : MutableLiveData<Courses> = MutableLiveData()
-    private var myCoursesList : MutableLiveData<Courses> = MutableLiveData()
+    private var coursesList : MutableLiveData<Courses>? = null
+    private var myCoursesList : MutableLiveData<Courses>? = null
     private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
     fun setUser(userItem : User) {
@@ -55,8 +55,9 @@ object Storage {
 
     fun getUser() = user
 
-    fun setCurrent(index : Int) {
-        currentCourse = MutableLiveData(coursesList.value!![index])
+    fun setCurrent(index : Int, isMy: Boolean = false) {
+        if (isMy) currentCourse = MutableLiveData(myCoursesList?.value!![index])
+        else currentCourse = MutableLiveData(coursesList?.value!![index])
     }
 
     fun getCurrentCourse() = currentCourse
@@ -78,12 +79,12 @@ object Storage {
 
     fun addCourses(list : Courses?, isMy : Boolean = false) {
         if (isMy) {
-            if (myCoursesList.value == null)
+            if (myCoursesList?.value == null)
                 myCoursesList = MutableLiveData(list)
             else mergeCourses(list, isMy)
         }
         else {
-            if (coursesList.value == null)
+            if (coursesList?.value == null)
                 coursesList = MutableLiveData(list)
             else mergeCourses(list)
         }
@@ -94,7 +95,7 @@ object Storage {
         else coursesList = MutableLiveData()
     }
 
-    fun getCourses(isMy: Boolean = false) : MutableLiveData<Courses> {
+    fun getCourses(isMy: Boolean = false) : MutableLiveData<Courses>? {
         if (isMy) return myCoursesList
         else return coursesList
     }
@@ -102,8 +103,8 @@ object Storage {
     fun mergeCourses(list : Courses?, isMy: Boolean = false) {
         if (list != null) {
             val oldList : MutableLiveData<Courses>
-            if (isMy) oldList = myCoursesList
-            else oldList = coursesList
+            if (isMy) oldList = myCoursesList!!
+            else oldList = coursesList!!
             for (i in 0 until oldList.value!!.size) {
                 for (k in 0 until list.size) {
                     if (oldList.value!![i].id == list[k].id) {

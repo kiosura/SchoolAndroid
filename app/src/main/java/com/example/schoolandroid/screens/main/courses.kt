@@ -78,16 +78,20 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
     private fun courseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
-            Storage.getCourses().observe(viewLifecycleOwner) { list ->
-                course_adapter.addCourses(list)
+            if (view != null) {
+                Storage.getCourses()?.observe(viewLifecycleOwner) { list ->
+                    course_adapter.addCourses(list)
+                }
             }
         }
     }
 
     private fun myCourseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
-            Storage.getCourses(isMy = true).observe(viewLifecycleOwner) { list ->
-                my_course_adapter.addCourses(list)
+            if (view != null) {
+                Storage.getCourses(isMy = true)?.observe(viewLifecycleOwner) { list ->
+                    my_course_adapter.addCourses(list)
+                }
             }
         }
     }
@@ -103,7 +107,7 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     }
 
     override fun onClick(position: Int) {
-        Storage.setCurrent(position)
+        Storage.setCurrent(position, isMy = recycleView.adapter == my_course_adapter)
         val intent: Intent = Intent(context, CourseActivity::class.java)
         context?.startActivity(intent)
     }
