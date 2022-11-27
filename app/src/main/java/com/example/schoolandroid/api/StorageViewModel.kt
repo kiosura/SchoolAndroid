@@ -97,9 +97,7 @@ class StorageViewModel : ViewModel() {
                 responseUser?.let { Storage.setUser(it) }
 
                 if (responseUser?.error_message == null) {
-                    getCoursesWithLessons()
-                    getMyCourses()
-                    fragmentReplacer.replace(2, profile())
+                    fragmentReplacer.replace(2, profile(isAuth = true))
                 }
 
             } catch (e: Exception) {
