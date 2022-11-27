@@ -1,5 +1,6 @@
 package com.example.schoolandroid.api
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.data.RetrofitLessonRequest
@@ -15,30 +16,38 @@ class CourseViewModel : ViewModel() {
 
     fun getLesson() {
         viewModelScope.launch {
-            val lesson = retrofitApi.fetchLesson(
-                RetrofitLessonRequest(
-                    course_id = Storage.getCurrentCourse().value!!.id,
-                    lesson_index = lessonIndex
-                )
-            ).body()
-            Storage.updateLesson(lesson, lessonIndex)
+            try {
+                val lesson = retrofitApi.fetchLesson(
+                    RetrofitLessonRequest(
+                        course_id = Storage.getCurrentCourse().value!!.id,
+                        lesson_index = lessonIndex
+                    )
+                ).body()
+                Storage.updateLesson(lesson, lessonIndex)
+            } catch (e: Exception) {
+                Log.e("TAG", "Exception during request getLesson -> ${e.localizedMessage}")
+            }
         }
     }
 
     fun postAnswer(text : String, taskIndex : Int) {
         viewModelScope.launch {
-            val answer = retrofitApi.fetchTaskAnswer(
-                RetrofitTaskAnswerRequest(
-                    course_id = Storage.getCurrentCourse().value!!.id,
-                    lesson_index = lessonIndex,
-                    task_index = taskIndex,
-                    user_id = Storage.getUser().value!!.id!!,
-                    answer = text
-                )
-            ).body()
-            if (answer != null) {
-                println(answer)
-                Storage.setProgresses(answer.progresses!!)
+            try {
+                val answer = retrofitApi.fetchTaskAnswer(
+                    RetrofitTaskAnswerRequest(
+                        course_id = Storage.getCurrentCourse().value!!.id,
+                        lesson_index = lessonIndex,
+                        task_index = taskIndex,
+                        user_id = Storage.getUser().value!!.id!!,
+                        answer = text
+                    )
+                ).body()
+                if (answer != null) {
+                    println(answer)
+                    Storage.setProgresses(answer.progresses!!)
+                }
+            } catch (e: Exception) {
+                Log.e("TAG", "Exception during request postAnswer -> ${e.localizedMessage}")
             }
         }
     }
