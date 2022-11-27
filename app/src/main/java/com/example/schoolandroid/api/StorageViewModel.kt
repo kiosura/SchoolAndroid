@@ -19,46 +19,54 @@ class StorageViewModel : ViewModel() {
 
     fun getCoursesWithLessons() {
         viewModelScope.launch {
-            val coursesList : Courses?
-            val lessonsFromCourses : Courses?
-            if (Storage.getUser().value?.registered_datetime != null) {
-                coursesList = retrofitApi.fetchCoursesPost(
-                    RetrofitUserIdPostRequest(
-                        Storage.getUser().value!!.id!!
-                    )
-                ).body()
+            try {
+                val coursesList : Courses?
+                val lessonsFromCourses : Courses?
+                if (Storage.getUser().value?.registered_datetime != null) {
+                    coursesList = retrofitApi.fetchCoursesPost(
+                        RetrofitUserIdPostRequest(
+                            Storage.getUser().value!!.id!!
+                        )
+                    ).body()
 
-                coursesList?.let { Storage.addCourses(it) }
+                    coursesList?.let { Storage.addCourses(it) }
 
-                lessonsFromCourses = retrofitApi.fetchLessonsPost(
-                    RetrofitUserIdPostRequest(
-                        Storage.getUser().value!!.id!!
-                    )
-                ).body()
+                    lessonsFromCourses = retrofitApi.fetchLessonsPost(
+                        RetrofitUserIdPostRequest(
+                            Storage.getUser().value!!.id!!
+                        )
+                    ).body()
 
-                Storage.mergeCourses(lessonsFromCourses)
-            }
-            else {
-                coursesList = retrofitApi.fetchCourses().body()
-                coursesList?.let { Storage.addCourses(it) }
+                    Storage.mergeCourses(lessonsFromCourses)
+                }
+                else {
+                    coursesList = retrofitApi.fetchCourses().body()
+                    coursesList?.let { Storage.addCourses(it) }
 
-                lessonsFromCourses = retrofitApi.fetchLessons().body()
-                Storage.mergeCourses(lessonsFromCourses)
+                    lessonsFromCourses = retrofitApi.fetchLessons().body()
+                    Storage.mergeCourses(lessonsFromCourses)
+                }
+            } catch (e: Exception) {
+                Log.e("TAG", "Exception during request getCoursesWithLessons -> ${e.localizedMessage}")
             }
         }
     }
 
     fun getMyCourses() {
         viewModelScope.launch {
-            if (Storage.getUser().value?.registered_datetime != null) {
-                val coursesList = retrofitApi.fetchMyCourses(
-                    RetrofitUserIdPostRequest(
-                        Storage.getUser().value!!.id!!
-                    )
-                ).body()
+            try {
+                if (Storage.getUser().value?.registered_datetime != null) {
+                    val coursesList = retrofitApi.fetchMyCourses(
+                        RetrofitUserIdPostRequest(
+                            Storage.getUser().value!!.id!!
+                        )
+                    ).body()
 
-                coursesList?.let { Storage.addCourses(it, isMy = true) }
-            }
+                    coursesList?.let { Storage.addCourses(it, isMy = true) }
+                }
+        } catch (e: Exception) {
+            Log.e("TAG", "Exception during request getMyCourses -> ${e.localizedMessage}")
+        }
         }
     }
 
@@ -79,7 +87,7 @@ class StorageViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
+                Log.e("TAG", "Exception during request postRegistration -> ${e.localizedMessage}")
             }
         }
     }
@@ -101,7 +109,7 @@ class StorageViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
+                Log.e("TAG", "Exception during request postAuthentification -> ${e.localizedMessage}")
             }
         }
     }
@@ -121,7 +129,7 @@ class StorageViewModel : ViewModel() {
                     }
 
                 } catch (e: Exception) {
-                    Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
+                    Log.e("TAG", "Exception during request getProgresses -> ${e.localizedMessage}")
                 }
             }
         }
