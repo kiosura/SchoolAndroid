@@ -24,6 +24,7 @@ import kotlin.reflect.full.primaryConstructor
 object Storage {
     private var user : MutableLiveData<User>  = MutableLiveData()
     private var coursesList : MutableLiveData<Courses> = MutableLiveData()
+    private var myCoursesList : MutableLiveData<Courses> = MutableLiveData()
     private var currentCourse : MutableLiveData<CourseItem> = MutableLiveData()
 
     fun setUser(userItem : User) {
@@ -75,26 +76,39 @@ object Storage {
     fun getLesson(index: Int) : MutableLiveData<LessonItem>
         = MutableLiveData(currentCourse.value!!.lessons[index])
 
-    fun addCourses(list : Courses?) {
-        if (coursesList.value == null)
-            coursesList = MutableLiveData(list)
-        else mergeCourses(list)
+    fun addCourses(list : Courses?, isMy : Boolean = false) {
+        if (isMy) {
+            if (myCoursesList.value == null)
+                myCoursesList = MutableLiveData(list)
+            else mergeCourses(list, isMy)
+        }
+        else {
+            if (coursesList.value == null)
+                coursesList = MutableLiveData(list)
+            else mergeCourses(list)
+        }
     }
 
-    fun clearCourses() {
-        coursesList = MutableLiveData()
+    fun clearCourses(isMy: Boolean = false) {
+        if (isMy) myCoursesList = MutableLiveData()
+        else coursesList = MutableLiveData()
     }
 
-    fun getCourses() = coursesList
+    fun getCourses(isMy: Boolean = false) : MutableLiveData<Courses> {
+        if (isMy) return myCoursesList
+        else return coursesList
+    }
 
-    fun mergeCourses(list : Courses?) {
-        val courseWithLessons = list
-        if (courseWithLessons != null) {
-            for (i in 0 until coursesList.value!!.size) {
-                for (k in 0 until courseWithLessons.size) {
-                    if (coursesList.value!![i].id == courseWithLessons[k].id) {
-                        coursesList.value!![i] =
-                            coursesList.value!![i] merge courseWithLessons[k]
+    fun mergeCourses(list : Courses?, isMy: Boolean = false) {
+        if (list != null) {
+            val oldList : MutableLiveData<Courses>
+            if (isMy) oldList = myCoursesList
+            else oldList = coursesList
+            for (i in 0 until oldList.value!!.size) {
+                for (k in 0 until list.size) {
+                    if (oldList.value!![i].id == list[k].id) {
+                        oldList.value!![i] =
+                            oldList.value!![i] merge list[k]
                     }
                 }
             }

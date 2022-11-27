@@ -25,6 +25,7 @@ import com.example.schoolandroid.dialogs.FilterCoursesDialog
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -43,7 +44,6 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     private lateinit var courseBaseName : TextView
     private lateinit var switchContainer : LinearLayout
     private lateinit var switch : SwitchCompat
-    private lateinit var archive : LinearLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,20 +62,12 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         }
 
         // subscription for MutableLiveData<Courses> changes - coming from Storage
-        Storage.getCourses().observe(viewLifecycleOwner) { list ->
-            course_adapter.addCourses(list)
-        }
-
-        Storage.getCourses().observe(viewLifecycleOwner) { list ->
-            my_course_adapter.addCourses(list)
-        }
+        courseObserver()
+        myCourseObserver()
 
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
         switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)
         switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)
-        archive = view.findViewById<LinearLayout>(R.id.archiveButton)
-
-        archive.isVisible = false
 
         switchContainer.setOnClickListener {
             switch.isChecked = !switch.isChecked
@@ -84,18 +76,30 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         }
     }
 
+    private fun courseObserver() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getCourses().observe(viewLifecycleOwner) { list ->
+                course_adapter.addCourses(list)
+            }
+        }
+    }
+
+    private fun myCourseObserver() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getCourses(isMy = true).observe(viewLifecycleOwner) { list ->
+                my_course_adapter.addCourses(list)
+            }
+        }
+    }
+
     private fun onChangeToSelf() {
         courseBaseName.text = courseNames[1]
         recycleView.adapter = my_course_adapter
-        switchContainer.post( Runnable {
-            archive.isVisible = true
-        })
     }
 
     private fun onChangeToAll() {
         courseBaseName.text = courseNames[0]
         recycleView.adapter = course_adapter
-        archive.isVisible = false
     }
 
     override fun onClick(position: Int) {

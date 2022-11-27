@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         storageViewModel.getCoursesWithLessons()
+        storageViewModel.getMyCourses()
 
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())
 

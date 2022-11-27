@@ -7,6 +7,14 @@ import retrofit2.http.*
 
 interface RetrofitApi {
 
+//  self
+
+    @POST ("course/self")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchMyCourses(@Body data : RetrofitUserIdPostRequest) : Response<Courses>
+
+//  default
+
     @GET ("course")
     @Headers("Content-Type: application/json")
     suspend fun fetchCourses() : Response<Courses>

@@ -27,18 +27,37 @@ class StorageViewModel : ViewModel() {
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
+
+                Storage.addCourses(coursesList)
+
                 lessonsFromCourses = retrofitApi.fetchLessonsPost(
                     RetrofitUserIdPostRequest(
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
+
+                Storage.addCourses(lessonsFromCourses)
             }
             else {
                 coursesList = retrofitApi.fetchCourses().body()
+                Storage.addCourses(coursesList)
                 lessonsFromCourses = retrofitApi.fetchLessons().body()
+                Storage.addCourses(lessonsFromCourses)
             }
-            Storage.addCourses(coursesList)
-            Storage.addCourses(lessonsFromCourses)
+        }
+    }
+
+    fun getMyCourses() {
+        viewModelScope.launch {
+            if (Storage.getUser().value?.registered_datetime != null) {
+                val coursesList = retrofitApi.fetchMyCourses(
+                    RetrofitUserIdPostRequest(
+                        Storage.getUser().value!!.id!!
+                    )
+                ).body()
+
+                Storage.addCourses(coursesList, isMy = true)
+            }
         }
     }
 

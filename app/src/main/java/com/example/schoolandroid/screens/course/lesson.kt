@@ -34,7 +34,9 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
-        CourseVM.getLesson()
+        if (Storage.getCurrentCourse().value!!.lessons[CourseVM.lessonIndex].homework != null) {
+            CourseVM.getLesson()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
