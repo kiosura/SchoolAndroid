@@ -37,3 +37,8 @@ data class RetrofitTaskAnswerRequest(
     @SerializedName("answer")
     val answer : String,
 )
+
+data class RetrofitUserProgressesPostRequest(
+    @SerializedName("user_id")
+    val user_id : Int
+)

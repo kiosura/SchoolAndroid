@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.schoolandroid.adapter.MainPageAdapter
+import com.example.schoolandroid.api.RegAuthViewModel
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.ActivityMainBinding
@@ -46,12 +47,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var baseAdapter : MainPageAdapter
 
+    // custom view models for main activity
+    private lateinit var storageViewModel : StorageViewModel
+    private lateinit var regAuthVM : RegAuthViewModel
+
 //    private val PushDialogFragment = PushDialog()
 //    private val SettingsDialogFragment = SettingsDialog()
     private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+        regAuthVM = ViewModelProvider(this).get(RegAuthViewModel::class.java)
 
         // SharedPref initial
         PersistentStorage.init(this)
@@ -61,7 +69,10 @@ class MainActivity : AppCompatActivity() {
         // and changing fragment (profile -> regAuth) if it doesn't
         val listOfFragments = arrayListOf(about_school(), courses(), profile())
         if (user.registered_datetime == null) listOfFragments[2] = regAuth()
-        else Storage.setUser(user, false)
+        else {
+            Storage.setUser(user, false)
+            regAuthVM.getProgresses()
+        }
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())
 
         // connecting views
@@ -89,9 +100,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         tabClickListener()
-
-        // custom view model for main activity
-        val storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
 
         // subscription for MutableLiveData<Response<Courses>> changes - coming from API
         val coursesRaw = storageViewModel.getCourses()

@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
 import android.view.View
 import android.widget.Button
 import androidx.core.view.get
@@ -157,8 +158,8 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
                                         background = resources.getDrawable(R.drawable.border_task_truth)
                                     }
                                     with(editTextAnswer) {
-                                        hint = progressTask.first.toString()
-                                        setTextIsSelectable(false)
+                                        isEnabled = false
+                                        text = Editable.Factory.getInstance().newEditable(progressTask.first.toString())
                                     }
                                     with(sendAnswer) {
                                         isVisible = false

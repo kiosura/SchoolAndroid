@@ -36,8 +36,10 @@ class CourseViewModel : ViewModel() {
                     answer = text
                 )
             ).body()
-            if (answer != null)
+            if (answer != null) {
+                println(answer)
                 Storage.setProgresses(answer.progresses!!)
+            }
         }
     }
 

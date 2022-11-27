@@ -21,7 +21,7 @@ data class ProgressItem (
     }
 
     // from models
-    private fun parseToList(variable : String) : List<List<String>> {
+    private fun parseToList(variable : String) : ArrayList<List<String>> {
         val array = variable.split(".")
         val finishArray = ArrayList<List<String>>()
         for (i in array.indices) {

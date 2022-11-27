@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
 import com.example.schoolandroid.data.RetrofitUserPostRequest
+import com.example.schoolandroid.data.RetrofitUserProgressesPostRequest
 
 import com.example.schoolandroid.interfaces.FragmentReplacer
 import com.example.schoolandroid.screens.main.profile
@@ -57,6 +58,27 @@ class RegAuthViewModel : ViewModel() {
 
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun getProgresses() {
+        if (Storage.getUser().value?.id != null) {
+            viewModelScope.launch {
+                try {
+                    val responseUserProgresses = retrofitApi.userProgresses(
+                        RetrofitUserProgressesPostRequest(
+                            user_id = Storage.getUser().value!!.id!!,
+                        )
+                    ).body()
+                    println(responseUserProgresses)
+                    if (responseUserProgresses?.error_message == null) {
+                        Storage.setProgresses(responseUserProgresses!!.progresses!!)
+                    }
+
+                } catch (e: Exception) {
+                    Log.e("TAG", "Exception during request -> ${e.localizedMessage}")
+                }
             }
         }
     }
