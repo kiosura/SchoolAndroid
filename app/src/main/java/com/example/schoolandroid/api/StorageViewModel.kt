@@ -28,20 +28,22 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                Storage.addCourses(coursesList)
+                coursesList?.let { Storage.addCourses(it) }
 
                 lessonsFromCourses = retrofitApi.fetchLessonsPost(
                     RetrofitUserIdPostRequest(
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
-                Storage.addCourses(lessonsFromCourses)
+
+                Storage.mergeCourses(lessonsFromCourses)
             }
             else {
                 coursesList = retrofitApi.fetchCourses().body()
-                Storage.addCourses(coursesList)
+                coursesList?.let { Storage.addCourses(it) }
+
                 lessonsFromCourses = retrofitApi.fetchLessons().body()
-                Storage.addCourses(lessonsFromCourses)
+                Storage.mergeCourses(lessonsFromCourses)
             }
         }
     }
@@ -54,8 +56,8 @@ class StorageViewModel : ViewModel() {
                         Storage.getUser().value!!.id!!
                     )
                 ).body()
-                
-                Storage.addCourses(coursesList, isMy = true)
+
+                coursesList?.let { Storage.addCourses(it, isMy = true) }
             }
         }
     }
@@ -95,8 +97,8 @@ class StorageViewModel : ViewModel() {
                 responseUser?.let { Storage.setUser(it) }
 
                 if (responseUser?.error_message == null) {
-                    Storage.clearCourses()
                     getCoursesWithLessons()
+                    getMyCourses()
                     fragmentReplacer.replace(2, profile())
                 }
 

@@ -78,20 +78,16 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
     private fun courseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
-            if (view != null) {
-                Storage.getCourses()?.observe(viewLifecycleOwner) { list ->
-                    course_adapter.addCourses(list)
-                }
+            Storage.getCourses().observe(requireActivity()) { list ->
+                course_adapter.addCourses(list)
             }
         }
     }
 
     private fun myCourseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
-            if (view != null) {
-                Storage.getCourses(isMy = true)?.observe(viewLifecycleOwner) { list ->
-                    my_course_adapter.addCourses(list)
-                }
+            Storage.getCourses(isMy = true).observe(requireActivity()) { list ->
+                my_course_adapter.addCourses(list)
             }
         }
     }
