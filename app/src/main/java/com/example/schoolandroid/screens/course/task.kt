@@ -143,8 +143,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     // Storage.currentCourse for course.id, CourseViewModel.lesson_index, taskIndex - for checking statusCode of current Task
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun checkProgressForNow() {
-        if (view != null)
-        lifecycleScope.launch(Dispatchers.Main) {
+        if (view != null) lifecycleScope.launch(Dispatchers.Main) {
             Storage.getUser().removeObservers(viewLifecycleOwner)
             observeCourse()
             if (Storage.getUser().value?.registered_datetime != null) {

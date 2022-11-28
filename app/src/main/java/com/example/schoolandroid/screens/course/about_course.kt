@@ -4,23 +4,30 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.AboutCourseLessonsAdapter
 import com.example.schoolandroid.api.CourseViewModel
 import com.example.schoolandroid.data.CourseItem
+import com.example.schoolandroid.data.ProgressItem
+import com.example.schoolandroid.data.Progresses
 import com.example.schoolandroid.databinding.FragmentAboutCourseBinding
 //import com.example.schoolandroid.api.FirstApi.Companion.apiBase
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
+
     private val lessonsAdapter : AboutCourseLessonsAdapter = AboutCourseLessonsAdapter(this)
 
     private lateinit var CourseVM : CourseViewModel
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
@@ -48,9 +55,26 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         }
         bind()
 
-        val lessonRaw = Storage.getCurrentCourse()
-        lessonRaw.observe(this.viewLifecycleOwner) {list ->
-            lessonsAdapter.addLesson(list.lessons)
+        courseObserver()
+        userProgressObserver()
+    }
+
+    fun courseObserver() {
+        if (view != null) lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getCurrentCourse().observe(viewLifecycleOwner) {list ->
+                lessonsAdapter.addLesson(list.lessons)
+            }
+        }
+    }
+
+    fun userProgressObserver() {
+        if (view != null) lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getUser().observe(viewLifecycleOwner) { user ->
+                val progress = user.progresses?.findProgress(Storage.getCurrentCourse().value!!.id)
+                if (progress != null) {
+                    lessonsAdapter.addProgressToLessons(progress.getLessons())
+                }
+            }
         }
     }
 

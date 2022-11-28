@@ -13,13 +13,22 @@ import com.example.schoolandroid.interfaces.Listener
 
 class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
     private var lessons = ArrayList<LessonItem>()
+    private var progressToLessons : List<String>? = null
 
     class LessonHolder(card : View) : RecyclerView.ViewHolder(card) {
         private val binding = AboutCourseLessonCardViewBinding.bind(card)
 
-        fun bind(lesson: LessonItem) = with(binding) {
+        fun bind(lesson: LessonItem, percent : String = "") = with(binding) {
             lessonName.text = lesson.name
             lessonNumber.text = (lesson.index!!.plus(1)).toString()
+            lessonPercentProgress.text = percentage(percent)
+        }
+        private fun percentage(percent: String) : String {
+            var newPercent = ""
+            if (percent != "") {
+               newPercent = "$percent%"
+            }
+            return newPercent
         }
     }
 
@@ -29,7 +38,9 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
     }
 
     override fun onBindViewHolder(holder: LessonHolder, position: Int) {
-        holder.bind(lessons[position])
+        if (progressToLessons != null) holder.bind(lessons[position], progressToLessons!![position])
+        else holder.bind(lessons[position])
+
         holder.itemView.findViewById<LinearLayout>(R.id.lessonBody)
             .setOnClickListener(View.OnClickListener{
                 listener.onClick(position)
@@ -38,6 +49,11 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
     override fun getItemCount(): Int {
         return lessons.size
+    }
+
+    fun addProgressToLessons(list : List<String>?) {
+        progressToLessons = list
+        notifyDataSetChanged()
     }
 
     fun addLesson(lesson: Lessons){

@@ -20,6 +20,10 @@ data class ProgressItem (
         return Pair<String?, Int>(answer, statusCode)
     }
 
+    fun getLessons() : List<String>? {
+        return lessons?.split(" ")
+    }
+
     // from models
     private fun parseToList(variable : String) : ArrayList<List<String>> {
         val array = variable.split(".")
