@@ -61,7 +61,7 @@
 
                     <TextView
                         style="@style/course_card_teacher"
-                        android:id="@+id/updateUserButton"
+                        android:id="@+id/userUpdateButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/course_card_view_teacher_button"
@@ -74,7 +74,7 @@
 
                     <TextView
                         style="@style/course_card_teacher"
-                        android:id="@+id/logoutUser"
+                        android:id="@+id/userLogout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/course_card_view_teacher_button"

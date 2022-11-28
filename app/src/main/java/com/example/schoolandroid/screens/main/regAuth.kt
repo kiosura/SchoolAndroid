@@ -91,11 +91,11 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
             )
             with(loginError) {
                 text = loginErrorReturned
-                setTextColor(resources.getColor(R.color.teal_200))
+                setTextColor(resources.getColor(R.color.coral))
             }
             with(passwordError) {
                 text = passwordErrorReturned
-                setTextColor(resources.getColor(R.color.purple_700))
+                setTextColor(resources.getColor(R.color.coral))
             }
             if (result) {
                 storageViewModel.postRegistration(

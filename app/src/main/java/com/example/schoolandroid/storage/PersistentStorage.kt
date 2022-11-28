@@ -16,8 +16,12 @@ object PersistentStorage {
         editor = settings.edit()
     }
 
+    fun logoutUser() {
+        editor.clear().apply()
+    }
+
     // put from key {name : value}
-     fun <T> addProperty(name : String, value : T?) {
+    fun <T> addProperty(name : String, value : T?) {
         when (value) {
             is String -> editor.putString(name, value)
             is Boolean -> editor.putBoolean(name, value)
