@@ -23,33 +23,87 @@
                 android:id="@+id/lessonNumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text=""
                 android:gravity="center"
                 android:textSize="16sp"
                 android:fontFamily="@font/bruta_semibold"
                 android:background="@drawable/rounded_corner_grey"
-                android:textColor="#ffffff"/>
+                android:textColor="@color/black"
+                android:text="1" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/lessonName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="16sp"
             android:layout_marginLeft="20dp"
-            android:fontFamily="@font/bruta_regular"
-            android:textColor="#000000"
-            android:text="Пивопитие"/>
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/lessonPercentProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:fontFamily="@font/bruta_regular"
-            android:textColor="#000000"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top">
+
+                <TextView
+                    android:id="@+id/lessonName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginBottom="7dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/bruta_regular"
+                    android:textColor="#000000"
+                    android:text="Урок"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lessonProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="11"
+                    android:layout_height="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/lessonProgressBarLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/lesson_progress_bar_left"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lessonProgressBarRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/lesson_progress_bar_right"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/lessonProgressText"
+                    android:layout_weight="1"
+                    android:layout_marginTop="-3dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bruta_regular"
+                    android:textColor="#000000"
+                    android:text="0%"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

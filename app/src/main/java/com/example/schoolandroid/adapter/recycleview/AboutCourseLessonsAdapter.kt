@@ -1,5 +1,7 @@
 package com.example.schoolandroid.adapter.recycleview
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.LessonItem
 import com.example.schoolandroid.data.Lessons
+import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.AboutCourseLessonCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
+import com.example.schoolandroid.storage.PersistentStorage
+import com.example.schoolandroid.storage.Storage
 
 class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<AboutCourseLessonsAdapter.LessonHolder>() {
     private var lessons = ArrayList<LessonItem>()
@@ -21,7 +26,34 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         fun bind(lesson: LessonItem, percent : String = "") = with(binding) {
             lessonName.text = lesson.name
             lessonNumber.text = (lesson.index!!.plus(1)).toString()
-            lessonPercentProgress.text = percentage(percent)
+
+            // If user is authenticated, showing progress bar
+            if (PersistentStorage.getObject<User>().registered_datetime == null) {
+                lessonProgressText.visibility = View.INVISIBLE
+                lessonProgressBar.visibility = View.INVISIBLE
+            }
+            else {
+                // Layout parameters - used in width changing while showing progress percentage
+                val paramsProgressBarLeft = lessonProgressBarLeft.layoutParams
+                val paramsProgressBarRight = lessonProgressBarRight.layoutParams
+
+                if (percent != "") {
+                    // Progress percentage in TextView
+                    lessonProgressText.text = percentage(percent)
+
+                    // Progress percentage in linear_layout bar
+                    paramsProgressBarLeft.width = (lessonProgressBar.width * percent.toInt() / 100)
+                    paramsProgressBarRight.width = lessonProgressBar.width - paramsProgressBarLeft.width
+                }
+                else paramsProgressBarRight.width = lessonProgressBar.width
+
+                // Setting new background for the progress bar with all corners rounded
+                lessonProgressBarRight.setBackgroundResource(R.drawable.rounded_corner_grey)
+
+                // Setting new width values for both sides of progress bar
+                lessonProgressBarLeft.setLayoutParams(paramsProgressBarLeft)
+                lessonProgressBarRight.setLayoutParams(paramsProgressBarRight)
+            }
         }
         private fun percentage(percent: String) : String {
             var newPercent = ""
