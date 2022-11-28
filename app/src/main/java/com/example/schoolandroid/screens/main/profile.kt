@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.schoolandroid.R
 import com.example.schoolandroid.api.StorageViewModel
+import com.example.schoolandroid.databinding.FragmentProfileBinding
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.PersistentStorage
 import com.example.schoolandroid.storage.Storage
@@ -28,9 +29,13 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Storage.getUser().observe(viewLifecycleOwner) { user ->
-
+        val binding = FragmentProfileBinding.bind(view)
+        fun bind() = with(binding) {
+            val user = Storage.getUser().value
+            userName.text = if (user?.name != "") user?.name + " " + user?.surname else "unknown"
+            userLogin.text = if (user?.email != "") user?.email else user.phone_number
         }
+        bind()
     }
 
     companion object {
