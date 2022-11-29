@@ -4,14 +4,22 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:id="@+id/taskBody"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_corner_coral">
 
-        <Button
-            android:id="@+id/taskBody"
+        <TextView
+            android:id="@+id/taskBodyText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/bruta_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="1"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

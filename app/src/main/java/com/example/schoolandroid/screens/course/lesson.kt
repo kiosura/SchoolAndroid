@@ -17,6 +17,7 @@ import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.api.CourseViewModel
 import com.example.schoolandroid.data.FileItem
 import com.example.schoolandroid.data.TaskItem
+import com.example.schoolandroid.databinding.FragmentLessonBinding
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
@@ -42,9 +43,21 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lessonPlan = view.findViewById<LinearLayout>(R.id.lessonPlan)
-        val textPlan = lessonPlan.findViewById<TextView>(R.id.textPlan)
-        lessonPlan.isVisible = false
+        val binding = FragmentLessonBinding.bind(view)
+        fun bind() = with(binding) {
+            Storage.getCurrentCourse().observe(viewLifecycleOwner) { course ->
+                val lesson = course.lessons[CourseVM.lessonIndex]
+
+                lessonName.text = lesson.name
+
+                lessonDescription.text = lesson.description
+
+                task_adapter.putTasks(null)
+                for (i in 0 until lesson.getTasks!!) {
+                    task_adapter.addTask(TaskItem(index = i+1, name="hui", color=resources.getColor(R.color.purple_500)))
+                }
+            }
+        }
 
         recyclerViewFiles = view.findViewById(R.id.filesRecycler)
         with(recyclerViewFiles) {
@@ -62,31 +75,17 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
                 recyclerViewFiles.isVisible = !recyclerViewFiles.isVisible
             }
 
-        view.findViewById<Button>(R.id.lessonPlanButton)
-            .setOnClickListener {
-                lessonPlan.isVisible = !lessonPlan.isVisible
-            }
-
         recyclerViewTasks = view.findViewById(R.id.recycleTasks)
         with(recyclerViewTasks) {
             layoutManager = GridLayoutManager(view.context, 4)
             adapter = task_adapter
         }
 
-        view.findViewById<Button>(R.id.progress).setOnClickListener{
-            onClick(0)
-        }
+//        view.findViewById<Button>(R.id.progress).setOnClickListener{
+//            onClick(0)
+//        }
 
-        Storage.getCurrentCourse().observe(viewLifecycleOwner){ course ->
-            val lesson = course.lessons[CourseVM.lessonIndex]
-            textPlan.post(Runnable{
-                textPlan.text = lesson.description
-            })
-            task_adapter.putTasks(null)
-            for (i in 0 until lesson.getTasks!!){
-                task_adapter.addTask(TaskItem(index = i+1, name="hui", color=resources.getColor(R.color.purple_500)))
-            }
-        }
+        bind()
     }
 
     override fun onClick(position: Int) {

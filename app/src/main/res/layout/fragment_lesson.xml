@@ -12,76 +12,95 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="10dp"
+            android:paddingVertical="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/lessonLinearLayout">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/lessonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="34dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/bruta_semibold"
+                android:textColor="@color/black"
+                android:textSize="25sp"
                 android:text="TextView" />
 
-            <VideoView
-                android:id="@+id/videoView2"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="10dp"/>
+<!--            <VideoView-->
+<!--                android:id="@+id/videoView2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="180dp"-->
+<!--                android:layout_marginTop="10dp"/>-->
 
-            <Button
-                android:id="@+id/lessonPlanButton"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp" />
-
-            <LinearLayout
-                android:id="@+id/lessonPlan"
+            <TextView
+                android:id="@+id/lessonDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp">
+                android:layout_marginHorizontal="34dp"
+                android:layout_marginBottom="24dp"
+                android:textSize="14sp"
+                android:lineSpacingExtra="5sp"
+                android:fontFamily="@font/bruta_regular"
+                android:textColor="@color/black"
+                android:text="Каждый из нас хоть раз задумывался о том,что ждет его впереди. На самом же деле - нихуя его не ждет. Славненько." />
 
-                <TextView
-                    android:id="@+id/textPlan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Каждый из нас хоть раз задумывался о том,что ждет его впереди. На самом же деле - нихуя его не ждет. Славненько." />
-            </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/filesButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginHorizontal="34dp"
+                android:layout_marginBottom="15dp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/bruta_regular"
+                android:textColor="@color/black"
+                android:background="@drawable/rounded_corner_white"
+                android:text="Файлы занятия"/>
 
             <LinearLayout
                 android:id="@+id/files"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp">
+                android:orientation="vertical">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/filesRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="34dp"
+                    android:layout_marginBottom="24dp"/>
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/progress"
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/progress"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:background="@drawable/rounded_corner_white"/>-->
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="34dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/bruta_semibold"
+                android:textColor="#000000"
+                android:text="Задания"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleTasks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="34dp"
                 android:clipToPadding="true"
-                android:layout_margin="8dp"
-                android:padding="8dp"
                 android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
