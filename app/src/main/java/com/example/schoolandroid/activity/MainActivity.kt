@@ -3,6 +3,8 @@ package com.example.schoolandroid.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.adapter.MainPageAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
@@ -18,6 +20,10 @@ import com.example.schoolandroid.storage.Storage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,8 +70,13 @@ class MainActivity : AppCompatActivity() {
             storageViewModel.getProgresses()
         }
 
-        storageViewModel.getCoursesWithLessons()
-        storageViewModel.getMyCourses()
+        lifecycleScope.launch {
+            async { storageViewModel.getCourses()
+                storageViewModel.getMyCourses()  }.await()
+            async { storageViewModel.getLessons()
+                storageViewModel.getChats()
+                storageViewModel.getMyChats() }
+        }
 
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())
 

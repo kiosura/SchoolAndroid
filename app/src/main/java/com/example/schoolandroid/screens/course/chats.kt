@@ -50,14 +50,16 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
         }
     }
 
+    override fun onClick(position : Int) {
+        val link = chats_adapter.getLink(position)
+        if (link != null) {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link));
+            startActivity(browserIntent)
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = chats()
-    }
-
-    override fun onClick(position : Int) {
-        val link = chats_adapter.getLink(position)
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link));
-        startActivity(browserIntent)
     }
 }

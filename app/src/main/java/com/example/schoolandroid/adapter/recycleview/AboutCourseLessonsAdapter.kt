@@ -99,8 +99,10 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         if (list != null) notifyDataSetChanged()
     }
 
-    fun addLesson(lessonsList: Lessons){
-        lessons = lessonsList
-        notifyDataSetChanged()
+    fun addLesson(lessonsList: Lessons?){
+        if (lessonsList != null) {
+            lessons = lessonsList
+            notifyDataSetChanged()
+        }
     }
 }

@@ -8,6 +8,9 @@ import retrofit2.http.*
 interface RetrofitApi {
 
 //  self
+    @POST ("course/chats/self")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchMyChats(@Body data : RetrofitUserIdPostRequest) : Response<Courses>
 
     @POST ("course/self")
     @Headers("Content-Type: application/json")
@@ -26,6 +29,14 @@ interface RetrofitApi {
     @GET ("course/lessons")
     @Headers("Content-Type: application/json")
     suspend fun fetchLessons() : Response<Courses>
+
+    @GET ("course/chats")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchChats() : Response<Courses>
+
+    @POST ("course/chats")
+    @Headers("Content-Type: application/json")
+    suspend fun fetchChatsPost(@Body data : RetrofitUserIdPostRequest) : Response<Courses>
 
     @POST ("course/lessons")
     @Headers("Content-Type: application/json")

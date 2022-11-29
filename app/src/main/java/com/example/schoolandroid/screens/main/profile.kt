@@ -35,15 +35,12 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
     override fun onAttach(context: Context) {
         super.onAttach(context)
         storageViewModel = ViewModelProvider(requireActivity()).get(StorageViewModel::class.java)
-        if (isAuth) {
-            storageViewModel.getCoursesWithLessons()
-            storageViewModel.getMyCourses()
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // needs to open UserObserver
         val binding = FragmentProfileBinding.bind(view)
         fun bind() = with(binding) {
             val user = Storage.getUser().value
@@ -53,6 +50,7 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             userLogout.setOnClickListener {
                 PersistentStorage.logoutUser()
                 Storage.setUser(User())
+
                 fragmentReplacer.replace(2, regAuth())
             }
         }
