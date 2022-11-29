@@ -28,42 +28,52 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
             lessonName.text = lesson.name
             lessonNumber.text = (lesson.index!!.plus(1)).toString()
 
-            // If user is authenticated, showing progress bar
-            if (Storage.getUser().value?.registered_datetime == null) {
+            val paramsProgressContainer = progressContainer.layoutParams
+            val paramsLockSymbol = lockSymbol.layoutParams
+            val paramsProgressBarLeft = lessonProgressBarLeft.layoutParams
+            val paramsProgressBarRight = lessonProgressBarRight.layoutParams
+            val paramsLessonInfoContainer = lessonInfoContainer.layoutParams
+
+            fun disableLesson() {
                 lessonProgressText.visibility = View.INVISIBLE
                 lessonProgressBar.visibility = View.INVISIBLE
-            } else {
-                // Layout parameters - used in width changing while showing progress percentage
-                val paramsProgressBarLeft = lessonProgressBarLeft.layoutParams
-                val paramsProgressBarRight = lessonProgressBarRight.layoutParams
 
-                if (percent != "") {
-                    if (percent == "100") lessonProgressBarLeft.setBackgroundResource(R.drawable.rounded_corner_green)
-                    // Progress percentage in TextView
-                    lessonProgressText.text = percentage(percent)
+                paramsProgressContainer.height = 0
+                paramsLessonInfoContainer.width = 500
 
-                    // Progress percentage in linear_layout bar
-                    paramsProgressBarLeft.width = (lessonProgressBar.width * percent.toInt() / 100)
-                    paramsProgressBarRight.width = lessonProgressBar.width - paramsProgressBarLeft.width
-                } else {
-                    if (!lesson.getAccess()) {
-                        lessonBody.isEnabled = false
-                        lessonBody.setBackgroundResource(R.drawable.rounded_corner_grey)
-                        lessonProgressText.visibility = View.INVISIBLE
-                        lessonProgressBar.visibility = View.INVISIBLE
-                    }
-                    else paramsProgressBarRight.width = lessonProgressBar.width
-                }
-
-                // Setting new background for the progress bar with all corners rounded
-                lessonProgressBarRight.setBackgroundResource(R.drawable.rounded_corner_grey)
-                paramsProgressBarRight.width =
-                    lessonProgressBar.width - paramsProgressBarLeft.width
-
-                // Setting new width values for both sides of progress bar
-                lessonProgressBarLeft.setLayoutParams(paramsProgressBarLeft)
-                lessonProgressBarRight.setLayoutParams(paramsProgressBarRight)
+                lessonBody.isEnabled = false
+                lessonBody.setBackgroundResource(R.drawable.rounded_corner_light_grey)
             }
+
+            if (Storage.getUser().value?.registered_datetime != null) {
+                if (lesson.getAccess()) {
+                    when (percent) {
+                        "", "0" -> {
+                            paramsProgressBarRight.width = lessonProgressBar.width
+                            lessonProgressBarRight.setBackgroundResource(R.drawable.rounded_corner_grey)
+                        }
+                        else -> {
+                            if (percent == "100") lessonProgressBarLeft.setBackgroundResource(R.drawable.rounded_corner_green)
+
+                            // Progress percentage in TextView
+                            lessonProgressText.text = percentage(percent)
+
+                            // Progress percentage in linear_layout bar
+                            paramsProgressBarLeft.width = (lessonProgressBar.width * percent.toInt() / 100)
+                            paramsProgressBarRight.width = lessonProgressBar.width - paramsProgressBarLeft.width
+                        }
+                    }
+                }
+                else disableLesson()
+
+            }
+            else disableLesson()
+
+            progressContainer.setLayoutParams(paramsProgressContainer)
+            lockSymbol.setLayoutParams(paramsLockSymbol)
+            lessonProgressBarLeft.setLayoutParams(paramsProgressBarLeft)
+            lessonProgressBarRight.setLayoutParams(paramsProgressBarRight)
+            lessonInfoContainer.setLayoutParams(paramsLessonInfoContainer)
         }
         private fun percentage(percent: String) : String {
             var newPercent = ""
