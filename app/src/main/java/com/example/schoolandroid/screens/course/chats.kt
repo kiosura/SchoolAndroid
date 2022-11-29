@@ -4,6 +4,8 @@ import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -47,6 +49,7 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
 
     override fun onClick(position : Int) {
         Toast.makeText(context,"Clicked on chat № ${position}" ,Toast.LENGTH_LONG).show()
-        println("34iuo5hrlkjewhtlkh34o2y7583476583746583746857345")
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+YU0qCPD0B8dhOWYy"));
+        startActivity(browserIntent)
     }
 }
