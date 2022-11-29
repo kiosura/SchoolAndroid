@@ -76,7 +76,7 @@
             android:textSize="25sp"
             android:textColor="#000000"
             android:fontFamily="@font/bruta_semibold"
-            android:text="text" />
+            android:text="Главная" />
 
         <Button
             android:id="@+id/pushButton"

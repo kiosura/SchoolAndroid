@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     // tablayout items' names
     private val fragNames = listOf(
-        "о школе",
+        "главная",
         "курсы",
         "профиль"
     )
 
     // headers' names
     private val baseNames : ArrayList<String> = arrayListOf(
-        "О Школе",
+        "Главная",
         "Все курсы",
         "Профиль"
     )

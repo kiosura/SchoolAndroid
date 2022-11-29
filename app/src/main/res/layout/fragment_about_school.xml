@@ -12,13 +12,74 @@
         <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/mainText"
+<!--            <TextView-->
+<!--                android:id="@+id/mainText"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_marginBottom="24dp"-->
+<!--                android:fontFamily=""-->
+<!--                android:text="Новости" />-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/rounded_corner_coral">
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_coral">
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/rounded_corner_coral">
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bruta_regular"
+                    android:textColor="@color/black"
+                    android:textSize="13.5sp"
+                    android:lineSpacingExtra="5sp"
+                    android:text="Школа была основана Тёмычем в 2022 году нашей эры и сразу стала популярнейшей школой вселенной"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
