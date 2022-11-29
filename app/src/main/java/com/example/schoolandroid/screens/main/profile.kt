@@ -1,17 +1,22 @@
 package com.example.schoolandroid.screens.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
+import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.adapter.recycleview.ProfileCoursesAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.FragmentProfileBinding
+import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.PersistentStorage
 import com.example.schoolandroid.storage.Storage
@@ -19,11 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_profile) {
+class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_profile), Listener {
+
+    private lateinit var recycleView: RecyclerView
 
     private lateinit var storageViewModel: StorageViewModel
 
-    private var profileAdapter: ProfileCoursesAdapter = ProfileCoursesAdapter()
+    private var profileAdapter: ProfileCoursesAdapter = ProfileCoursesAdapter(this)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,6 +68,12 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             }
 
         }
+    }
+
+    override fun onClick(position: Int) {
+        Storage.setCurrent(position, isMy = true)
+        val intent: Intent = Intent(context, CourseActivity::class.java)
+        context?.startActivity(intent)
     }
 
     companion object {

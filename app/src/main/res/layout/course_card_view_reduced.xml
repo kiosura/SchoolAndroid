@@ -12,6 +12,8 @@
         android:padding="24dp"
         android:elevation="7dp"
         android:background="@drawable/rounded_corner_white"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical">
 
         <TextView
