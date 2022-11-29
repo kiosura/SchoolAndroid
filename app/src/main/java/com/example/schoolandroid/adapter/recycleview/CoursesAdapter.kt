@@ -16,7 +16,7 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
 
     var courses = ArrayList<CourseItem>()
 
-    class CourseHolder(card : View) : RecyclerView.ViewHolder(card){
+    class CourseHolder(card : View) : RecyclerView.ViewHolder(card) {
         val binding = CourseCardViewBinding.bind(card)
         fun bind(course: CourseItem) = with(binding) {
             coursename.text = course.name
