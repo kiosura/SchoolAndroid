@@ -22,6 +22,7 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
             coursename.text = course.name
             coursedescription.text = course.product_preview
             coursetutor.text = makeTeacherName(course)
+            courseTutorDescription.text = course.teachers[0].description
         }
         fun makeTeacherName(course : CourseItem) : String {
             return course.teachers[0].name + " " + course.teachers[0].surname

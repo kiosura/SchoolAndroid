@@ -99,13 +99,14 @@
                     android:textSize="13.67sp" />
 
                 <TextView
+                    android:id="@+id/courseTutorDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15.8dp"
                     android:fontFamily="@font/bruta_regular"
-                    android:text="5+ лет преподавания"
                     android:textColor="#000000"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:text="5+ лет преподавания"/>
 
                 <TextView
                     style="@style/course_card_teacher"
