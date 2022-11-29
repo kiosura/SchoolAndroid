@@ -3,6 +3,7 @@ package com.example.schoolandroid.adapter.recycleview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
@@ -42,6 +43,11 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
             .setOnClickListener {
             listener.onClick(position)
         }
+
+        holder.itemView.findViewById<Button>(R.id.teachermore)
+            .setOnClickListener {
+                listener.onClickMore(position)
+            }
     }
 
     override fun getItemCount(): Int {
