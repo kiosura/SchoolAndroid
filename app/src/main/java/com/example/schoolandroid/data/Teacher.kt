@@ -13,3 +13,5 @@ data class Teacher(
     val registered: String,
     val surname: String
 )
+
+class Teachers : ArrayList<Teacher>()
