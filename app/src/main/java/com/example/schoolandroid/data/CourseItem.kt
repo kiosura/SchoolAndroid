@@ -1,5 +1,7 @@
 package com.example.schoolandroid.data
 
+import com.google.gson.annotations.SerializedName
+
 data class CourseItem(
     val date_open: String,
     val duration: String,
@@ -10,7 +12,7 @@ data class CourseItem(
     val product_preview: String,
     val description: String,
     val teachers: Teachers,
-    var chats: Chats?,
+    @SerializedName("chat") var chats: Chats?,
     val value: Int,
     var tags: Tags?
 )

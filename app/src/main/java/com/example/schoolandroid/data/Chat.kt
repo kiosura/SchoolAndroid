@@ -1,8 +1,8 @@
 package com.example.schoolandroid.data
 
 data class Chat (
-    val name : String,
-    val url : String,
+    var name : String,
+    var url : String?,
 )
 
 class Chats : ArrayList<Chat>()
