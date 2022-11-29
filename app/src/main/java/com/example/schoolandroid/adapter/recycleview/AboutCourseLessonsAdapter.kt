@@ -88,8 +88,8 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
         notifyDataSetChanged()
     }
 
-    fun addLesson(lesson: Lessons){
-        lessons = lesson
+    fun addLesson(lessonsList: Lessons){
+        lessons = lessonsList
         notifyDataSetChanged()
     }
 }

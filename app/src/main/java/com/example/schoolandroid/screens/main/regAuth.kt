@@ -80,7 +80,6 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
         }
     }
 
-    //
     @Suppress("DEPRECATION")
     fun registration() {
         registrationButton.setOnClickListener {

@@ -6,18 +6,24 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.schoolandroid.R
+import com.example.schoolandroid.adapter.recycleview.ProfileCoursesAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.FragmentProfileBinding
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.PersistentStorage
 import com.example.schoolandroid.storage.Storage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_profile) {
 
     private lateinit var storageViewModel: StorageViewModel
+
+    private var profileAdapter: ProfileCoursesAdapter = ProfileCoursesAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,13 +42,25 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             val user = Storage.getUser().value
             userName.text = if (user?.name != "") user?.name + " " + user?.surname else "unknown"
             userLogin.text = if (user?.email != "") user?.email else user.phone_number
+            recycleCoursesProfile.adapter = profileAdapter
             userLogout.setOnClickListener {
                 PersistentStorage.logoutUser()
                 Storage.setUser(User())
                 fragmentReplacer.replace(2, regAuth())
             }
         }
+
+        coursesProfileObserver()
         bind()
+    }
+
+    fun coursesProfileObserver() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getCourses(isMy = true).observe(requireActivity()) { courses ->
+                profileAdapter.addCourse(courses)
+            }
+
+        }
     }
 
     companion object {
