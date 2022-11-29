@@ -38,6 +38,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
                 val paramsProgressBarRight = lessonProgressBarRight.layoutParams
 
                 if (percent != "") {
+                    if (percent == "100") lessonProgressBarLeft.setBackgroundResource(R.drawable.rounded_corner_green)
                     // Progress percentage in TextView
                     lessonProgressText.text = percentage(percent)
 
@@ -49,6 +50,7 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
 
                 // Setting new background for the progress bar with all corners rounded
                 lessonProgressBarRight.setBackgroundResource(R.drawable.rounded_corner_grey)
+                paramsProgressBarRight.width = lessonProgressBar.width - paramsProgressBarLeft.width
 
                 // Setting new width values for both sides of progress bar
                 lessonProgressBarLeft.setLayoutParams(paramsProgressBarLeft)
