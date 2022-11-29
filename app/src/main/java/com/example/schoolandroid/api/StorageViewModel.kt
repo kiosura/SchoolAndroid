@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import com.example.schoolandroid.data.Courses
-import com.example.schoolandroid.data.RetrofitUserIdPostRequest
-import com.example.schoolandroid.data.RetrofitUserPostRequest
-import com.example.schoolandroid.data.User
+import com.example.schoolandroid.data.*
 import com.example.schoolandroid.interfaces.FragmentReplacer
 import com.example.schoolandroid.screens.main.profile
 import com.example.schoolandroid.storage.Storage
@@ -16,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import retrofit2.Retrofit
 
 class StorageViewModel : ViewModel() {
     var retrofitApi = RetrofitInstance.api
@@ -161,6 +159,27 @@ class StorageViewModel : ViewModel() {
 
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request postAuthentification -> ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun postUpdateUser(user_id : Int, name : String, surname : String, email : String, phone_number : String) {
+        viewModelScope.launch {
+            try {
+                val responseUser = retrofitApi.updateUser(
+                    RetrofitUpdateUserPostRequest(
+                        user_id = user_id,
+                        name = name,
+                        surname = surname,
+                        email = email,
+                        phone_number = phone_number
+                    )
+                ).body()
+
+                responseUser?.let { Storage.setUser(it) }
+            }
+            catch (e: Exception) {
+                Log.e("TAG", "Exception during request postUpdateUser -> ${e.localizedMessage}")
             }
         }
     }

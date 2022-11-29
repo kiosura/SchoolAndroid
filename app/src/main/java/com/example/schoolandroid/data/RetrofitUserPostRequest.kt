@@ -42,3 +42,16 @@ data class RetrofitUserIdPostRequest(
     @SerializedName("user_id")
     val user_id : Int
 )
+
+data class RetrofitUpdateUserPostRequest(
+    @SerializedName("user_id")
+    val user_id : Int,
+    @SerializedName("name")
+    val name : String,
+    @SerializedName("surname")
+    val surname : String,
+    @SerializedName("email")
+    val email : String,
+    @SerializedName("phone_nember")
+    val phone_number : String
+)

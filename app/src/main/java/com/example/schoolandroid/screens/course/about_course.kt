@@ -46,6 +46,7 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
                 courseName.text = courseItem.name
                 courseDescription.text = courseItem.description
                 courseTutor.text = makeTeacherName(courseItem)
+                courseTutorDescription.text = courseItem.teachers[0].description
                 with(recycleLessons) {
                     layoutManager = LinearLayoutManager(view.context)
                     adapter = lessonsAdapter
