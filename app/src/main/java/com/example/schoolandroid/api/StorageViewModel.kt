@@ -29,7 +29,7 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                myselfCoursesList?.let { Storage.addCourses(it, isMy = true) }
+                Storage.addCourses(myselfCoursesList, isMy = true)
             }
         } catch (e: Exception) {
             Log.e("TAG", "Exception during request getCourses -> ${e.localizedMessage}")
@@ -46,11 +46,11 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                coursesList?.let { Storage.addCourses(it) }
+                Storage.addCourses(coursesList)
             }
             else {
                 coursesList = retrofitApi.fetchCourses().body()
-                coursesList?.let { Storage.addCourses(it) }
+                Storage.addCourses(coursesList)
             }
         } catch (e: Exception) {
             Log.e("TAG", "Exception during request getMyCourses -> ${e.localizedMessage}")
@@ -182,6 +182,24 @@ class StorageViewModel : ViewModel() {
                 } catch (e: Exception) {
                     Log.e("TAG", "Exception during request getProgresses -> ${e.localizedMessage}")
                 }
+            }
+        }
+    }
+
+    fun logoutGetData(){
+        viewModelScope.launch {
+            try {
+                async {
+                    getCourses()
+                    getMyCourses()
+                }.await()
+                async {
+                    getLessons()
+                    getChats()
+                    getMyChats()
+                }
+            } catch (e: Exception) {
+                Log.e("TAG", "Exception during logout -> ${e.localizedMessage}")
             }
         }
     }

@@ -76,10 +76,17 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        println()
+    }
+
     private fun courseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
             Storage.getCourses().observe(requireActivity()) { list ->
-                course_adapter.addCourses(list)
+                recycleView.post(Runnable {
+                    course_adapter.addCourses(list)
+                })
             }
         }
     }
@@ -87,7 +94,9 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     private fun myCourseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
             Storage.getCourses(isMy = true).observe(requireActivity()) { list ->
-                my_course_adapter.addCourses(list)
+                recycleView.post(Runnable {
+                    my_course_adapter.addCourses(list)
+                })
             }
         }
     }

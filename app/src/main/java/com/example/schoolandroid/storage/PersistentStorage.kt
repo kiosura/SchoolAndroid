@@ -50,7 +50,6 @@ object PersistentStorage {
         constructor.parameters.associateWith { parameter ->
             val property = properties[parameter.name]
                 ?: throw IllegalStateException("no declared member property found with name '${parameter.name}'")
-            println(mapOf(Pair(parameter.name!!, property.get(other).toString())))
             if (property.get(other) != null) {
                 addProperty(parameter.name!!, property.get(other))
             }

@@ -77,14 +77,20 @@ object Storage {
     fun getLesson(index: Int) : MutableLiveData<LessonItem>
         = MutableLiveData(currentCourse.value!!.lessons[index])
 
-    fun addCourses(list : Courses, isMy : Boolean = false) {
+    fun addCourses(list : Courses?, isMy : Boolean = false) {
         if (isMy) {
-            myCoursesList.value = list
-            myCoursesList.postValue(list)
+            if (list == null) myCoursesList = MutableLiveData()
+            else {
+                myCoursesList.value = list
+                myCoursesList.postValue(list)
+            }
         }
         else {
-            coursesList.value = list
-            coursesList.postValue(list)
+            if (list == null) coursesList = MutableLiveData()
+            else {
+                coursesList.value = list
+                coursesList.postValue(list)
+            }
         }
     }
 

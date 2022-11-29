@@ -50,7 +50,7 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             userLogout.setOnClickListener {
                 PersistentStorage.logoutUser()
                 Storage.setUser(User())
-
+                storageViewModel.logoutGetData()
                 fragmentReplacer.replace(2, regAuth())
             }
         }
