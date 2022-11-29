@@ -8,6 +8,7 @@ import android.os.Looper
 import android.text.Editable
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
@@ -175,9 +176,12 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     }
 
     private fun answerPost() {
-        if (Storage.getUser().value!!.id != null) {
+        if (Storage.getUser().value?.id != null) {
             val answer = binding.editTextAnswer.editableText.toString()
             CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
+        }
+        else {
+            Toast.makeText(this.context, "Зарегистрируйтесь, чтобы отправлять ответы на задания", Toast.LENGTH_SHORT).show()
         }
     }
 

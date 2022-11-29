@@ -9,6 +9,13 @@ data class LessonItem(
     var description : String?,
     var homework: Homework?,
     var link : String?
-)
+) {
+    fun getAccess() : Boolean {
+        when (access) {
+            "0" -> return true
+            else -> return false
+        }
+    }
+}
 
 class Lessons : ArrayList<LessonItem>()
