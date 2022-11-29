@@ -8,11 +8,12 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Chat
+import com.example.schoolandroid.data.Chats
 import com.example.schoolandroid.databinding.ChatCardViewBinding
 import com.example.schoolandroid.interfaces.Listener
 
 class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.ChatHolder>(){
-    private val chats = ArrayList<Chat>()
+    private var chats = Chats()
 
     class ChatHolder(card : View) : RecyclerView.ViewHolder(card){
         private val binding = ChatCardViewBinding.bind(card)
@@ -39,12 +40,14 @@ class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.
         return chats.size
     }
 
-    fun addChat(chat: Chat){
-        chats.add(chat)
-        notifyDataSetChanged()
+    fun getLink(position: Int) : String {
+        return chats[position].link
     }
-    fun addChat(chat : List<Chat>){
-        chats.addAll(chat)
-        notifyDataSetChanged()
+
+    fun addChat(list : Chats?){
+        if (list != null) {
+            chats = list
+            notifyDataSetChanged()
+        }
     }
 }

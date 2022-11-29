@@ -9,8 +9,10 @@ data class CourseItem(
     val name: String,
     val product_preview: String,
     val description: String,
-    val teachers: List<Teacher>,
-    val value: Int
+    val teachers: Teachers,
+    var chats: Chats?,
+    val value: Int,
+    var tags: Tags?
 )
 
 class Courses : ArrayList<CourseItem>()
