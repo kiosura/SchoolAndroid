@@ -5,7 +5,7 @@ data class TaskItem(
     var name : String? = null,
     var text : String? = null,
     var index : Int? = null,
-    var color : Int,
+    var drawable : Int,
     var files : Files? = null
 )
 

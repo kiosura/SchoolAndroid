@@ -8,6 +8,7 @@ import android.os.Looper
 import android.text.Editable
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.core.view.isVisible
@@ -101,10 +102,10 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
         if (position != lastIndex) {
             if (position == task_adapter.itemCount-1) view?.findViewById<Button>(R.id.nextTask)?.isVisible = false
             if (lastIndex == task_adapter.itemCount-1) view?.findViewById<Button>(R.id.nextTask)?.isVisible = true
-            recyclerView.get(lastIndex).findViewById<Button>(R.id.taskBody)
-                .setBackgroundColor(resources.getColor(R.color.purple_500))
-            recyclerView.get(position).findViewById<Button>(R.id.taskBody)
-                .setBackgroundColor(resources.getColor(R.color.teal_200))
+            recyclerView.get(lastIndex).findViewById<LinearLayout>(R.id.taskBody)
+                .setBackgroundResource(R.drawable.rounded_corner_coral)
+            recyclerView.get(position).findViewById<LinearLayout>(R.id.taskBody)
+                .setBackgroundResource(R.drawable.rounded_corner_grey)
             lastIndex = position
             nextIndex = 0
             getTask()
@@ -134,8 +135,8 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
             Storage.getCurrentCourse().observe(viewLifecycleOwner){
                 task_adapter.putTasks(null)
                 for (i in 0 until taskCount){
-                    val color = if (lastIndex == i) resources.getColor(R.color.teal_200) else resources.getColor(R.color.purple_500)
-                    task_adapter.addTask(TaskItem(index = i+1, name="hui", color=color))
+                    task_adapter.addTask(TaskItem(index=i+1, drawable = if (taskIndex() == i)
+                        R.drawable.rounded_corner_coral else R.drawable.rounded_corner_grey))
                 }
             }
         }

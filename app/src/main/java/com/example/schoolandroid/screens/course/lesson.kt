@@ -54,7 +54,7 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
 
                 task_adapter.putTasks(null)
                 for (i in 0 until lesson.getTasks!!) {
-                    task_adapter.addTask(TaskItem(index = i+1, name="hui", color=resources.getColor(R.color.purple_500)))
+                    task_adapter.addTask(TaskItem(index = i+1, name="hui", drawable = R.drawable.rounded_corner_grey))
                 }
             }
         }

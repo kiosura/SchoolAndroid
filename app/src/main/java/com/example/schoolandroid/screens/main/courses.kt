@@ -78,7 +78,8 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
     override fun onResume() {
         super.onResume()
-        println()
+        println(Storage.getCourses())
+        println(Storage.getCourses(isMy = true))
     }
 
     private fun courseObserver() {

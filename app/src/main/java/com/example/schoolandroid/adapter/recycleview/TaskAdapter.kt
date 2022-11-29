@@ -19,6 +19,7 @@ class TaskAdapter(private val listener : Listener, private val layout : Int) : R
         val binding = TaskCardViewBinding.bind(card)
         fun bind(task: TaskItem) = with(binding) {
             taskBodyText.text = task.index.toString()
+            taskBody.setBackgroundResource(task.drawable)
         }
     }
 
