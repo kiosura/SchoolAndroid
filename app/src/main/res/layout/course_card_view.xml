@@ -108,11 +108,16 @@
                     android:textSize="11sp"
                     android:text="5+ лет преподавания"/>
 
-                <Button
-                    android:id="@+id/teachermore"
-                    android:layout_width="104dp"
-                    android:layout_height="20dp"
-                    android:text="teachermore" />
+                <TextView
+                    android:id="@+id/courseTutorMore"
+                    style="@style/course_card_teacher"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/course_card_view_teacher_button"
+                    android:fontFamily="@font/bruta_regular"
+                    android:text="подробнее" />
 
             </LinearLayout>
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.CourseItem
@@ -44,7 +45,7 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
             listener.onClick(position)
         }
 
-        holder.itemView.findViewById<Button>(R.id.teachermore)
+        holder.itemView.findViewById<TextView>(R.id.courseTutorMore)
             .setOnClickListener {
                 listener.onClickMore(position)
             }

@@ -60,7 +60,7 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         courseObserver()
         userProgressObserver()
 
-        binding.teachermore.setOnClickListener {
+        binding.courseTutorMore.setOnClickListener {
             Storage.getCurrentCourse().value?.let { it1 -> this.onClickMore(it1.id) }
         }
     }
