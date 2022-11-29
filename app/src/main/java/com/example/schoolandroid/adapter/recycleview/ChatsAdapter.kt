@@ -41,7 +41,7 @@ class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.
     }
 
     fun getLink(position: Int) : String {
-        return chats[position].link
+        return chats[position].url
     }
 
     fun addChat(list : Chats?){
