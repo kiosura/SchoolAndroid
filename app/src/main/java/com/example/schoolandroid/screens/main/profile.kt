@@ -74,6 +74,10 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
         context?.startActivity(intent)
     }
 
+    override fun onClickMore(position: Int) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = profile()

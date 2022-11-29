@@ -58,6 +58,10 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
         }
     }
 
+    override fun onClickMore(position: Int) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = chats()
