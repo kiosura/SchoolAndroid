@@ -41,6 +41,7 @@ class UpdateUserDialog : DialogFragment() {
                     userSurnameUpdate.text.toString(),
                     userEmailUpdate.text.toString(),
                     userPhoneUpdate.text.toString())
+                dialog?.cancel()
             }
         }
 
