@@ -52,6 +52,6 @@ data class RetrofitUpdateUserPostRequest(
     val surname : String,
     @SerializedName("email")
     val email : String,
-    @SerializedName("phone_nember")
+    @SerializedName("phone_number")
     val phone_number : String
 )
