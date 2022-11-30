@@ -21,20 +21,25 @@ import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.activity.MainActivity
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.api.StorageViewModel
+import com.example.schoolandroid.databinding.FragmentCoursesBinding
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
 class courses : BaseFragment(R.layout.fragment_courses), Listener {
 
+    private lateinit var binding : FragmentCoursesBinding
+
     private lateinit var recycleView: RecyclerView
     // раздать разные cardview
     private val course_adapter = CourseAdapter(this, R.layout.course_card_view)
     private val my_course_adapter = CourseAdapter(this, R.layout.course_card_view)
+    private lateinit var storageViewModel: StorageViewModel
 
     private val courseNames : List<String> = listOf(
         "Все курсы",
@@ -45,8 +50,14 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     private lateinit var switchContainer : LinearLayout
     private lateinit var switch : SwitchCompat
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentCoursesBinding.bind(view)
 
         val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
         buttonFilter.setOnClickListener {
@@ -76,18 +87,10 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        println(Storage.getCourses())
-        println(Storage.getCourses(isMy = true))
-    }
-
     private fun courseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
             Storage.getCourses().observe(requireActivity()) { list ->
-                recycleView.post(Runnable {
-                    course_adapter.addCourses(list)
-                })
+                course_adapter.addCourses(list)
             }
         }
     }
@@ -95,9 +98,7 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     private fun myCourseObserver() {
         lifecycleScope.launch(Dispatchers.Main) {
             Storage.getCourses(isMy = true).observe(requireActivity()) { list ->
-                recycleView.post(Runnable {
-                    my_course_adapter.addCourses(list)
-                })
+                my_course_adapter.addCourses(list)
             }
         }
     }

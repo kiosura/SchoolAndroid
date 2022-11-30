@@ -41,8 +41,9 @@ class ProfileCoursesAdapter(val listener: Listener) : RecyclerView.Adapter<Profi
         return courses.size
     }
 
-    fun addCourse(coursesList: Courses) {
-        courses = coursesList
+    fun addCourse(coursesList: Courses?) {
+        if (coursesList != null) courses = coursesList
+        else courses.clear()
         notifyDataSetChanged()
     }
 }

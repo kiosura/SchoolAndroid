@@ -31,19 +31,19 @@ object Storage {
         if (userItem.error_message == null) {
             PersistentStorage.addObject(userItem)
         }
-        user = MutableLiveData(userItem)
+        user.value = userItem
         user.postValue(userItem)
     }
 
     fun setUser(userItem : User, is_added : Boolean){
         if (is_added && user.value != null) {
-            user = MutableLiveData(userItem merge user.value!!)
+            user.value = userItem merge user.value!!
             user.postValue(user.value)
 
             PersistentStorage.addObject(user.value!!)
         }
         else {
-            user = MutableLiveData(userItem)
+            user.value = userItem
             user.postValue(userItem)
         }
     }
@@ -79,18 +79,13 @@ object Storage {
 
     fun addCourses(list : Courses?, isMy : Boolean = false) {
         if (isMy) {
-            if (list == null) myCoursesList = MutableLiveData()
-            else {
-                myCoursesList.value = list
-                myCoursesList.postValue(list)
-            }
-        }
-        else {
-            if (list == null) coursesList = MutableLiveData()
-            else {
-                coursesList.value = list
-                coursesList.postValue(list)
-            }
+            if (list == null) myCoursesList.value!!.clear()
+            else myCoursesList.value = list
+            myCoursesList.postValue(myCoursesList.value)
+        } else {
+            if (list == null) coursesList.value!!.clear()
+            else coursesList.value = list
+            coursesList.postValue(coursesList.value)
         }
     }
 
@@ -109,6 +104,7 @@ object Storage {
                     if (oldList.value!![i].id == list[k].id) {
                         oldList.value!![i] =
                             oldList.value!![i] merge list[k]
+                        oldList.postValue(oldList.value)
                     }
                 }
             }

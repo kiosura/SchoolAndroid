@@ -14,6 +14,7 @@ import com.example.schoolandroid.screens.main.profile
 import com.example.schoolandroid.storage.Storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -152,11 +153,6 @@ class StorageViewModel : ViewModel() {
 
                 if (responseUser?.error_message == null) {
                     fragmentReplacer.replace(2, profile(isAuth = true))
-                    async { getCourses()
-                        getMyCourses()  }.await()
-                    async { getLessons()
-                        getChats()
-                        getMyChats() }
                 }
 
             } catch (e: Exception) {
@@ -191,12 +187,11 @@ class StorageViewModel : ViewModel() {
             try {
                 async {
                     getCourses()
-                    getMyCourses()
+                    Storage.addCourses(null, isMy = true)
                 }.await()
                 async {
                     getLessons()
                     getChats()
-                    getMyChats()
                 }
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during logout -> ${e.localizedMessage}")

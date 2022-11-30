@@ -14,7 +14,7 @@ import com.example.schoolandroid.interfaces.Listener
 
 class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
-    var courses = ArrayList<CourseItem>()
+    var courses = Courses()
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card) {
         val binding = CourseCardViewBinding.bind(card)
@@ -49,9 +49,8 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
     }
 
     fun addCourses(list: Courses?) {
-        if (list != null) {
-            courses = list
-            notifyDataSetChanged()
-        }
+        if (list != null) courses = list
+        else courses.clear()
+        notifyDataSetChanged()
     }
 }
