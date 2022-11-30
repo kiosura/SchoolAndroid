@@ -23,6 +23,7 @@ import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.databinding.FragmentCoursesBinding
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
+import com.example.schoolandroid.dialogs.TeacherDescriptionDialog
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
@@ -117,6 +118,15 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         Storage.setCurrent(position, isMy = recycleView.adapter == my_course_adapter)
         val intent: Intent = Intent(context, CourseActivity::class.java)
         context?.startActivity(intent)
+    }
+
+    override fun onClickMore(position: Int) {
+        val course_id = Storage.getCourses().value?.get(position)?.id
+        arguments?.putInt(course_id.toString(), course_id!!)
+        var dialog = TeacherDescriptionDialog()
+        dialog.arguments
+        dialog.show(activity?.supportFragmentManager!!, "About Teacher")
+
     }
 
     companion object {

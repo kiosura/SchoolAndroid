@@ -13,6 +13,7 @@ import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.data.ProgressItem
 import com.example.schoolandroid.data.Progresses
 import com.example.schoolandroid.databinding.FragmentAboutCourseBinding
+import com.example.schoolandroid.dialogs.TeacherDescriptionDialog
 //import com.example.schoolandroid.api.FirstApi.Companion.apiBase
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
@@ -46,6 +47,7 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
                 courseName.text = courseItem.name
                 courseDescription.text = courseItem.description
                 courseTutor.text = makeTeacherName(courseItem)
+                courseTutorDescription.text = courseItem.teachers[0].description
                 with(recycleLessons) {
                     layoutManager = LinearLayoutManager(view.context)
                     adapter = lessonsAdapter
@@ -57,6 +59,10 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
 
         courseObserver()
         userProgressObserver()
+
+        binding.courseTutorMore.setOnClickListener {
+            Storage.getCurrentCourse().value?.let { it1 -> this.onClickMore(it1.id) }
+        }
     }
 
     fun courseObserver() {
@@ -84,6 +90,13 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         val tabLayout : TabLayout? = activity?.findViewById<TabLayout>(R.id.coursePageBottomMenue)
         val tab = tabLayout?.getTabAt(1)
         tab?.select()
+    }
+
+    override fun onClickMore(course_id : Int) {
+        arguments?.putInt(course_id.toString(), course_id!!)
+        var dialog = TeacherDescriptionDialog()
+        dialog.arguments
+        dialog.show(activity?.supportFragmentManager!!, "About Teacher")
     }
 
     companion object {

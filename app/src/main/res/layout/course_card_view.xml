@@ -109,15 +109,15 @@
                     android:text="5+ лет преподавания"/>
 
                 <TextView
+                    android:id="@+id/courseTutorMore"
                     style="@style/course_card_teacher"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/course_card_view_teacher_button"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:fontFamily="@font/bruta_regular"
-                    android:text="подробнее"
-                    android:textAllCaps="false" />
+                    android:text="подробнее" />
 
             </LinearLayout>
 

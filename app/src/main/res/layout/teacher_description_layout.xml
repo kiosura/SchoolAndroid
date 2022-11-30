@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.main.about_school">
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_white"
+    android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -14,6 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/closeteacher"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="CLOSE" />
 
             <TextView
                 android:id="@+id/courseName"
@@ -58,25 +64,14 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/courseTutorDescription"
+                        android:id="@+id/briefdescriptions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15.8dp"
                         android:fontFamily="@font/bruta_regular"
+                        android:text="5+ лет преподавания"
                         android:textColor="#000000"
-                        android:textSize="12sp"
-                        android:text="5+ лет преподавания"/>
-
-                    <TextView
-                        android:id="@+id/courseTutorMore"
-                        style="@style/course_card_teacher"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/course_card_view_teacher_button"
-                        android:fontFamily="@font/bruta_regular"
-                        android:text="подробнее" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -90,44 +85,21 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/courseDescription"
+                    android:id="@+id/teacherdescription"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/bruta_regular"
-                    android:lineSpacingExtra="5sp"
-                    android:textColor="#000000"
-                    android:text="@string/aboutCourse" />
-
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
             </LinearLayout>
 
-<!--            <Button-->
-<!--                android:id="@+id/courseInfo"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/more"/>-->
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:fontFamily="@font/bruta_semibold"
-                android:textColor="#000000"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginHorizontal="34dp"
-                android:text="Уроки"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleLessons"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="true"
-                android:nestedScrollingEnabled="false"/>
+            <!--            <Button-->
+            <!--                android:id="@+id/courseInfo"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:text="@string/more"/>-->
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+</LinearLayout>

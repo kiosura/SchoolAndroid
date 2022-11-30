@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:fontFamily="@font/bruta_semibold"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:text="Изменить"/>
+
+    <EditText
+        android:id="@+id/userNameUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        style="@style/profile_fragment_input_text"
+        android:hint="ИМЯ"
+        android:inputType="text"
+        android:autofillHints="Почта"/>
+
+    <EditText
+        android:id="@+id/userSurnameUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        style="@style/profile_fragment_input_text"
+        android:hint="ФАМИЛИЯ"
+        android:inputType="text"
+        android:autofillHints="Почта"/>
+
+    <EditText
+        android:id="@+id/userEmailUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        style="@style/profile_fragment_input_text"
+        android:hint="ПОЧТА"
+        android:inputType="text"
+        android:autofillHints="Почта"/>
+
+    <EditText
+        android:id="@+id/userPhoneUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        style="@style/profile_fragment_input_text"
+        android:hint="НОМЕР ТЕЛЕФОНА"
+        android:inputType="text"
+        android:autofillHints="Почта"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:paddingHorizontal="70dp"
+        android:textSize="13sp"
+        android:fontFamily="@font/bruta_regular"
+        android:layout_margin="24dp"
+        android:textColor="#FFFFFF"
+        android:elevation="7dp"
+        android:background="@drawable/rounded_corner_black"
+        android:text="Изменить"/>
+
+</LinearLayout>

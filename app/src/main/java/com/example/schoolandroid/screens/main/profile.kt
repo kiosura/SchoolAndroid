@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +17,7 @@ import com.example.schoolandroid.adapter.recycleview.ProfileCoursesAdapter
 import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.User
 import com.example.schoolandroid.databinding.FragmentProfileBinding
+import com.example.schoolandroid.dialogs.UpdateUserDialog
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.PersistentStorage
@@ -67,6 +69,11 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             }
         }
 
+        val updateUserButton = binding.userUpdateButton
+        updateUserButton.setOnClickListener {
+            UpdateUserDialog().show(requireActivity().supportFragmentManager, "update_user")
+        }
+
         coursesProfileObserver()
         bind()
     }
@@ -84,6 +91,10 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
         Storage.setCurrent(position, isMy = true)
         val intent: Intent = Intent(context, CourseActivity::class.java)
         context?.startActivity(intent)
+    }
+
+    override fun onClickMore(position: Int) {
+        TODO("Not yet implemented")
     }
 
     companion object {
