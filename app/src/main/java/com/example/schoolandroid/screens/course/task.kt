@@ -112,10 +112,6 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
         }
     }
 
-    override fun onClickMore(position: Int) {
-        TODO("Not yet implemented")
-    }
-
     // receive info with current task
     private fun getTask() {
         lifecycleScope.launch(Dispatchers.IO) {

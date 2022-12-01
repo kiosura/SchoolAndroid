@@ -9,12 +9,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.schoolandroid.R
+import com.example.schoolandroid.data.Teacher
 import com.example.schoolandroid.databinding.FragmentProfileBinding
 import com.example.schoolandroid.storage.Storage
 
 class TeacherDescriptionDialog : DialogFragment() {
 
-    var course_id: Int = 0
+    private lateinit var teacher : Teacher
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,25 +28,27 @@ class TeacherDescriptionDialog : DialogFragment() {
             dialog?.cancel()
         }
 
+        getBundle()
+
         return view
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        var course_id =  this.arguments
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val teacher_description = Storage.getCourses().value?.get(course_id)?.teachers?.get(0)?.description
-        println(teacher_description)
-        view.findViewById<TextView>(R.id.teacherdescription).text =  teacher_description
+        view.findViewById<TextView>(R.id.teacherdescription).text =  teacher.description
 
     }
 
-
+    private fun getBundle() {
+        if (requireArguments().getBoolean("isCurrent", false)) {
+            teacher = Storage.getCurrentCourse().value?.teachers?.get(0)!!
+        }
+        else {
+            val position = requireArguments().getInt("position")
+            val isMy = requireArguments().getBoolean("isMy", false)
+            teacher = Storage.getCourses(isMy).value?.get(position)?.teachers?.get(0)!!
+        }
+    }
 
 }

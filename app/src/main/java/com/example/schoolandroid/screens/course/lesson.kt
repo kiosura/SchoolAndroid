@@ -94,10 +94,6 @@ class lesson : BaseFragment(R.layout.fragment_lesson), Listener {
         text.text = "Домашнее задание"
     }
 
-    override fun onClickMore(position: Int) {
-        TODO("Not yet implemented")
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = lesson()

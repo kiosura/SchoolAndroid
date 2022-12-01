@@ -16,7 +16,8 @@ import com.example.schoolandroid.interfaces.Listener
 
 class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerView.Adapter<CourseAdapter.CourseHolder>() {
 
-    var courses = Courses()
+    private var courses = Courses()
+    private var isMy : Boolean = false
 
     class CourseHolder(card : View) : RecyclerView.ViewHolder(card) {
         val binding = CourseCardViewBinding.bind(card)
@@ -47,12 +48,16 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
 
         holder.itemView.findViewById<TextView>(R.id.courseTutorMore)
             .setOnClickListener {
-                listener.onClickMore(position)
+                listener.onClickMore(position, isMy)
             }
     }
 
     override fun getItemCount(): Int {
         return courses.size
+    }
+
+    fun setBoolean(bool : Boolean) {
+        isMy = bool
     }
 
     fun addCourses(list: Courses?) {

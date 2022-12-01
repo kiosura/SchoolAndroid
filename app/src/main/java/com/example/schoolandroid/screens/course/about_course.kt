@@ -61,7 +61,7 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         userProgressObserver()
 
         binding.courseTutorMore.setOnClickListener {
-            Storage.getCurrentCourse().value?.let { it1 -> this.onClickMore(it1.id) }
+            moreAboutTeacher()
         }
     }
 
@@ -92,10 +92,11 @@ class about_course : BaseFragment(R.layout.fragment_about_course), Listener {
         tab?.select()
     }
 
-    override fun onClickMore(course_id : Int) {
-        arguments?.putInt(course_id.toString(), course_id!!)
-        var dialog = TeacherDescriptionDialog()
-        dialog.arguments
+    fun moreAboutTeacher() {
+        val bundle = Bundle()
+        bundle.putBoolean("isCurrent", true)
+        val dialog = TeacherDescriptionDialog()
+        dialog.arguments = bundle
         dialog.show(activity?.supportFragmentManager!!, "About Teacher")
     }
 

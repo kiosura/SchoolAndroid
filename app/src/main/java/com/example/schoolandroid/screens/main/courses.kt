@@ -54,6 +54,7 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+        my_course_adapter.setBoolean(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -120,13 +121,14 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         context?.startActivity(intent)
     }
 
-    override fun onClickMore(position: Int) {
-        val course_id = Storage.getCourses().value?.get(position)?.id
-        arguments?.putInt(course_id.toString(), course_id!!)
-        var dialog = TeacherDescriptionDialog()
-        dialog.arguments
-        dialog.show(activity?.supportFragmentManager!!, "About Teacher")
+    override fun onClickMore(position: Int, isMy : Boolean) {
+        val bundle = Bundle()
+        bundle.putInt("position", position)
+        bundle.putBoolean("isMy", isMy)
 
+        val dialog = TeacherDescriptionDialog()
+        dialog.arguments = bundle
+        dialog.show(activity?.supportFragmentManager!!, "About Teacher")
     }
 
     companion object {
