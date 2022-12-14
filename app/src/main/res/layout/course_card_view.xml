@@ -20,42 +20,47 @@
         android:padding="24dp">
 
         <!-- Tags -->
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:orientation="horizontal">
+            />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                style="@style/course_card_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/rounded_corner_coral"
-                android:text="ЕГЭ" />
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                style="@style/course_card_tag"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@drawable/rounded_corner_coral"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="ЕГЭ" />&ndash;&gt;-->
 
-            <TextView
-                style="@style/course_card_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/rounded_corner_coral"
-                android:text="11 класс" />
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                style="@style/course_card_tag"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@drawable/rounded_corner_coral"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="11 класс" />&ndash;&gt;-->
 
-            <TextView
-                style="@style/course_card_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_corner_coral"
-                android:text="математика" />
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                style="@style/course_card_tag"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@drawable/rounded_corner_coral"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="математика" />&ndash;&gt;-->
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/courseTags"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>-->
+<!--&lt;!&ndash;            <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/courseTags"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>&ndash;&gt;-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <!-- Name -->
         <TextView

@@ -5,6 +5,7 @@ import com.example.schoolandroid.data.*
 import retrofit2.Response
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
+import kotlin.reflect.jvm.internal.impl.resolve.constants.NullValue
 
 //private lateinit var currentCourse : StateFlow<Lessons>
 //
@@ -74,24 +75,54 @@ object Storage {
         }
     }
 
-    fun getLesson(index: Int) : MutableLiveData<LessonItem>
-        = MutableLiveData(currentCourse.value!!.lessons[index])
-
     fun addCourses(list : Courses?, isMy : Boolean = false) {
         if (isMy) {
             if (list == null) myCoursesList.value!!.clear()
-            else myCoursesList.value = list
+            else {
+                appendChats(list)
+                myCoursesList.value = list
+            }
             myCoursesList.postValue(myCoursesList.value)
         } else {
             if (list == null) coursesList.value!!.clear()
-            else coursesList.value = list
+            else {
+                appendChats(list)
+                coursesList.value = list
+            }
             coursesList.postValue(coursesList.value)
+        }
+    }
+
+    fun appendChats(list : Courses) {
+        for (i in 0 until list.size) {
+            if (list[i].chats == null) list[i].chats = Chats()
+            for (k in 0 until list[i].teachers.size) {
+                val teacher = list[i].teachers[k]
+                list[i].chats.add(Chat.teachers_chat_creation(teacher.name, teacher.surname, teacher.telegram_link))
+            }
         }
     }
 
     fun getCourses(isMy: Boolean = false) : MutableLiveData<Courses> {
         if (isMy) return myCoursesList
         else return coursesList
+    }
+
+    fun mergeChats(list : Courses?, isMy: Boolean = false) {
+        if (list != null) {
+            val oldList : MutableLiveData<Courses>
+            if (isMy) oldList = myCoursesList
+            else oldList = coursesList
+            for (i in 0 until oldList.value!!.size) {
+                for (k in 0 until list.size) {
+                    if (oldList.value!![i].id == list[k].id) {
+                        oldList.value!![i].chats.addAll(list[k].chats)
+                        oldList.postValue(oldList.value)
+                        break
+                    }
+                }
+            }
+        }
     }
 
     fun mergeCourses(list : Courses?, isMy: Boolean = false) {
@@ -105,6 +136,7 @@ object Storage {
                         oldList.value!![i] =
                             oldList.value!![i] merge list[k]
                         oldList.postValue(oldList.value)
+                        break
                     }
                 }
             }

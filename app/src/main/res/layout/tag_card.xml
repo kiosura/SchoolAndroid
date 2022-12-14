@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView style="@style/course_card_tag"
+    android:id="@+id/tagName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+
+    android:paddingHorizontal="10dp"
+    android:background="@drawable/rounded_corner_coral"
+    xmlns:android="http://schemas.android.com/apk/res/android"> </TextView>

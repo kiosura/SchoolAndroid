@@ -70,12 +70,12 @@ class MainActivity : AppCompatActivity() {
             storageViewModel.getProgresses()
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             async { storageViewModel.getCourses()
                 storageViewModel.getMyCourses()  }.await()
             async { storageViewModel.getLessons()
                 storageViewModel.getChats()
-                storageViewModel.getMyChats() }
+                storageViewModel.getMyChats() }.await()
         }
 
         baseAdapter = MainPageAdapter(this, listOfFragments.toList())

@@ -88,11 +88,11 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                Storage.mergeCourses(chatsFromCourses)
+                Storage.mergeChats(chatsFromCourses)
             }
             else {
                 chatsFromCourses = retrofitApi.fetchChats().body()
-                Storage.mergeCourses(chatsFromCourses)
+                Storage.mergeChats(chatsFromCourses)
             }
         } catch (e: Exception) {
             Log.e("TAG", "Exception during request getChats -> ${e.localizedMessage}")
@@ -108,7 +108,7 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                Storage.mergeCourses(chatsFromCourses, isMy = true)
+                Storage.mergeChats(chatsFromCourses, isMy = true)
             }
         } catch (e: Exception) {
             Log.e("TAG", "Exception during request getMyChats -> ${e.localizedMessage}")

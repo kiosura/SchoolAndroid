@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Chat
@@ -19,7 +20,8 @@ class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.
         private val binding = ChatCardViewBinding.bind(card)
 
         fun bind(chat: Chat) = with(binding){
-            chatBody.text = chat.name
+            chatName.text = chat.name
+            if (chat.isPersonally) chatAction.text = "Задать вопрос"
         }
     }
 
@@ -30,7 +32,7 @@ class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.
 
     override fun onBindViewHolder(holder: ChatHolder, position: Int) {
         holder.bind(chats[position])
-        holder.itemView.findViewById<Button>(R.id.chatBody)
+        holder.itemView.findViewById<LinearLayout>(R.id.chatBody)
             .setOnClickListener(View.OnClickListener{
                 listener.onClick(position)
             })

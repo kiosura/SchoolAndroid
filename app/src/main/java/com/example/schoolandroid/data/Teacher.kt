@@ -11,7 +11,8 @@ data class Teacher(
     val notifications: List<Any>,
     val progresses: List<Any>,
     val registered: String,
-    val surname: String
+    val surname: String,
+    val telegram_link: String?
 )
 
 class Teachers : ArrayList<Teacher>()

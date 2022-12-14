@@ -12,7 +12,7 @@ data class CourseItem(
     val product_preview: String,
     val description: String,
     val teachers: Teachers,
-    @SerializedName("chat") var chats: Chats?,
+    @SerializedName("chat") var chats: Chats,
     val value: Int,
     var tags: Tags?
 )
