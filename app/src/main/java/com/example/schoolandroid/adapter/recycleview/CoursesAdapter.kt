@@ -37,7 +37,7 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
             tagAdapter.addTags(course.tags)
             with(tags){
                 adapter = tagAdapter
-                layoutManager = FlexboxLayoutManager(context, ROW_REVERSE, WRAP)
+                layoutManager = FlexboxLayoutManager(context, ROW, WRAP)
             }
         }
         fun makeTeacherName(course : CourseItem) : String {
