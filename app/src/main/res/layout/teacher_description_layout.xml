@@ -10,28 +10,28 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingVertical="34dp"
+            android:padding="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/closeteacher"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:text="CLOSE" />
+<!--            <Button-->
+<!--                android:id="@+id/closeteacher"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:text="CLOSE" />-->
 
-            <TextView
-                android:id="@+id/courseName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="21dp"
-                android:layout_marginHorizontal="34dp"
-                android:fontFamily="@font/bruta_semibold"
-                android:includeFontPadding="false"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="25sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/courseName"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="21dp"-->
+<!--                android:layout_marginHorizontal="34dp"-->
+<!--                android:fontFamily="@font/bruta_semibold"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:text=""-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="25sp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,8 +39,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:background="@drawable/rounded_corner_white"
-                android:layout_marginHorizontal="34dp">
+                android:background="@drawable/rounded_corner_white">
 
                 <ImageView
                     android:layout_width="110dp"
@@ -63,16 +62,6 @@
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/briefdescriptions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15.8dp"
-                        android:fontFamily="@font/bruta_regular"
-                        android:text="5+ лет преподавания"
-                        android:textColor="#000000"
-                        android:textSize="12sp" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -81,14 +70,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_white"
-                android:layout_marginHorizontal="34dp"
                 android:orientation="vertical">
 
+<!--                <TextView-->
+<!--                    android:id="@+id/teacherdescription"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="TextView" />-->
+
                 <TextView
-                    android:id="@+id/teacherdescription"
-                    android:layout_width="match_parent"
+                    android:id="@+id/briefdescriptions"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:fontFamily="@font/bruta_regular"
+                    android:text="5+ лет преподавания"
+                    android:textColor="#000000"
+                    android:textSize="12sp" />
+
             </LinearLayout>
 
             <!--            <Button-->

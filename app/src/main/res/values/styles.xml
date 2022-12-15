@@ -47,4 +47,10 @@
         <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabTextColor">#000000</item>
     </style>
+    <style name="custom_dialog">
+        <item name="android:windowBackground">@drawable/rounded_corner_white</item>
+        <!-- turn off any drawable used to draw a frame on the window -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- float the window so it does not fill the screen -->
+    </style>
 </resources>

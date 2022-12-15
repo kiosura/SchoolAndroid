@@ -16,6 +16,11 @@ import com.example.schoolandroid.storage.Storage
 class UpdateUserDialog : DialogFragment() {
 
     private lateinit var storageViewModel : StorageViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//        setStyle(STYLE_NORMAL, R.style.custom_dialog)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
