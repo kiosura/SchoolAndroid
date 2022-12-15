@@ -201,6 +201,16 @@ class StorageViewModel : ViewModel() {
         }
     }
 
+    fun loginGetData(){
+        viewModelScope.launch {
+            async { getCourses()
+                getMyCourses()  }.await()
+            async { getLessons()
+                getChats()
+                getMyChats() }.await()
+        }
+    }
+
     fun logoutGetData(){
         viewModelScope.launch {
             try {

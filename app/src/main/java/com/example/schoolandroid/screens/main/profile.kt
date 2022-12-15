@@ -38,17 +38,7 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
     override fun onAttach(context: Context) {
         super.onAttach(context)
         storageViewModel = ViewModelProvider(requireActivity()).get(StorageViewModel::class.java)
-        if (isAuth) lifecycleScope.launch {
-            async {
-                storageViewModel.getCourses()
-                storageViewModel.getMyCourses()
-            }.await()
-            async {
-                storageViewModel.getLessons()
-                storageViewModel.getChats()
-                storageViewModel.getMyChats()
-            }
-        }
+        if (isAuth) storageViewModel.loginGetData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,7 +73,6 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             Storage.getCourses(isMy = true).observe(requireActivity()) { courses ->
                 profileAdapter.addCourse(courses)
             }
-
         }
     }
 
