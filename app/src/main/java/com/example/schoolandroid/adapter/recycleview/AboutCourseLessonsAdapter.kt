@@ -67,7 +67,12 @@ class AboutCourseLessonsAdapter(val listener: Listener) : RecyclerView.Adapter<A
                 else disableLesson()
 
             }
-            else disableLesson()
+            else {
+                if (!lesson.getAccess()) disableLesson()
+                lessonProgressText.visibility = View.INVISIBLE
+                lessonProgressBar.visibility = View.INVISIBLE
+                paramsProgressContainer.height = 0
+            }
 
             progressContainer.setLayoutParams(paramsProgressContainer)
             lockSymbol.setLayoutParams(paramsLockSymbol)
