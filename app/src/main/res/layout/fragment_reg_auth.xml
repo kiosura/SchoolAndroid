@@ -77,14 +77,15 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/registrationButton"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="70dp"
                     android:textSize="13sp"
                     android:fontFamily="@font/bruta_regular"
                     android:layout_marginTop="10dp"
                     android:textColor="#FFFFFF"
-                    android:background="@drawable/rounded_corner_black"
+                    android:background="@drawable/rounded_corner_coral"
                     android:text="Зарегистрироваться"/>
 
                 <TextView

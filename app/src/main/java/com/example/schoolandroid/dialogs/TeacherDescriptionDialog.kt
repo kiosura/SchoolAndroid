@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.schoolandroid.R
+import com.example.schoolandroid.data.CourseItem
 import com.example.schoolandroid.data.Teacher
 import com.example.schoolandroid.databinding.FragmentProfileBinding
+import com.example.schoolandroid.databinding.TeacherDescriptionLayoutBinding
 import com.example.schoolandroid.storage.Storage
 
 class TeacherDescriptionDialog : DialogFragment() {
@@ -24,11 +26,21 @@ class TeacherDescriptionDialog : DialogFragment() {
     ): View? {
         val view : View = inflater.inflate(R.layout.teacher_description_layout, container, false)
 
-        view.findViewById<Button>(R.id.closeteacher).setOnClickListener {
-            dialog?.cancel()
+//        view.findViewById<Button>(R.id.closeteacher).setOnClickListener {
+//            dialog?.cancel()
+//        }
+        val binding = TeacherDescriptionLayoutBinding.bind(view)
+        fun bind() = with(binding) {
+            fun makeTeacherName(teacher : Teacher) : String {
+                return teacher.name + " " + teacher.surname
+            }
+
+            courseTutor.text = makeTeacherName(teacher)
+            briefdescriptions.text = teacher.description
         }
 
         getBundle()
+        bind()
 
         return view
     }
@@ -36,7 +48,7 @@ class TeacherDescriptionDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.teacherdescription).text =  teacher.description
+//        view.findViewById<TextView>(R.id.teacherdescription).text =  teacher.description
 
     }
 
