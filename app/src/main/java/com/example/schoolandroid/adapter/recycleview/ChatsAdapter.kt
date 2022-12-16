@@ -46,7 +46,7 @@ class ChatsAdapter(val listener: Listener)  : RecyclerView.Adapter<ChatsAdapter.
         return chats[position].url
     }
 
-    fun addChat(list : Chats?){
+    fun addChats(list : Chats?){
         if (list != null) {
             chats = list
             notifyDataSetChanged()

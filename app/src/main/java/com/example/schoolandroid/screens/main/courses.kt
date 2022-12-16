@@ -119,7 +119,11 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener, FilterInt {
     }
 
     override fun onClick(position: Int) {
-        Storage.setCurrent(position, isMy = recycleView.adapter == my_course_adapter)
+        when (recycleView.adapter) {
+            course_adapter -> Storage.setCurrent(position, isMy = false)
+            my_course_adapter -> Storage.setCurrent(position, isMy = true)
+            filter_course_adapter -> Storage.setCurrent(position, isMy = filter_course_adapter.getBoolean())
+        }
         val intent: Intent = Intent(context, CourseActivity::class.java)
         context?.startActivity(intent)
     }
@@ -136,6 +140,8 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener, FilterInt {
 
     override fun change(indices: Courses) {
         filter_course_adapter.addCourses(indices)
+        if (recycleView.adapter == my_course_adapter) filter_course_adapter.setBoolean(true)
+        else filter_course_adapter.setBoolean(false)
         recycleView.adapter = filter_course_adapter
     }
 

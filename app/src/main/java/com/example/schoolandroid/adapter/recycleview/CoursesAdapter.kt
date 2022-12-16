@@ -69,6 +69,8 @@ class CourseAdapter(val listener : Listener, val card_layout : Int) : RecyclerVi
         return courses.size
     }
 
+    fun getBoolean() : Boolean = isMy
+
     fun setBoolean(bool : Boolean) {
         isMy = bool
     }

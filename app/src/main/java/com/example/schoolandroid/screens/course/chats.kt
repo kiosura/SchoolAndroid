@@ -45,7 +45,7 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
     fun courseObserver() {
         if (view != null) lifecycleScope.launch(Dispatchers.Main) {
             Storage.getCurrentCourse().observe(viewLifecycleOwner) { course ->
-                chats_adapter.addChat(course.chats)
+                chats_adapter.addChats(course.chats)
             }
         }
     }
