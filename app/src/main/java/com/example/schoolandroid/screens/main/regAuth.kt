@@ -75,7 +75,7 @@ class regAuth : BaseFragment(R.layout.fragment_reg_auth) {
             )
 
             Storage.getUser().observe(viewLifecycleOwner){user ->
-                Toast.makeText(context,"${user.error_message}" , Toast.LENGTH_LONG).show()
+                if (user.error_message != null) Toast.makeText(context,"${user.error_message}" , Toast.LENGTH_SHORT).show()
             }
         }
     }
