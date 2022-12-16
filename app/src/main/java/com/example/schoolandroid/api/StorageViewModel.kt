@@ -172,7 +172,7 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                responseUser?.let { Storage.setUser(it) }
+                responseUser?.let { Storage.setUser(it, is_added = true) }
             }
             catch (e: Exception) {
                 Log.e("TAG", "Exception during request postUpdateUser -> ${e.localizedMessage}")

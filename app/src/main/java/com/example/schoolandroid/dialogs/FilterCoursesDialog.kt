@@ -69,5 +69,6 @@ class FilterCoursesDialog(val filter: FilterInt, val isMy : Boolean) : BottomShe
         val filter_item = filter_direction_adapter.getFilter(position)
         val indices =CourseCompose.getWithTag(filter_item, isMy)
         filter.change(indices)
+        dialog?.cancel()
     }
 }
