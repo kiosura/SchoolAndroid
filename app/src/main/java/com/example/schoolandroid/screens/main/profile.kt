@@ -35,27 +35,19 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
 
     private var profileAdapter: ProfileCoursesAdapter = ProfileCoursesAdapter(this)
 
+    private lateinit var binding: FragmentProfileBinding
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         storageViewModel = ViewModelProvider(requireActivity()).get(StorageViewModel::class.java)
-        if (isAuth) lifecycleScope.launch {
-            async {
-                storageViewModel.getCourses()
-                storageViewModel.getMyCourses()
-            }.await()
-            async {
-                storageViewModel.getLessons()
-                storageViewModel.getChats()
-                storageViewModel.getMyChats()
-            }
-        }
+        if (isAuth) storageViewModel.loginGetData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // needs to open UserObserver
-        val binding = FragmentProfileBinding.bind(view)
+        binding = FragmentProfileBinding.bind(view)
         fun bind() = with(binding) {
             val user = Storage.getUser().value
             userName.text = if (user?.name != "") user?.name + " " + user?.surname else "unknown"
@@ -74,6 +66,7 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
             UpdateUserDialog().show(requireActivity().supportFragmentManager, "update_user")
         }
 
+        userUpdateObserver()
         coursesProfileObserver()
         bind()
     }
@@ -84,6 +77,15 @@ class profile(val isAuth : Boolean = false): BaseFragment(R.layout.fragment_prof
                 profileAdapter.addCourse(courses)
             }
 
+        }
+    }
+
+    fun userUpdateObserver() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Storage.getUser().observe(requireActivity()) { user ->
+                binding.userName.text = if (user?.name != "") user?.name + " " + user?.surname else "unknown"
+                binding.userLogin.text = if (user?.email != "") user?.email else user.phone_number
+            }
         }
     }
 

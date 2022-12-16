@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.adapter.recycleview.TaskAdapter
 import com.example.schoolandroid.api.CourseViewModel
+import com.example.schoolandroid.api.StorageViewModel
 import com.example.schoolandroid.data.TaskItem
 import com.example.schoolandroid.databinding.TaskViewBinding
 import com.example.schoolandroid.interfaces.Listener
@@ -40,6 +41,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     private var nextIndex : Int = 0
     private lateinit var nesty : NestedScrollView
 
+    private lateinit var StorageVM : StorageViewModel
     private lateinit var CourseVM : CourseViewModel
     private val course = Storage.getCurrentCourse().value!!
     private var taskCount : Int = 0
@@ -48,6 +50,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         CourseVM = ViewModelProvider(requireActivity()).get(CourseViewModel::class.java)
+        StorageVM = ViewModelProvider(requireActivity()).get(StorageViewModel::class.java)
         taskCount = course.lessons[CourseVM.lessonIndex].getTasks!!
     }
 
@@ -179,7 +182,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
     private fun answerPost() {
         if (Storage.getUser().value?.id != null) {
             val answer = binding.editTextAnswer.editableText.toString()
-            CourseVM.postAnswer(text = answer, taskIndex = taskIndex())
+            CourseVM.postAnswer(text = answer, taskIndex = taskIndex(), storageVM = StorageViewModel())
         }
         else {
             Toast.makeText(this.context, "Зарегистрируйтесь, чтобы отправлять ответы на задания", Toast.LENGTH_SHORT).show()

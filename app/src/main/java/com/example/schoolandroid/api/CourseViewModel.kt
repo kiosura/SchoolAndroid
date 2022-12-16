@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.data.RetrofitLessonRequest
 import com.example.schoolandroid.data.RetrofitTaskAnswerRequest
 import com.example.schoolandroid.storage.Storage
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class CourseViewModel : ViewModel() {
@@ -30,7 +32,7 @@ class CourseViewModel : ViewModel() {
         }
     }
 
-    fun postAnswer(text : String, taskIndex : Int) {
+    fun postAnswer(text : String, taskIndex : Int, storageVM: StorageViewModel) {
         viewModelScope.launch {
             try {
                 val answer = retrofitApi.fetchTaskAnswer(
@@ -43,8 +45,8 @@ class CourseViewModel : ViewModel() {
                     )
                 ).body()
                 if (answer != null) {
-                    println(answer)
                     Storage.setProgresses(answer.progresses!!)
+                    storageVM.loginGetData()
                 }
             } catch (e: Exception) {
                 Log.e("TAG", "Exception during request postAnswer -> ${e.localizedMessage}")

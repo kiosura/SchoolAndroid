@@ -29,7 +29,7 @@ class UpdateUserDialog : DialogFragment() {
     ): View? {
         val view : View = inflater.inflate(R.layout.update_user_dialog, container, false)
 
-        storageViewModel = ViewModelProvider(this).get(StorageViewModel::class.java)
+        storageViewModel = ViewModelProvider(requireActivity()).get(StorageViewModel::class.java)
 
         val binding = UpdateUserDialogBinding.bind(view)
         fun bind() = with(binding) {

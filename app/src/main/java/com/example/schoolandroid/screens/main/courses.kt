@@ -21,9 +21,11 @@ import com.example.schoolandroid.activity.CourseActivity
 import com.example.schoolandroid.activity.MainActivity
 import com.example.schoolandroid.adapter.recycleview.CourseAdapter
 import com.example.schoolandroid.api.StorageViewModel
+import com.example.schoolandroid.data.Courses
 import com.example.schoolandroid.databinding.FragmentCoursesBinding
 import com.example.schoolandroid.dialogs.FilterCoursesDialog
 import com.example.schoolandroid.dialogs.TeacherDescriptionDialog
+import com.example.schoolandroid.interfaces.FilterInt
 import com.example.schoolandroid.interfaces.Listener
 import com.example.schoolandroid.screens.BaseFragment
 import com.example.schoolandroid.storage.Storage
@@ -32,7 +34,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
-class courses : BaseFragment(R.layout.fragment_courses), Listener {
+class courses : BaseFragment(R.layout.fragment_courses), Listener, FilterInt {
 
     private lateinit var binding : FragmentCoursesBinding
 
@@ -40,6 +42,7 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
     // раздать разные cardview
     private val course_adapter = CourseAdapter(this, R.layout.course_card_view)
     private val my_course_adapter = CourseAdapter(this, R.layout.course_card_view)
+    private val filter_course_adapter = CourseAdapter(this, R.layout.course_card_view)
     private lateinit var storageViewModel: StorageViewModel
 
     private val courseNames : List<String> = listOf(
@@ -61,12 +64,6 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCoursesBinding.bind(view)
 
-        val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
-        buttonFilter.setOnClickListener {
-            val FilterCoursesDialogFragment = FilterCoursesDialog()
-            FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
-        }
-
         // дописать заход на my_courses_adapter после подготовки UserData
         recycleView = view.findViewById(R.id.recycleCourses)
         with(recycleView) {
@@ -81,6 +78,12 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         courseBaseName = activity?.findViewById<TextView>(R.id.textView)!!
         switchContainer = view.findViewById<LinearLayout>(R.id.switchWithCourses)
         switch = switchContainer.findViewById<SwitchCompat>(R.id.switch1)
+
+        val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
+        buttonFilter.setOnClickListener {
+            val FilterCoursesDialogFragment = FilterCoursesDialog(this, if (my_course_adapter == recycleView.adapter) true else false)
+            FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
+        }
 
         switchContainer.setOnClickListener {
             switch.isChecked = !switch.isChecked
@@ -129,6 +132,11 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener {
         val dialog = TeacherDescriptionDialog()
         dialog.arguments = bundle
         dialog.show(activity?.supportFragmentManager!!, "About Teacher")
+    }
+
+    override fun change(indices: Courses) {
+        filter_course_adapter.addCourses(indices)
+        recycleView.adapter = filter_course_adapter
     }
 
     companion object {

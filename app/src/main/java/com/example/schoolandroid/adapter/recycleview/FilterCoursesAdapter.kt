@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.Filter
+import com.example.schoolandroid.data.Filters
 import com.example.schoolandroid.databinding.DirectionSubjectCardViewBinding
+import com.example.schoolandroid.interfaces.Listener
 
 
-class FilterCoursesAdapter: RecyclerView.Adapter<FilterCoursesAdapter.FilterHolder>()  {
-    private val filters = ArrayList<Filter>()
+class FilterCoursesAdapter(val listener : Listener) : RecyclerView.Adapter<FilterCoursesAdapter.FilterHolder>()  {
+    private lateinit var filters : Filters
 
     class FilterHolder(card : View) : RecyclerView.ViewHolder(card){
         val binding = DirectionSubjectCardViewBinding.bind(card)
@@ -25,20 +27,22 @@ class FilterCoursesAdapter: RecyclerView.Adapter<FilterCoursesAdapter.FilterHold
     }
 
     override fun onBindViewHolder(holder: FilterHolder, position: Int) {
-
         holder.bind(filters[position])
+        holder.binding.filterbody.setOnClickListener {
+            listener.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
         return filters.size
     }
 
-    fun addFilter(filter: Filter){
-        filters.add(filter)
-        notifyDataSetChanged()
+    fun getFilter(position: Int) : Filter {
+        return filters.get(position)
     }
-    fun addFilter(filter: List<Filter>){
-        filters.addAll(filter)
+
+    fun addFilters(filter: Filters){
+        filters = filter
         notifyDataSetChanged()
     }
 }

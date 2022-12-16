@@ -41,6 +41,7 @@ object Storage {
             user.value = userItem merge user.value!!
             user.postValue(user.value)
 
+            PersistentStorage.logoutUser()
             PersistentStorage.addObject(user.value!!)
         }
         else {

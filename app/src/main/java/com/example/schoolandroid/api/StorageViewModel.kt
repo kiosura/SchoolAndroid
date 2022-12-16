@@ -172,7 +172,7 @@ class StorageViewModel : ViewModel() {
                     )
                 ).body()
 
-                responseUser?.let { Storage.setUser(it) }
+                responseUser?.let { Storage.setUser(it, is_added = true) }
             }
             catch (e: Exception) {
                 Log.e("TAG", "Exception during request postUpdateUser -> ${e.localizedMessage}")
@@ -198,6 +198,16 @@ class StorageViewModel : ViewModel() {
                     Log.e("TAG", "Exception during request getProgresses -> ${e.localizedMessage}")
                 }
             }
+        }
+    }
+
+    fun loginGetData(){
+        viewModelScope.launch {
+            async { getCourses()
+                getMyCourses()  }.await()
+            async { getLessons()
+                getChats()
+                getMyChats() }.await()
         }
     }
 
