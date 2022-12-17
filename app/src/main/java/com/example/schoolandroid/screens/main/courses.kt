@@ -81,7 +81,11 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener, FilterInt {
 
         val buttonFilter = view.findViewById<LinearLayout>(R.id.filterWithCourses)
         buttonFilter.setOnClickListener {
-            val FilterCoursesDialogFragment = FilterCoursesDialog(this, if (my_course_adapter == recycleView.adapter) true else false)
+            var personality = if (my_course_adapter == recycleView.adapter) true else false
+            personality = if (!personality && filter_course_adapter == recycleView.adapter)
+                filter_course_adapter.getBoolean() else personality
+            println(personality)
+            val FilterCoursesDialogFragment = FilterCoursesDialog(this, personality)
             FilterCoursesDialogFragment.show(childFragmentManager, "Filter")
         }
 
@@ -139,10 +143,14 @@ class courses : BaseFragment(R.layout.fragment_courses), Listener, FilterInt {
     }
 
     override fun change(indices: Courses) {
-        filter_course_adapter.addCourses(indices)
-        if (recycleView.adapter == my_course_adapter) filter_course_adapter.setBoolean(true)
-        else filter_course_adapter.setBoolean(false)
-        recycleView.adapter = filter_course_adapter
+        if (recycleView.adapter != filter_course_adapter) {
+            filter_course_adapter.addCourses(indices)
+            if (recycleView.adapter == my_course_adapter) filter_course_adapter.setBoolean(true)
+            else filter_course_adapter.setBoolean(false)
+
+            recycleView.adapter = filter_course_adapter
+        }
+        else filter_course_adapter.addCourses(indices)
     }
 
     companion object {
