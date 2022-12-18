@@ -70,7 +70,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
             adapter = task_adapter
         }
 
-        if (taskCount < 2)  binding.nextTask.isVisible = false
+        if (taskCount < 2 || taskCount == lastIndex+1)  binding.nextTask.isVisible = false
         recyclerView.isVisible = false
 
 
@@ -117,7 +117,7 @@ class task(tabSelected : Int) : BaseFragment(R.layout.task_view),
 
     // receive info with current task
     private fun getTask() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.Main) {
             val homework = course.lessons[CourseVM.lessonIndex].homework
             if (homework == null) {
                 Thread.sleep(500L)

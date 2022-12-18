@@ -52,7 +52,9 @@ class chats : BaseFragment(R.layout.fragment_chats), Listener {
 
     override fun onClick(position : Int) {
         val link = chats_adapter.getLink(position)
-        if (link != null) {
+        val is_bought = Storage.getUser().value!!.progresses!!.findProgress(
+            Storage.getCurrentCourse().value!!.id)?.is_bought
+        if (link != null && is_bought ?: false) {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link));
             startActivity(browserIntent)
         }

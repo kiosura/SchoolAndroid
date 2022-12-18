@@ -67,7 +67,7 @@ class FilterCoursesDialog(val filter: FilterInt, val isMy : Boolean) : BottomShe
 
     override fun onClick(position: Int) {
         val filter_item = filter_direction_adapter.getFilter(position)
-        val indices =CourseCompose.getWithTag(filter_item, isMy)
+        val indices = CourseCompose.getWithTag(filter_item, isMy)
         filter.change(indices)
         dialog?.cancel()
     }
